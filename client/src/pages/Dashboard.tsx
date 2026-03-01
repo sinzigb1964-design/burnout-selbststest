@@ -14,6 +14,7 @@ import {
   Heart,
   LogOut,
   Settings,
+  Shield,
   Users,
 } from "lucide-react";
 import { useLocation } from "wouter";
@@ -305,6 +306,26 @@ export default function Dashboard() {
                     >
                       <Users className="w-4 h-4 mr-2" />
                       Meine Klienten
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Admin-Link – nur für Administratoren sichtbar */}
+              {user?.role === "admin" && (
+                <Card className="border-destructive/30 bg-destructive/5">
+                  <CardContent className="p-4">
+                    <p className="text-xs font-semibold text-destructive uppercase tracking-wider mb-2">
+                      Administration
+                    </p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                      onClick={() => navigate("/admin")}
+                    >
+                      <Shield className="w-4 h-4 mr-2" />
+                      Admin-Panel öffnen
                     </Button>
                   </CardContent>
                 </Card>

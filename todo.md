@@ -50,7 +50,7 @@
 - [ ] E-Mail-Benachrichtigungen (tägliche Erinnerung)
 - [x] PDF-Export der Auswertung (ersetzt JSON-Export in Einstellungen)
 - [ ] Impressum und Datenschutzseiten (statisch)
-- [ ] Admin-Panel für Coach-Rollenvergabe
+- [x] Admin-Link im Dashboard (nur für Administratoren sichtbar)
 - [ ] Mehrsprachigkeit (EN)
 - [x] Admin-Panel: Nutzerliste, Zyklus-Übersicht und Zyklus-Reset für Admin (Bernd Sinzig)
 - [x] Admin-Panel: Passwortschutz (separates Admin-Passwort, unabhängig vom Login)
