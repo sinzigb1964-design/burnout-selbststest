@@ -255,7 +255,7 @@ export const PATTERN_INFO: Record<string, PatternInfo> = {
     title: "Freude und Verbindung beginnen zu verblassen",
     subtitle: "Erste Zeichen von Sinnverlust und emotionalem Rückzug sind erkennbar.",
     description:
-      "Die Frage \u201eWofür mache ich das eigentlich noch?\u201c und das Gefühl, innerlich etwas auf Abstand zu halten – das sind frühe, aber wichtige Signale. Sie zeigen, dass deine emotionalen Ressourcen zur Neige gehen. Jetzt ist ein guter Zeitpunkt, gegenzusteuern, bevor diese Muster tiefer werden.",
+      "Die Frage \u201eWofür mache ich das eigentlich noch?\u201c und das Gefühl, innerlich etwas auf Abstand zu halten – das sind frühe, aber wichtige Signale. Diese Signale zeigen, dass deine emotionalen Ressourcen zur Neige gehen. Jetzt ist ein guter Zeitpunkt, gegenzusteuern, bevor diese Muster tiefer werden.",
     severity: "warning",
   },
   C: {

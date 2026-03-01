@@ -486,10 +486,10 @@ export default function Auswertung() {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Diese Auswertung ist kein medizinisches Diagnosewerkzeug. Sie dient der
-                persoenlichen Reflexion und Selbsteinschaetzung. Bei ernsthaften Beschwerden oder
-                Unsicherheiten wende dich bitte an einen Arzt, Therapeuten oder qualifizierten
-                Coach.
+                Diese Auswertung ist kein medizinisches Diagnosewerkzeug. Sie dient deiner
+                persönlichen Reflexion und Selbsteinschätzung. Bei ernsthaften Beschwerden oder
+                Unsicherheiten wende dich bitte an eine Ärztin, einen Arzt, eine Therapeutin,
+                einen Therapeuten oder eine qualifizierte Fachperson.
               </p>
             </div>
           </CardContent>
