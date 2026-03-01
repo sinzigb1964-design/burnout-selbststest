@@ -3,7 +3,8 @@ import AppFooter from "@/components/AppFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { QUESTIONNAIRE_AREAS, getAreaLevel } from "../../../shared/questionnaire";
-import { ArrowLeft, BarChart3, Heart } from "lucide-react";
+import { buildIntroText } from "../../../shared/introText";
+import { ArrowLeft, BarChart3, Heart, Info } from "lucide-react";
 import { useState } from "react";
 import { useLocation, useParams } from "wouter";
 import {
@@ -128,6 +129,34 @@ export default function CoachKlient() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Einleitungsabsatz */}
+            {(() => {
+              const cycle = cycles?.find((c) => c.id === activeCycleId);
+              if (!cycle) return null;
+              const introText = buildIntroText({
+                userName: evalData.user?.name,
+                daysCompleted: evalData.evaluation.daysCompleted,
+                totalSum: evalData.evaluation.totalSum,
+                avgs: evalData.evaluation.avgs,
+                cycleStartDate: cycle.startDate,
+              });
+              return (
+                <Card className="border-border mb-6 bg-card">
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                        <Info className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs font-semibold text-foreground mb-1.5">Persönliche Einschätzung</p>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{introText}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })()}
 
             {/* Chart */}
             <Card className="border-border mb-6">

@@ -76,3 +76,4 @@
 - [x] Einleitungsabsatz: Dynamisch personalisierten Einleitungstext für Auswertungsbericht erstellen (Name, Datum, Gesamtscore, Belastungsniveau, Tage)
 - [x] Einleitungsabsatz: In Auswertungsseite (Auswertung.tsx) als erstes Element einbinden
 - [x] Einleitungsabsatz: In PDF-Export (generatePdf.ts) nach dem Header einbinden
+- [x] Einleitungsabsatz: In Coach-Klienten-Detailansicht (CoachKlient.tsx) einbinden
