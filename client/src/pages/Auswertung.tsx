@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/_core/hooks/useAuth";
 import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +13,7 @@ import {
   getAreaLevel,
   getTotalLevel,
 } from "../../../shared/questionnaire";
+import { buildIntroText } from "../../../shared/introText";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -121,6 +123,15 @@ export default function Auswertung() {
   const totalColor = totalLevelKey === "low" ? "text-green-600" : totalLevelKey === "medium" ? "text-yellow-600" : "text-red-600";
   const totalBg = totalLevelKey === "low" ? "bg-green-50 border-green-200" : totalLevelKey === "medium" ? "bg-yellow-50 border-yellow-200" : "bg-red-50 border-red-200";
 
+  const { user } = useAuth();
+  const introText = buildIntroText({
+    userName: user?.name,
+    daysCompleted,
+    totalSum,
+    avgs,
+    cycleStartDate: cycle.startDate,
+  });
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -167,6 +178,21 @@ export default function Auswertung() {
             </Badge>
           )}
         </div>
+
+        {/* Einleitungsabsatz */}
+        <Card className="border-border mb-8 bg-card">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <Info className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-foreground mb-2">Dein persönlicher Bericht</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{introText}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Gesamtbelastung */}
         <Card className={`border-2 mb-8 ${totalBg}`}>

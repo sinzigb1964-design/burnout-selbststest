@@ -73,3 +73,6 @@
 - [x] Tagesnotizen: Notiz-Eingabefeld im Fragebogen (letzte Seite)
 - [x] Tagesnotizen: Notizen in der Auswertungsseite anzeigen
 - [x] Tagesnotizen: Notizen im PDF-Export einbetten
+- [x] Einleitungsabsatz: Dynamisch personalisierten Einleitungstext für Auswertungsbericht erstellen (Name, Datum, Gesamtscore, Belastungsniveau, Tage)
+- [x] Einleitungsabsatz: In Auswertungsseite (Auswertung.tsx) als erstes Element einbinden
+- [x] Einleitungsabsatz: In PDF-Export (generatePdf.ts) nach dem Header einbinden

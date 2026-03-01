@@ -8,6 +8,7 @@ import {
   getTotalLevel,
 } from "../../../shared/questionnaire";
 import type { DailyEntry, TestCycle, User as UserType } from "../../../drizzle/schema";
+import { buildIntroText } from "../../../shared/introText";
 
 // ─── Hilfsfunktionen ──────────────────────────────────────────────────────────
 
@@ -142,6 +143,26 @@ export async function generatePDF(data: {
     doc.text(`14-Tage-Zyklus: ${startStr} – ${endStr}  (${cycleEntries.length} Einträge)`, margin + 4, y + 8);
     y += 16;
     doc.setTextColor(0, 0, 0);
+
+    // ── Einleitungsabsatz ──
+    const introText = buildIntroText({
+      userName: data.user?.name,
+      daysCompleted: cycleEntries.length,
+      totalSum: totalScore,
+      avgs: areaAvgs,
+      cycleStartDate: cycle.startDate,
+    });
+    const introLines = doc.splitTextToSize(introText, contentW) as string[];
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "italic");
+    doc.setTextColor(60, 60, 60);
+    // Hintergrundbox für Einleitung
+    const introBoxH = introLines.length * 5 + 8;
+    doc.setFillColor(245, 248, 250);
+    doc.roundedRect(margin, y, contentW, introBoxH, 2, 2, "F");
+    doc.text(introLines, margin + 4, y + 6);
+    doc.setTextColor(0, 0, 0);
+    y += introBoxH + 6;
 
     // ── Gesamtscore ──
     doc.setFontSize(10);
