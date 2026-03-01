@@ -13,12 +13,12 @@ export default function CoachDashboard() {
 
   const { data: clients, isLoading } = trpc.coach.myClients.useQuery();
 
-  if (user?.role !== "coach" && user?.role !== "admin") {
+  if (!user?.isCoach && user?.role !== "admin") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
           <CardContent className="p-8">
-            <p className="text-muted-foreground">Kein Zugriff. Nur fuer Coaches.</p>
+            <p className="text-muted-foreground">Kein Zugriff. Nur für Coaches.</p>
             <Button className="mt-4" onClick={() => navigate("/dashboard")}>
               Zum Dashboard
             </Button>

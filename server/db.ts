@@ -286,7 +286,7 @@ export async function hasCoachAccess(coachId: number, userId: number): Promise<b
 export async function getAllCoaches(): Promise<User[]> {
   const db = await getDb();
   if (!db) return [];
-  return db.select().from(users).where(eq(users.role, "coach"));
+  return db.select().from(users).where(eq(users.isCoach, true));
 }
 
 // ─── ADMIN ────────────────────────────────────────────────────────────────────
@@ -297,10 +297,17 @@ export async function getAllUsers(): Promise<User[]> {
   return db.select().from(users).orderBy(users.createdAt);
 }
 
-export async function updateUserRole(userId: number, role: "user" | "admin" | "coach"): Promise<void> {
+export async function updateUserRole(userId: number, role: "user" | "admin"): Promise<void> {
   const db = await getDb();
   if (!db) return;
   await db.update(users).set({ role }).where(eq(users.id, userId));
+}
+
+export async function updateUserRoles(userId: number, isAdmin: boolean, isCoach: boolean): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  const role: "user" | "admin" = isAdmin ? "admin" : "user";
+  await db.update(users).set({ role, isCoach }).where(eq(users.id, userId));
 }
 
 export async function resetUserCycle(userId: number): Promise<void> {

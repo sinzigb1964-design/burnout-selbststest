@@ -19,7 +19,8 @@ export const users = mysqlTable("users", {
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin", "coach"]).default("user").notNull(),
+  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  isCoach: boolean("isCoach").default(false).notNull(),
   // DSGVO: Einwilligung
   consentGiven: boolean("consentGiven").default(false).notNull(),
   consentGivenAt: timestamp("consentGivenAt"),

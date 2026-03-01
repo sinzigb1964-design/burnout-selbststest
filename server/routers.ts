@@ -27,6 +27,7 @@ import {
   saveDailyEntry,
   updateUserConsent,
   updateUserRole,
+  updateUserRoles,
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
 import { ENV } from "./_core/env";
@@ -244,7 +245,7 @@ export const appRouter = router({
       .input(z.object({ coachId: z.number() }))
       .mutation(async ({ ctx, input }) => {
         const coach = await getUserById(input.coachId);
-        if (!coach || coach.role !== "coach") {
+        if (!coach || !coach.isCoach) {
           throw new TRPCError({ code: "BAD_REQUEST", message: "Ungültige Coach-ID." });
         }
         await grantCoachAccess(ctx.user.id, input.coachId);
@@ -260,7 +261,7 @@ export const appRouter = router({
 
     // Coach-only: view clients
     myClients: protectedProcedure.query(async ({ ctx }) => {
-      if (ctx.user.role !== "coach" && ctx.user.role !== "admin") {
+      if (!ctx.user.isCoach && ctx.user.role !== "admin") {
         throw new TRPCError({ code: "FORBIDDEN" });
       }
       return getCoachClients(ctx.user.id);
@@ -270,7 +271,7 @@ export const appRouter = router({
     clientEvaluation: protectedProcedure
       .input(z.object({ userId: z.number(), cycleId: z.number() }))
       .query(async ({ ctx, input }) => {
-        if (ctx.user.role !== "coach" && ctx.user.role !== "admin") {
+        if (!ctx.user.isCoach && ctx.user.role !== "admin") {
           throw new TRPCError({ code: "FORBIDDEN" });
         }
         const hasAccess = await hasCoachAccess(ctx.user.id, input.userId);
@@ -289,7 +290,7 @@ export const appRouter = router({
     clientCycles: protectedProcedure
       .input(z.object({ userId: z.number() }))
       .query(async ({ ctx, input }) => {
-        if (ctx.user.role !== "coach" && ctx.user.role !== "admin") {
+        if (!ctx.user.isCoach && ctx.user.role !== "admin") {
           throw new TRPCError({ code: "FORBIDDEN" });
         }
         const hasAccess = await hasCoachAccess(ctx.user.id, input.userId);
@@ -341,18 +342,19 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    /** Rolle eines Nutzers ändern */
-    setRole: protectedProcedure
+    /** Rollen eines Nutzers ändern (Admin + Coach unabhängig) */
+    setRoles: protectedProcedure
       .input(z.object({
         adminPassword: z.string(),
         userId: z.number(),
-        role: z.enum(["user", "admin", "coach"]),
+        isAdmin: z.boolean(),
+        isCoach: z.boolean(),
       }))
       .mutation(async ({ input }) => {
         if (input.adminPassword !== ENV.adminPanelPassword) {
           throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
         }
-        await updateUserRole(input.userId, input.role);
+        await updateUserRoles(input.userId, input.isAdmin, input.isCoach);
         return { success: true };
       }),
   }),

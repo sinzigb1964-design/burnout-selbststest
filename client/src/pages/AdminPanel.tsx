@@ -6,13 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -137,32 +131,20 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
     onError: (err) => toast.error(err.message || "Fehler beim Zurücksetzen."),
   });
 
-  const setRole = trpc.admin.setRole.useMutation({
+  const setRoles = trpc.admin.setRoles.useMutation({
     onSuccess: () => {
-      toast.success("Rolle erfolgreich geändert.");
+      toast.success("Rollen erfolgreich geändert.");
       utils.admin.listUsers.invalidate();
     },
-    onError: (err) => toast.error(err.message || "Fehler beim Ändern der Rolle."),
+    onError: (err: { message?: string }) => toast.error(err.message || "Fehler beim Ändern der Rollen."),
   });
-
-  const roleColors: Record<string, string> = {
-    admin: "bg-red-100 text-red-700 border-red-200",
-    coach: "bg-blue-100 text-blue-700 border-blue-200",
-    user: "bg-gray-100 text-gray-700 border-gray-200",
-  };
-
-  const roleLabels: Record<string, string> = {
-    admin: "Admin",
-    coach: "Coach",
-    user: "Nutzer",
-  };
 
   const stats = useMemo(() => {
     if (!users) return null;
     return {
       total: users.length,
       active: users.filter((u) => u.activeCycle).length,
-      coaches: users.filter((u) => u.role === "coach").length,
+      coaches: users.filter((u) => u.isCoach).length,
       admins: users.filter((u) => u.role === "admin").length,
     };
   }, [users]);
@@ -247,9 +229,15 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
                         <span className="font-medium text-foreground text-sm truncate">
                           {user.name || "Unbekannt"}
                         </span>
-                        <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${roleColors[user.role] ?? roleColors.user}`}>
-                          {roleLabels[user.role] ?? user.role}
-                        </span>
+                        {user.role === "admin" && (
+                          <span className="text-xs px-2 py-0.5 rounded-full border font-medium bg-red-100 text-red-700 border-red-200">Admin</span>
+                        )}
+                        {user.isCoach && (
+                          <span className="text-xs px-2 py-0.5 rounded-full border font-medium bg-blue-100 text-blue-700 border-blue-200">Coach</span>
+                        )}
+                        {user.role !== "admin" && !user.isCoach && (
+                          <span className="text-xs px-2 py-0.5 rounded-full border font-medium bg-gray-100 text-gray-700 border-gray-200">Nutzer</span>
+                        )}
                       </div>
                       <p className="text-xs text-muted-foreground truncate mt-0.5">
                         {user.email || "Keine E-Mail"}
@@ -267,24 +255,28 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
                     </div>
 
                     {/* Aktionen */}
-                    <div className="flex items-center gap-2 shrink-0">
-                      {/* Rolle ändern */}
-                      <Select
-                        value={user.role}
-                        onValueChange={(role) => {
-                          if (role === user.role) return;
-                          setRole.mutate({ adminPassword, userId: user.id, role: role as "user" | "admin" | "coach" });
-                        }}
-                      >
-                        <SelectTrigger className="h-8 w-28 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="user">Nutzer</SelectItem>
-                          <SelectItem value="coach">Coach</SelectItem>
-                          <SelectItem value="admin">Admin</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div className="flex items-center gap-2 shrink-0 flex-wrap">
+                      {/* Rollen ändern: Checkboxen für Admin und Coach */}
+                      <div className="flex items-center gap-3 px-3 py-1.5 rounded-md border border-border bg-background text-xs">
+                        <label className="flex items-center gap-1.5 cursor-pointer select-none">
+                          <Checkbox
+                            checked={user.role === "admin"}
+                            onCheckedChange={(checked) =>
+                              setRoles.mutate({ adminPassword, userId: user.id, isAdmin: !!checked, isCoach: user.isCoach })
+                            }
+                          />
+                          <span>Admin</span>
+                        </label>
+                        <label className="flex items-center gap-1.5 cursor-pointer select-none">
+                          <Checkbox
+                            checked={user.isCoach}
+                            onCheckedChange={(checked) =>
+                              setRoles.mutate({ adminPassword, userId: user.id, isAdmin: user.role === "admin", isCoach: !!checked })
+                            }
+                          />
+                          <span>Coach</span>
+                        </label>
+                      </div>
 
                       {/* Zyklus zurücksetzen */}
                       <AlertDialog>

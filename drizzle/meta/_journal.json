@@ -15,6 +15,13 @@
       "when": 1772355579881,
       "tag": "0001_funny_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1772362930584,
+      "tag": "0002_sleepy_spectrum",
+      "breakpoints": true
     }
   ]
 }
