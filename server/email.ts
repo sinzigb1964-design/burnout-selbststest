@@ -162,14 +162,15 @@ export function buildReminderEmail(params: {
     : "";
 
   const content = `
-    <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Hallo ${firstName},</h2>
+    <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Guten Abend, ${firstName},</h2>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      heute ist <strong>Tag ${dayNumber}</strong> deines 14-Tage Burnout-Selbsttests –
-      und du hast ihn noch nicht ausgefüllt.
+      bevor der Tag endet – hast du heute schon deinen Fragebogen ausgefüllt?
+      Heute ist <strong>Tag ${dayNumber}</strong> deines 14-Tage Burnout-Selbsttests.
     </p>
     ${urgency}
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      Nur wenige Minuten trennen dich von einem weiteren Datenpunkt für deine persönliche Auswertung.
+      Jetzt, am Abend, hast du den besten Überblick über deinen Tag. Genau der richtige Moment,
+      um ehrlich auf dich selbst zu schauen – es dauert nur 5–10 Minuten.
       Jeder ausgefüllte Tag macht dein Ergebnis aussagekräftiger.
     </p>
     ${ctaButton(fragebogenUrl, `Tag ${dayNumber} jetzt ausfüllen →`)}
