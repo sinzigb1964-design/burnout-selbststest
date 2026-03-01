@@ -537,7 +537,7 @@ export async function generatePDF(data: {
     doc.setFontSize(8);
     doc.setTextColor(150, 150, 150);
     const ph = doc.internal.pageSize.getHeight();
-    doc.text(`Selbsttest Burnout Belastung  .  Burnout LIFEBACK™ Guide 2026  |  Seite ${i} von ${pageCount}`, margin, ph - 8);
+    doc.text(`Selbsttest Burnout Belastung  .  Burnout LIFEBACK® Guide 2026  |  Seite ${i} von ${pageCount}`, margin, ph - 8);
     doc.text(
       "Dieser Bericht ist vertraulich und ausschließlich für den persönlichen Gebrauch bestimmt.",
       margin, ph - 4
