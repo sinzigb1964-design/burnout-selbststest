@@ -293,23 +293,6 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
 
-              {/* Coach role */}
-              {(user?.role === "coach" || user?.role === "admin") && (
-                <Card className="border-primary/30 bg-primary/5">
-                  <CardContent className="p-4">
-                    <p className="text-sm font-medium text-primary mb-2">Coach-Bereich</p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full"
-                      onClick={() => navigate("/coach")}
-                    >
-                      <Users className="w-4 h-4 mr-2" />
-                      Meine Klienten
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
 
               {/* Admin-Link – nur für Administratoren sichtbar */}
               {user?.role === "admin" && (

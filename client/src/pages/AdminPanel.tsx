@@ -24,7 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog } from "lucide-react";
+import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog, LayoutDashboard } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function AdminPanel() {
@@ -121,6 +121,7 @@ export default function AdminPanel() {
 
 function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; onLogout: () => void }) {
   const utils = trpc.useUtils();
+  const [, navigate] = useLocation();
 
   const { data: users, isLoading, refetch } = trpc.admin.listUsers.useQuery(
     { adminPassword },
@@ -322,6 +323,29 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
                 ))}
               </div>
             )}
+          </CardContent>
+        </Card>
+
+        {/* Coach-Bereich */}
+        <Card className="mt-6">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-base flex items-center gap-2">
+              <UserCog className="w-4 h-4" />
+              Coach-Bereich
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-4">
+              Hier gelangen Sie zur Coach-Übersicht mit allen freigegebenen Klienten und deren Auswertungen.
+            </p>
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto"
+              onClick={() => navigate("/coach")}
+            >
+              <Users className="w-4 h-4 mr-2" />
+              Meine Klienten anzeigen
+            </Button>
           </CardContent>
         </Card>
 

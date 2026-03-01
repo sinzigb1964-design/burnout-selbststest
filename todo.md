@@ -55,3 +55,4 @@
 - [x] Admin-Panel: Nutzerliste, Zyklus-Übersicht und Zyklus-Reset für Admin (Bernd Sinzig)
 - [x] Admin-Panel: Passwortschutz (separates Admin-Passwort, unabhängig vom Login)
 - [x] Admin-Panel: Coach-Rollenvergabe und -entzug
+- [x] Coach-Bereich-Kachel aus Dashboard entfernen und in Admin-Panel integrieren
