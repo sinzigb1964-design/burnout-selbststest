@@ -16,7 +16,7 @@ export interface ClosingText {
   signature: string;
 }
 
-const CONTACT_URL = "mailto:info@burnout-lifeback-guide.online";
+const CONTACT_URL = "https://zeeg.me/bsinzig/P00U26";
 
 /**
  * Gibt den passenden Abschlusstext für das Gesamtbelastungsniveau zurück.
