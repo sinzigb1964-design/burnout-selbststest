@@ -212,6 +212,98 @@ async function generatePDF(data: {
     });
     y = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
 
+    // ── Balkendiagramm ──
+    if (y > 200) { doc.addPage(); y = margin; }
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(0, 0, 0);
+    doc.text("Belastungsprofil nach Bereichen", margin, y);
+    y += 6;
+
+    const chartH = 55;  // Gesamthöhe des Diagrammbereichs
+    const barAreaTop = y + 6;  // Oberkante der Balken
+    const barAreaH = 38;  // Höhe der Balkenfläche
+    const barAreaBottom = barAreaTop + barAreaH;
+    const maxVal = 21;  // Maximaler Bereichswert
+    const barW = (contentW - 20) / 8;  // Breite pro Balken
+    const barGap = 2;
+
+    // Hintergrundfläche
+    doc.setFillColor(245, 248, 250);
+    doc.roundedRect(margin, y, contentW, chartH, 2, 2, "F");
+
+    // Schwellenwert-Linien (gestrichelt)
+    const greenThreshold = 7;   // <= 7 = grün
+    const yellowThreshold = 14; // <= 14 = gelb
+    const greenY = barAreaBottom - (greenThreshold / maxVal) * barAreaH;
+    const yellowY = barAreaBottom - (yellowThreshold / maxVal) * barAreaH;
+
+    // Gelbe Linie (Schwellenwert 7)
+    doc.setDrawColor(200, 140, 0);
+    doc.setLineWidth(0.3);
+    doc.setLineDashPattern([1.5, 1], 0);
+    doc.line(margin + 10, greenY, margin + contentW - 4, greenY);
+    doc.setFontSize(6);
+    doc.setTextColor(200, 140, 0);
+    doc.text("7", margin + 4, greenY + 1.5);
+
+    // Rote Linie (Schwellenwert 14)
+    doc.setDrawColor(180, 40, 40);
+    doc.setLineDashPattern([1.5, 1], 0);
+    doc.line(margin + 10, yellowY, margin + contentW - 4, yellowY);
+    doc.setTextColor(180, 40, 40);
+    doc.text("14", margin + 3, yellowY + 1.5);
+
+    // Linienmuster zurücksetzen
+    doc.setLineDashPattern([], 0);
+    doc.setLineWidth(0.1);
+
+    // Balken zeichnen
+    for (let i = 0; i < 8; i++) {
+      const avg = areaAvgs[i] ?? 0;
+      const level = getAreaLevel(avg);
+      const barColor = level === "green" ? GREEN_C : level === "yellow" ? YELLOW_C : RED_C;
+      const barHeight = Math.max(1, (avg / maxVal) * barAreaH);
+      const barX = margin + 10 + i * barW + barGap / 2;
+      const barY = barAreaBottom - barHeight;
+      const barWidth = barW - barGap;
+
+      doc.setFillColor(...barColor);
+      doc.rect(barX, barY, barWidth, barHeight, "F");
+
+      // Wert über dem Balken
+      doc.setFontSize(6);
+      doc.setTextColor(0, 0, 0);
+      doc.setFont("helvetica", "bold");
+      doc.text(avg.toFixed(1), barX + barWidth / 2, barY - 1, { align: "center" });
+
+      // Bereichsnummer unter dem Balken
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(6.5);
+      const shortLabel = `B${i + 1}`;
+      doc.text(shortLabel, barX + barWidth / 2, barAreaBottom + 4, { align: "center" });
+    }
+
+    // Legende
+    const legendY = barAreaBottom + 9;
+    const legendItems: Array<{ color: [number, number, number]; label: string }> = [
+      { color: GREEN_C, label: "Gering (0–7)" },
+      { color: YELLOW_C, label: "Deutlich (8–14)" },
+      { color: RED_C, label: "Stark (15–21)" },
+    ];
+    let legendX = margin + 10;
+    doc.setFontSize(7);
+    for (const item of legendItems) {
+      doc.setFillColor(...item.color);
+      doc.rect(legendX, legendY - 2.5, 4, 3, "F");
+      doc.setTextColor(60, 60, 60);
+      doc.text(item.label, legendX + 5.5, legendY);
+      legendX += 45;
+    }
+
+    y += chartH + 8;
+    doc.setTextColor(0, 0, 0);
+
     // ── Bereichsspezifische Texte ──
     if (y > 230) { doc.addPage(); y = margin; }
     doc.setFontSize(10);
