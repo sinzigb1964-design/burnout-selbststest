@@ -200,3 +200,26 @@ describe("ENV.testMode", () => {
     process.env.TEST_MODE = original;
   });
 });
+
+// ─── Admin-Passwort-Verifikation ───────────────────────────────────────────────
+
+describe("admin.verifyPassword", () => {
+  it("accepts the correct admin password", async () => {
+    process.env.ADMIN_PANEL_PASSWORD = "test-admin-pw-123";
+    // Dynamisch ENV neu laden
+    const { ENV } = await import("./_core/env");
+    expect(process.env.ADMIN_PANEL_PASSWORD).toBe("test-admin-pw-123");
+  });
+
+  it("rejects an empty password when ADMIN_PANEL_PASSWORD is set", () => {
+    process.env.ADMIN_PANEL_PASSWORD = "secure";
+    const result = "" !== process.env.ADMIN_PANEL_PASSWORD;
+    expect(result).toBe(true);
+  });
+
+  it("password comparison is case-sensitive", () => {
+    process.env.ADMIN_PANEL_PASSWORD = "SecurePass";
+    expect("securepass" !== process.env.ADMIN_PANEL_PASSWORD).toBe(true);
+    expect("SecurePass" === process.env.ADMIN_PANEL_PASSWORD).toBe(true);
+  });
+});

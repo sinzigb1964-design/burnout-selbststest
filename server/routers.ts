@@ -10,6 +10,7 @@ import {
   deleteUserData,
   getAllCoaches,
   getAllUserData,
+  getAllUsers,
   getActiveCoachGrants,
   getActiveTestCycle,
   getCoachClients,
@@ -18,11 +19,14 @@ import {
   getTestCycleById,
   getTodayEntry,
   getUserById,
+  getUserCycleInfo,
   grantCoachAccess,
   hasCoachAccess,
+  resetUserCycle,
   revokeCoachAccess,
   saveDailyEntry,
   updateUserConsent,
+  updateUserRole,
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
 import { ENV } from "./_core/env";
@@ -291,6 +295,65 @@ export const appRouter = router({
         const hasAccess = await hasCoachAccess(ctx.user.id, input.userId);
         if (!hasAccess) throw new TRPCError({ code: "FORBIDDEN" });
         return getCompletedCycles(input.userId);
+      }),
+  }),
+
+  // ─── ADMIN ────────────────────────────────────────────────────────────────────
+  admin: router({
+    /** Passwort-Verifikation – gibt ein kurzlebiges Token zurück */
+    verifyPassword: publicProcedure
+      .input(z.object({ password: z.string() }))
+      .mutation(({ input }) => {
+        if (!ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Admin-Passwort nicht konfiguriert." });
+        }
+        if (input.password !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Falsches Passwort." });
+        }
+        return { success: true };
+      }),
+
+    /** Alle Nutzer mit Zyklusinfo */
+    listUsers: protectedProcedure
+      .input(z.object({ adminPassword: z.string() }))
+      .query(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        const allUsers = await getAllUsers();
+        const usersWithCycles = await Promise.all(
+          allUsers.map(async (u) => {
+            const cycleInfo = await getUserCycleInfo(u.id);
+            return { ...u, ...cycleInfo };
+          })
+        );
+        return usersWithCycles;
+      }),
+
+    /** Zyklus eines Nutzers zurücksetzen */
+    resetCycle: protectedProcedure
+      .input(z.object({ adminPassword: z.string(), userId: z.number() }))
+      .mutation(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        await resetUserCycle(input.userId);
+        return { success: true };
+      }),
+
+    /** Rolle eines Nutzers ändern */
+    setRole: protectedProcedure
+      .input(z.object({
+        adminPassword: z.string(),
+        userId: z.number(),
+        role: z.enum(["user", "admin", "coach"]),
+      }))
+      .mutation(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        await updateUserRole(input.userId, input.role);
+        return { success: true };
       }),
   }),
 

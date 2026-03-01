@@ -9,4 +9,6 @@ export const ENV = {
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   /** TEST_MODE=true deaktiviert die Tagessperre im 14-Tage-Zyklus */
   testMode: process.env.TEST_MODE === "true",
+  /** Passwort für das Admin-Panel */
+  adminPanelPassword: process.env.ADMIN_PANEL_PASSWORD ?? "",
 };

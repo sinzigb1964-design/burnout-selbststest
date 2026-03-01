@@ -288,3 +288,44 @@ export async function getAllCoaches(): Promise<User[]> {
   if (!db) return [];
   return db.select().from(users).where(eq(users.role, "coach"));
 }
+
+// ─── ADMIN ────────────────────────────────────────────────────────────────────
+
+export async function getAllUsers(): Promise<User[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(users).orderBy(users.createdAt);
+}
+
+export async function updateUserRole(userId: number, role: "user" | "admin" | "coach"): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(users).set({ role }).where(eq(users.id, userId));
+}
+
+export async function resetUserCycle(userId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  // Aktiven Zyklus finden
+  const cycle = await getActiveTestCycle(userId);
+  if (!cycle) return;
+  // Alle Einträge des Zyklus löschen
+  await db.delete(dailyEntries).where(eq(dailyEntries.cycleId, cycle.id));
+  // Zyklus selbst löschen
+  await db.delete(testCycles).where(eq(testCycles.id, cycle.id));
+}
+
+export async function getUserCycleInfo(userId: number): Promise<{
+  activeCycle: TestCycle | undefined;
+  completedCount: number;
+  entryCount: number;
+}> {
+  const activeCycle = await getActiveTestCycle(userId);
+  const completed = await getCompletedCycles(userId);
+  let entryCount = 0;
+  if (activeCycle) {
+    const entries = await getDailyEntriesForCycle(activeCycle.id);
+    entryCount = entries.length;
+  }
+  return { activeCycle, completedCount: completed.length, entryCount };
+}

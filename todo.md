@@ -52,3 +52,6 @@
 - [ ] Impressum und Datenschutzseiten (statisch)
 - [ ] Admin-Panel für Coach-Rollenvergabe
 - [ ] Mehrsprachigkeit (EN)
+- [x] Admin-Panel: Nutzerliste, Zyklus-Übersicht und Zyklus-Reset für Admin (Bernd Sinzig)
+- [x] Admin-Panel: Passwortschutz (separates Admin-Passwort, unabhängig vom Login)
+- [x] Admin-Panel: Coach-Rollenvergabe und -entzug
