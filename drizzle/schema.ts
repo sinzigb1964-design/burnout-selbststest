@@ -142,6 +142,9 @@ export const dailyEntries = mysqlTable("daily_entries", {
   // Total day score (0–168)
   totalDayScore: int("totalDayScore").notNull().default(0),
 
+  // Optional daily note / comment
+  noteText: text("noteText"),
+
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 

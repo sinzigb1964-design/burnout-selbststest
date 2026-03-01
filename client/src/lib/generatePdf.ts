@@ -417,6 +417,35 @@ export async function generatePDF(data: {
       }
     }
 
+    // ── Tagesnotizen ──
+    const notesWithText = cycleEntries
+      .filter((e) => e.noteText)
+      .sort((a, b) => a.dayNumber - b.dayNumber);
+
+    if (notesWithText.length > 0) {
+      if (y > 230) { doc.addPage(); y = margin; }
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      doc.text("Tagesnotizen", margin, y);
+      y += 6;
+
+      for (const entry of notesWithText) {
+        if (y > 250) { doc.addPage(); y = margin; }
+        const dateStr = new Date(entry.entryDate).toLocaleDateString("de-DE", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        });
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Tag ${entry.dayNumber}  –  ${dateStr}`, margin, y);
+        doc.setFont("helvetica", "normal");
+        const noteLines = doc.splitTextToSize(entry.noteText ?? "", contentW) as string[];
+        doc.text(noteLines, margin, y + 5);
+        y += noteLines.length * 4.5 + 8;
+      }
+    }
+
     y += 10;
   }
 

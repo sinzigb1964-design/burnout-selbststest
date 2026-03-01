@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   Heart,
   Info,
+  MessageSquare,
   Printer,
   TrendingUp,
 } from "lucide-react";
@@ -341,6 +342,36 @@ export default function Auswertung() {
             );
           })}
         </div>
+
+        {/* Tagesnotizen */}
+        {entries.some((e: { noteText?: string | null }) => e.noteText) && (
+          <Card className="border-border mb-8">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-primary" />
+                Tagesnotizen
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {entries
+                .filter((e: { noteText?: string | null }) => e.noteText)
+                .sort((a: { dayNumber: number }, b: { dayNumber: number }) => a.dayNumber - b.dayNumber)
+                .map((e: { id: number; dayNumber: number; noteText?: string | null; entryDate: Date }) => (
+                  <div key={e.id} className="flex items-start gap-3 p-4 rounded-lg bg-muted/50 border border-border">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">
+                      {e.dayNumber}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs text-muted-foreground mb-1">
+                        Tag {e.dayNumber} &ndash; {new Date(e.entryDate).toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" })}
+                      </p>
+                      <p className="text-sm text-foreground leading-relaxed">{e.noteText}</p>
+                    </div>
+                  </div>
+                ))}
+            </CardContent>
+          </Card>
+        )}
 
         {/* Disclaimer */}
         <Card className="border-border bg-muted/30 mb-8">

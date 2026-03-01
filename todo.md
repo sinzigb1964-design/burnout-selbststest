@@ -49,7 +49,7 @@
 - [x] Test-Modus: Tagessperre deaktivierbar für schnelles Durchlaufen des 14-Tage-Zyklus
 - [ ] E-Mail-Benachrichtigungen (tägliche Erinnerung)
 - [x] PDF-Export der Auswertung (ersetzt JSON-Export in Einstellungen)
-- [ ] Impressum und Datenschutzseiten (statisch)
+- [x] Impressum und Datenschutzseiten (statisch)
 - [x] Admin-Link im Dashboard (nur für Administratoren sichtbar)
 - [ ] Mehrsprachigkeit (EN)
 - [x] Admin-Panel: Nutzerliste, Zyklus-Übersicht und Zyklus-Reset für Admin (Bernd Sinzig)
@@ -69,3 +69,7 @@
 - [x] PDF-Export: Liniendiagramm Gesamtscore über 14 Tage hinzugefügt
 - [x] Auswertungsseite: Drucken-Button für direkten PDF-Export hinzugefügt
 - [x] PDF-Tagesverlauf: T1–T14 durch 'Tag 1'–'Tag 14' ersetzt
+- [x] Tagesnotizen: noteText-Feld in dailyEntries-Tabelle hinzufügen
+- [x] Tagesnotizen: Notiz-Eingabefeld im Fragebogen (letzte Seite)
+- [x] Tagesnotizen: Notizen in der Auswertungsseite anzeigen
+- [x] Tagesnotizen: Notizen im PDF-Export einbetten

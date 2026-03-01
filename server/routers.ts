@@ -53,6 +53,7 @@ const dailyAnswersSchema = z.object({
   b7q5: answerValue, b7q6: answerValue, b7q7: answerValue,
   b8q1: answerValue, b8q2: answerValue, b8q3: answerValue, b8q4: answerValue,
   b8q5: answerValue, b8q6: answerValue, b8q7: answerValue,
+  noteText: z.string().max(1000).optional(),
 });
 
 function computeSums(answers: z.infer<typeof dailyAnswersSchema>) {
@@ -206,6 +207,7 @@ export const appRouter = router({
           dayNumber,
           ...input,
           ...sums,
+          noteText: input.noteText ?? null,
         });
 
         // Auto-complete after day 14

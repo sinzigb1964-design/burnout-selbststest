@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { trpc } from "@/lib/trpc";
 import { ANSWER_LABELS, QUESTIONNAIRE_AREAS } from "../../../shared/questionnaire";
-import { ArrowLeft, ArrowRight, CheckCircle2, Heart, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Heart, Loader2, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
@@ -26,6 +26,7 @@ export default function Fragebogen() {
   const [currentArea, setCurrentArea] = useState(0); // 0-7
   const [answers, setAnswers] = useState<Answers>(initialAnswers());
   const [submitted, setSubmitted] = useState(false);
+  const [noteText, setNoteText] = useState("");
 
   const { data: todayData } = trpc.entry.today.useQuery();
   const isTestMode = todayData?.testMode ?? false;
@@ -72,12 +73,13 @@ export default function Fragebogen() {
 
   const handleSubmit = () => {
     // Build the full answer object for the mutation
-    const input: Record<string, number> = {};
+    const input: Record<string, number | string | undefined> = {};
     for (let b = 1; b <= 8; b++) {
       for (let q = 1; q <= 7; q++) {
         input[`b${b}q${q}`] = answers[`b${b}q${q}`] ?? 0;
       }
     }
+    if (noteText.trim()) input.noteText = noteText.trim();
     submitEntry.mutate(input as Parameters<typeof submitEntry.mutate>[0]);
   };
 
@@ -201,6 +203,29 @@ export default function Fragebogen() {
             );
           })}
         </div>
+
+        {/* Tagesnotiz (nur auf letzter Seite) */}
+        {isLastArea && (
+          <div className="mb-6">
+            <Card className="border-primary/20 bg-primary/5">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <MessageSquare className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium text-foreground">Notiz zum heutigen Tag (optional)</span>
+                </div>
+                <textarea
+                  value={noteText}
+                  onChange={(e) => setNoteText(e.target.value)}
+                  maxLength={1000}
+                  rows={3}
+                  placeholder="Wie war Ihr Tag? Besondere Ereignisse, Gedanken oder Beobachtungen ..."
+                  className="w-full text-sm bg-background border border-border rounded-lg p-3 text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+                />
+                <p className="text-xs text-muted-foreground mt-1 text-right">{noteText.length}/1000 Zeichen</p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Navigation */}
         <div className="flex items-center justify-between">
