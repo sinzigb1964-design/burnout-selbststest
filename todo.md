@@ -56,3 +56,4 @@
 - [x] Admin-Panel: Passwortschutz (separates Admin-Passwort, unabhängig vom Login)
 - [x] Admin-Panel: Coach-Rollenvergabe und -entzug
 - [x] Coach-Bereich-Kachel aus Dashboard entfernen und in Admin-Panel integrieren
+- [x] Bugfix: Schlussseite Fragebogen zeigt Tag N+1 statt Tag N (Off-by-One-Fehler)

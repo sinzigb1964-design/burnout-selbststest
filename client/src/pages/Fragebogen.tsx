@@ -108,7 +108,7 @@ export default function Fragebogen() {
               <CheckCircle2 className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-xl font-bold text-foreground mb-2">
-              Tag {todayData?.dayNumber || ""} abgeschlossen!
+              Tag {submitEntry.data?.dayNumber || todayData?.dayNumber || ""} abgeschlossen!
             </h2>
             <p className="text-muted-foreground mb-2">
               Sehr gut! Deine Antworten wurden gespeichert.
