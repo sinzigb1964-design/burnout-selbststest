@@ -77,3 +77,4 @@
 - [x] Einleitungsabsatz: In Auswertungsseite (Auswertung.tsx) als erstes Element einbinden
 - [x] Einleitungsabsatz: In PDF-Export (generatePdf.ts) nach dem Header einbinden
 - [x] Einleitungsabsatz: In Coach-Klienten-Detailansicht (CoachKlient.tsx) einbinden
+- [x] Bugfix: React Error #310 (useMemo) auf Auswertungsseite nach Abschluss des letzten Tages

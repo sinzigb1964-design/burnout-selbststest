@@ -79,6 +79,9 @@ export default function Auswertung() {
     }
   };
 
+  // Hooks müssen VOR allen bedingten Returns stehen (Rules of Hooks)
+  const { user } = useAuth();
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -123,7 +126,6 @@ export default function Auswertung() {
   const totalColor = totalLevelKey === "low" ? "text-green-600" : totalLevelKey === "medium" ? "text-yellow-600" : "text-red-600";
   const totalBg = totalLevelKey === "low" ? "bg-green-50 border-green-200" : totalLevelKey === "medium" ? "bg-yellow-50 border-yellow-200" : "bg-red-50 border-red-200";
 
-  const { user } = useAuth();
   const introText = buildIntroText({
     userName: user?.name,
     daysCompleted,
