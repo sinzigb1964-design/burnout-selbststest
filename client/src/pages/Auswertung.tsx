@@ -3,6 +3,7 @@ import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
+import { generatePDF } from "@/lib/generatePdf";
 import {
   AREA_TEXTS,
   GLOBAL_TEXTS,
@@ -18,8 +19,11 @@ import {
   CheckCircle2,
   Heart,
   Info,
+  Printer,
   TrendingUp,
 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { useLocation, useParams } from "wouter";
 import {
   Bar,
@@ -50,6 +54,27 @@ export default function Auswertung() {
   const [, navigate] = useLocation();
 
   const { data, isLoading, error } = trpc.cycle.getEvaluation.useQuery({ cycleId });
+  const [isPrinting, setIsPrinting] = useState(false);
+
+  const { refetch: fetchExport } = trpc.gdpr.exportData.useQuery(undefined, {
+    enabled: false,
+  });
+
+  const handlePrint = async () => {
+    setIsPrinting(true);
+    try {
+      const result = await fetchExport();
+      if (result.data) {
+        await generatePDF(result.data as Parameters<typeof generatePDF>[0]);
+        toast.success("PDF wurde erfolgreich erstellt und heruntergeladen.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("PDF-Export fehlgeschlagen. Bitte versuche es erneut.");
+    } finally {
+      setIsPrinting(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -104,10 +129,20 @@ export default function Auswertung() {
             <Button variant="ghost" size="icon" onClick={() => navigate("/dashboard")}>
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-1">
               <Heart className="w-5 h-5 text-primary" />
               <h1 className="text-lg font-bold text-foreground">14-Tage-Auswertung</h1>
             </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handlePrint}
+              disabled={isPrinting}
+              className="flex items-center gap-2"
+            >
+              <Printer className="w-4 h-4" />
+              {isPrinting ? "Wird erstellt…" : "PDF herunterladen"}
+            </Button>
           </div>
         </div>
       </div>
