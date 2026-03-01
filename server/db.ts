@@ -5,12 +5,15 @@ import {
   DailyEntry,
   InsertCoachAccess,
   InsertDailyEntry,
+  InsertMagicToken,
   InsertTestCycle,
   InsertUser,
+  MagicToken,
   TestCycle,
   User,
   coachAccess,
   dailyEntries,
+  magicTokens,
   testCycles,
   users,
 } from "../drizzle/schema";
@@ -335,4 +338,117 @@ export async function getUserCycleInfo(userId: number): Promise<{
     entryCount = entries.length;
   }
   return { activeCycle, completedCount: completed.length, entryCount };
+}
+
+// ─── MAGIC LINK AUTH ──────────────────────────────────────────────────────────
+
+/**
+ * Findet einen User anhand der E-Mail-Adresse oder erstellt einen neuen.
+ * Beim ersten Login wird der Vorname gespeichert.
+ * Bei Folge-Logins bleibt der Name erhalten (kein Überschreiben).
+ */
+export async function findOrCreateUserByEmail(
+  email: string,
+  firstName?: string
+): Promise<User> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Bestehenden User suchen
+  const existing = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email.toLowerCase().trim()))
+    .limit(1);
+
+  if (existing[0]) {
+    // Vorname aktualisieren falls noch nicht gesetzt
+    if (firstName && !existing[0].name) {
+      await db
+        .update(users)
+        .set({ name: firstName, lastSignedIn: new Date() })
+        .where(eq(users.id, existing[0].id));
+      return { ...existing[0], name: firstName };
+    }
+    await db
+      .update(users)
+      .set({ lastSignedIn: new Date() })
+      .where(eq(users.id, existing[0].id));
+    return existing[0];
+  }
+
+  // Neuen User anlegen
+  const openId = `email_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const insertData: InsertUser = {
+    openId,
+    email: email.toLowerCase().trim(),
+    name: firstName || null,
+    loginMethod: "magic_link",
+    lastSignedIn: new Date(),
+    consentGiven: true,
+    consentGivenAt: new Date(),
+  };
+  await db.insert(users).values(insertData);
+
+  const created = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email.toLowerCase().trim()))
+    .limit(1);
+  return created[0];
+}
+
+/**
+ * Erstellt einen neuen Magic-Link-Token für einen User.
+ * Gültig für 15 Minuten.
+ */
+export async function createMagicToken(userId: number, token: string): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 Minuten
+  await db.insert(magicTokens).values({ userId, token, expiresAt });
+}
+
+/**
+ * Prüft und verbraucht einen Magic-Link-Token.
+ * Gibt den zugehörigen User zurück oder null wenn ungültig/abgelaufen.
+ */
+export async function verifyAndConsumeToken(token: string): Promise<User | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  const result = await db
+    .select()
+    .from(magicTokens)
+    .where(eq(magicTokens.token, token))
+    .limit(1);
+
+  const magicToken = result[0];
+  if (!magicToken) return null;
+  if (magicToken.usedAt) return null; // bereits verwendet
+  if (new Date() > magicToken.expiresAt) return null; // abgelaufen
+
+  // Token als verwendet markieren
+  await db
+    .update(magicTokens)
+    .set({ usedAt: new Date() })
+    .where(eq(magicTokens.id, magicToken.id));
+
+  // User laden
+  const user = await getUserById(magicToken.userId);
+  return user ?? null;
+}
+
+/**
+ * Löscht abgelaufene und bereits verwendete Tokens (Housekeeping).
+ */
+export async function cleanupExpiredTokens(): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  // Tokens älter als 1 Stunde löschen
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  await db
+    .delete(magicTokens)
+    .where(eq(magicTokens.createdAt, oneHourAgo));
 }

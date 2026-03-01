@@ -152,6 +152,22 @@ export type DailyEntry = typeof dailyEntries.$inferSelect;
 export type InsertDailyEntry = typeof dailyEntries.$inferInsert;
 
 /**
+ * Magic login tokens for passwordless authentication.
+ * Each token is valid for 15 minutes and can only be used once.
+ */
+export const magicTokens = mysqlTable("magic_tokens", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  token: varchar("token", { length: 128 }).notNull().unique(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  usedAt: timestamp("usedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type MagicToken = typeof magicTokens.$inferSelect;
+export type InsertMagicToken = typeof magicTokens.$inferInsert;
+
+/**
  * Coach access grants: a user can grant a coach access to their results.
  */
 export const coachAccess = mysqlTable("coach_access", {

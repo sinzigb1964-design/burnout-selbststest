@@ -16,6 +16,8 @@ import Settings from "./pages/Settings";
 import AdminPanel from "./pages/AdminPanel";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
+import Login from "./pages/Login";
+import AuthVerify from "./pages/AuthVerify";
 import { useAuth } from "./_core/hooks/useAuth";
 import { getLoginUrl } from "./const";
 
@@ -39,7 +41,7 @@ function ProtectedRoute({
   }
 
   if (!isAuthenticated) {
-    window.location.href = getLoginUrl();
+    navigate(getLoginUrl());
     return null;
   }
 
@@ -58,9 +60,10 @@ function Router() {
       <Route path="/einwilligung">
         {() => {
           const { user, loading, isAuthenticated } = useAuth();
+          const [, nav] = useLocation();
           if (loading) return <div className="min-h-screen bg-background flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>;
-          if (!isAuthenticated) { window.location.href = getLoginUrl(); return null; }
-          if (user?.consentGiven) { window.location.href = "/dashboard"; return null; }
+          if (!isAuthenticated) { nav("/login"); return null; }
+          if (user?.consentGiven) { nav("/dashboard"); return null; }
           return <Consent />;
         }}
       </Route>
@@ -86,6 +89,8 @@ function Router() {
         {() => <ProtectedRoute component={Settings} />}
       </Route>
       <Route path="/admin" component={AdminPanel} />
+      <Route path="/login" component={Login} />
+      <Route path="/auth/verify" component={AuthVerify} />
       <Route path="/impressum" component={Impressum} />
       <Route path="/datenschutz" component={Datenschutz} />
       <Route path="/404" component={NotFound} />

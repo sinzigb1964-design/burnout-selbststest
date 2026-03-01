@@ -84,3 +84,10 @@
 - [x] E-Mail-Sequenz: Willkommens-E-Mail bei Zyklusstart
 - [x] E-Mail-Sequenz: Täglicher Cron-Job für Erinnerungs-E-Mails (nur wenn nicht ausgefüllt)
 - [x] E-Mail-Sequenz: Abschluss-E-Mail mit Link zum Auswertungsbericht
+- [x] Magic-Link-Login: magicTokens-Tabelle im Datenbankschema hinzufügen
+- [x] Magic-Link-Login: Server-Routen (requestLink, verifyToken, logout)
+- [x] Magic-Link-Login: Magic-Link E-Mail-Template in email.ts
+- [x] Magic-Link-Login: Login-Seite (Vorname + E-Mail Eingabe)
+- [x] Magic-Link-Login: Verify-Seite (Token aus URL prüfen, Session setzen)
+- [x] Magic-Link-Login: Manus-OAuth aus App entfernen, Auth-Kontext anpassen
+- [x] Magic-Link-Login: Session 14 Tage gültig
