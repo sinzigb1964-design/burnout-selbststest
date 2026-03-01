@@ -64,3 +64,4 @@
 - [x] Admin-Panel: Mehrfach-Rollenvergabe (Admin + Coach gleichzeitig möglich)
 - [x] Bugfix: Zurück-Link in Datenschutz- und Impressum-Kopfzeile führt auf 404
 - [x] PDF-Export: Balkendiagramm-Grafik aus dem Auswertungsbericht einbetten
+- [x] PDF-Diagramm: Kürzel B1–B8 durch vollständige Bereichsnamen mit schräger Beschriftung ersetzen

@@ -220,7 +220,19 @@ async function generatePDF(data: {
     doc.text("Belastungsprofil nach Bereichen", margin, y);
     y += 6;
 
-    const chartH = 55;  // Gesamthöhe des Diagrammbereichs
+    // Kurze Bereichsnamen für schräge Beschriftung
+    const areaShortNames = [
+      "Schlaf",
+      "Energie",
+      "Nervensystem",
+      "Konzentration",
+      "Körper",
+      "Soziales",
+      "Sinn & Freude",
+      "Innere Distanz",
+    ];
+
+    const chartH = 75;  // Gesamthöhe inkl. schräger Beschriftung
     const barAreaTop = y + 6;  // Oberkante der Balken
     const barAreaH = 38;  // Höhe der Balkenfläche
     const barAreaBottom = barAreaTop + barAreaH;
@@ -277,11 +289,13 @@ async function generatePDF(data: {
       doc.setFont("helvetica", "bold");
       doc.text(avg.toFixed(1), barX + barWidth / 2, barY - 1, { align: "center" });
 
-      // Bereichsnummer unter dem Balken
+      // Schräger Bereichsname unter dem Balken (45 Grad)
       doc.setFont("helvetica", "normal");
       doc.setFontSize(6.5);
-      const shortLabel = `B${i + 1}`;
-      doc.text(shortLabel, barX + barWidth / 2, barAreaBottom + 4, { align: "center" });
+      doc.setTextColor(60, 60, 60);
+      const labelX = barX + barWidth / 2 + 1;
+      const labelY = barAreaBottom + 3;
+      doc.text(areaShortNames[i] ?? `B${i + 1}`, labelX, labelY, { angle: 45 });
     }
 
     // Legende
