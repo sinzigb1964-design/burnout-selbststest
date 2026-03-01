@@ -44,8 +44,8 @@ export default function Dashboard() {
   const canFillToday = activeCycle && !todayEntry;
 
   const motivationMessages = [
-    "Jeder Tag zählt. Du machst das grossartig!",
-    "Schon mehr als die Haelfte geschafft. Weiter so!",
+    "Jeder Tag zählt. Du machst das großartig!",
+    "Schon mehr als die Hälfte geschafft. Weiter so!",
     "Du bist fast am Ziel. Noch ein paar Tage!",
     "Fantastisch! Du hast alle 14 Tage abgeschlossen.",
   ];
@@ -91,7 +91,7 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground mt-1">
             {activeCycle
-              ? `Tag ${dayNumber} von 14 – ${canFillToday ? "Heute noch nicht ausgefuellt." : "Heute bereits ausgefuellt."}`
+              ? `Tag ${dayNumber} von 14 – ${canFillToday ? "Heute noch nicht ausgefüllt." : "Heute bereits ausgefüllt."}`
               : "Starte deinen 14-Tage-Belastungstest."}
           </p>
         </div>
@@ -173,12 +173,12 @@ export default function Dashboard() {
                         onClick={() => navigate("/fragebogen")}
                       >
                         <ClipboardList className="w-4 h-4 mr-2" />
-                        Fragebogen fuer Tag {dayNumber} ausfüllen
+                        Fragebogen für Tag {dayNumber} ausfüllen
                       </Button>
                     ) : (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted rounded-lg px-3 py-2">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
-                        Heute bereits ausgefuellt. Morgen geht es weiter.
+                        Heute bereits ausgefüllt. Morgen geht es weiter.
                       </div>
                     )}
                   </CardContent>
@@ -193,7 +193,7 @@ export default function Dashboard() {
                       Kein aktiver Zyklus
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                      Starte jetzt deinen 14-Tage-Belastungstest. Fuelle täglich den Fragebogen
+                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich den Fragebogen
                       aus und erhalte nach zwei Wochen eine detaillierte Auswertung.
                     </p>
                     <Button
@@ -201,7 +201,7 @@ export default function Dashboard() {
                       disabled={startCycle.isPending}
                       size="lg"
                     >
-                      {startCycle.isPending ? "Wird gestartet..." : "14-Tage-Test starten"}
+                      {startCycle.isPending ? "Wird gestartet …" : "14-Tage-Test starten"}
                     </Button>
                   </CardContent>
                 </Card>
