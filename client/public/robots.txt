@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /fragebogen
+Disallow: /auswertung
+Disallow: /settings
+Disallow: /coach
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://selbsttest.burnout-lifeback-guide.click/sitemap.xml
