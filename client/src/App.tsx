@@ -14,6 +14,8 @@ import CoachDashboard from "./pages/CoachDashboard";
 import CoachKlient from "./pages/CoachKlient";
 import Settings from "./pages/Settings";
 import AdminPanel from "./pages/AdminPanel";
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
 import { useAuth } from "./_core/hooks/useAuth";
 import { getLoginUrl } from "./const";
 
@@ -84,6 +86,8 @@ function Router() {
         {() => <ProtectedRoute component={Settings} />}
       </Route>
       <Route path="/admin" component={AdminPanel} />
+      <Route path="/impressum" component={Impressum} />
+      <Route path="/datenschutz" component={Datenschutz} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
