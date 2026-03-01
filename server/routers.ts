@@ -34,7 +34,7 @@ import {
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
 import { ENV } from "./_core/env";
-import { sendEmail, buildWelcomeEmail, buildCompletionEmail } from "./email";
+import { sendEmail, buildWelcomeEmail, buildCompletionEmail, buildReminderEmail } from "./email";
 import { startEmailCron } from "./emailCron";
 
 // Cron-Job beim Serverstart registrieren
@@ -479,6 +479,53 @@ export const appRouter = router({
         }
         await setTestModeSetting(input.enabled);
         return { success: true, testMode: input.enabled };
+      }),
+
+    /** Sendet alle 4 E-Mail-Typen als Test an eine angegebene Adresse */
+    sendTestEmails: publicProcedure
+      .input(z.object({ adminPassword: z.string(), toEmail: z.string().email() }))
+      .mutation(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        const to = { email: input.toEmail, name: "Bernd" };
+        const results: Record<string, boolean> = {};
+
+        // 1. Magic-Link E-Mail (simuliert)
+        const { sendMagicLinkEmail } = await import("./emailMagicLink");
+        results.magicLink = await sendMagicLinkEmail({
+          to,
+          firstName: "Bernd",
+          magicUrl: `${APP_URL}/?token=TESTTOKEN123`,
+          isNewUser: true,
+        });
+
+        // 2. Willkommens-E-Mail
+        const welcome = buildWelcomeEmail({
+          firstName: "Bernd",
+          appUrl: APP_URL,
+          startDate: new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" }),
+        });
+        results.welcome = await sendEmail({ to, ...welcome });
+
+        // 3. Tägliche Erinnerungs-E-Mail (Tag 7, 7 Tage verbleibend)
+        const reminder = buildReminderEmail({
+          firstName: "Bernd",
+          appUrl: APP_URL,
+          dayNumber: 7,
+          daysLeft: 7,
+        });
+        results.reminder = await sendEmail({ to, ...reminder });
+
+        // 4. Abschluss-E-Mail
+        const completion = buildCompletionEmail({
+          firstName: "Bernd",
+          appUrl: APP_URL,
+          cycleId: 999,
+        });
+        results.completion = await sendEmail({ to, ...completion });
+
+        return { success: true, results };
       }),
   }),
 
