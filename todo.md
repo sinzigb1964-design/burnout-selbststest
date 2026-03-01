@@ -100,3 +100,4 @@
 - [x] DSGVO: Bestätigungsseite /abmeldung im Frontend
 - [x] Bugfix: React insertBefore-Fehler beim Login ins Admin-Panel
 - [x] Datenschutzerklärung: Brevo als Auftragsverarbeiter, E-Mail-Sequenz und Abmelderecht ergänzen
+- [x] Auswertungsbericht: Dynamischer Abschlusstext von Bernd Sinzig (3 Varianten je Belastungsniveau, CTA ab mittel)

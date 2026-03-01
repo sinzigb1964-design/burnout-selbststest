@@ -10,6 +10,7 @@ import {
 } from "../../../shared/questionnaire";
 import type { DailyEntry, TestCycle, User as UserType } from "../../../drizzle/schema";
 import { buildIntroText } from "../../../shared/introText";
+import { buildClosingText } from "../../../shared/closingText";
 
 // ─── Hilfsfunktionen ──────────────────────────────────────────────────────────
 
@@ -481,6 +482,49 @@ export async function generatePDF(data: {
         doc.text(noteLines, margin, y + 5);
         y += noteLines.length * 4.5 + 8;
       }
+    }
+
+    // ── Abschlusstext von Bernd Sinzig ──
+    const closing = buildClosingText(totalLevel, data.user?.name?.split(" ")[0] || "");
+    if (y > 200) { doc.addPage(); y = margin; }
+    y += 6;
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(30, 30, 30);
+    doc.text(closing.heading, margin, y);
+    y += 7;
+    for (const para of closing.paragraphs) {
+      if (y > 260) { doc.addPage(); y = margin; }
+      doc.setFontSize(9);
+      const isQuote = para.startsWith("„") || para.startsWith('"');
+      doc.setFont("helvetica", isQuote ? "bolditalic" : "normal");
+      doc.setTextColor(isQuote ? 40 : 80, isQuote ? 40 : 80, isQuote ? 40 : 80);
+      const wrapped = doc.splitTextToSize(para, pageW - margin * 2 - 4);
+      if (isQuote) {
+        doc.setDrawColor(100, 100, 200);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, margin, y + wrapped.length * 4.5);
+      }
+      doc.text(wrapped, isQuote ? margin + 4 : margin, y);
+      y += wrapped.length * 4.5 + 3;
+    }
+    if (closing.ctaLabel && closing.ctaUrl) {
+      if (y > 260) { doc.addPage(); y = margin; }
+      y += 4;
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(totalLevel === "high" ? 180 : 160, totalLevel === "high" ? 30 : 100, 30);
+      doc.text(`→ ${closing.ctaLabel}: ${closing.ctaUrl}`, margin, y);
+      y += 6;
+    }
+    doc.setFontSize(8);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(60, 60, 60);
+    const sigLines = closing.signature.split("\n");
+    for (const line of sigLines) {
+      if (y > 270) { doc.addPage(); y = margin; }
+      doc.text(line, margin, y);
+      y += 4.5;
     }
 
     y += 10;

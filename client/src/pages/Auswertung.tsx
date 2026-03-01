@@ -15,6 +15,7 @@ import {
   getTotalLevel,
 } from "../../../shared/questionnaire";
 import { buildIntroText } from "../../../shared/introText";
+import { buildClosingText } from "../../../shared/closingText";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -126,6 +127,8 @@ export default function Auswertung() {
   const totalLevelKey = getTotalLevel(totalSum);
   const totalColor = totalLevelKey === "low" ? "text-green-600" : totalLevelKey === "medium" ? "text-yellow-600" : "text-red-600";
   const totalBg = totalLevelKey === "low" ? "bg-green-50 border-green-200" : totalLevelKey === "medium" ? "bg-yellow-50 border-yellow-200" : "bg-red-50 border-red-200";
+
+  const closingContent = buildClosingText(totalLevelKey, user?.name?.split(" ")[0] || "");
 
   const introText = buildIntroText({
     userName: user?.name,
@@ -426,6 +429,54 @@ export default function Auswertung() {
             </CardContent>
           </Card>
         )}
+
+        {/* Abschlusstext von Bernd Sinzig */}
+        <Card className={`border-2 mb-8 ${
+          totalLevelKey === "low"
+            ? "border-green-200 bg-green-50/40"
+            : totalLevelKey === "medium"
+            ? "border-amber-200 bg-amber-50/40"
+            : "border-red-200 bg-red-50/40"
+        }`}>
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 text-lg font-bold text-primary">
+                B
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-foreground mb-4 text-base">{closingContent.heading}</h3>
+                <div className="space-y-3">
+                  {closingContent.paragraphs.map((para, i) => (
+                    <p key={i} className={`text-sm leading-relaxed ${
+                      para.startsWith("„") || para.startsWith('"')
+                        ? "text-foreground font-medium italic border-l-2 border-primary/40 pl-3"
+                        : "text-muted-foreground"
+                    }`}>
+                      {para}
+                    </p>
+                  ))}
+                </div>
+                {closingContent.ctaLabel && closingContent.ctaUrl && (
+                  <div className="mt-5">
+                    <a
+                      href={closingContent.ctaUrl}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-colors ${
+                        totalLevelKey === "high"
+                          ? "bg-red-600 hover:bg-red-700"
+                          : "bg-amber-600 hover:bg-amber-700"
+                      }`}
+                    >
+                      {closingContent.ctaLabel}
+                    </a>
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground mt-5 whitespace-pre-line font-medium">
+                  {closingContent.signature}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Disclaimer */}
         <Card className="border-border bg-muted/30 mb-8">
