@@ -58,7 +58,7 @@ export default function AdminPanel() {
               </div>
               <CardTitle className="text-xl">Admin-Panel</CardTitle>
               <p className="text-sm text-muted-foreground mt-1">
-                Bitte geben Sie das Admin-Passwort ein.
+                  Bitte gib das Admin-Passwort ein.
               </p>
             </CardHeader>
             <CardContent>
@@ -416,7 +416,7 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
-              Hier gelangen Sie zur Coach-Übersicht mit allen freigegebenen Klienten und deren Auswertungen.
+              Hier gelangst du zur Coach-Übersicht mit allen freigegebenen Klientinnen und Klienten und deren Auswertungen.
             </p>
             <Button
               variant="outline"
