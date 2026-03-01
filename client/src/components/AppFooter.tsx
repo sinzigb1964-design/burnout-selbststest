@@ -21,6 +21,10 @@ export default function AppFooter() {
           <Link href="/datenschutz" className="hover:text-foreground transition-colors">
             Datenschutzerklärung
           </Link>
+          <span className="text-border">|</span>
+          <Link href="/admin" className="hover:text-foreground transition-colors opacity-50 hover:opacity-100 text-xs">
+            Admin
+          </Link>
         </nav>
       </div>
     </footer>
