@@ -99,3 +99,4 @@
 - [x] DSGVO: Abmeldelink in alle E-Mail-Templates (Willkommen, Erinnerung, Abschluss)
 - [x] DSGVO: Bestätigungsseite /abmeldung im Frontend
 - [x] Bugfix: React insertBefore-Fehler beim Login ins Admin-Panel
+- [x] Datenschutzerklärung: Brevo als Auftragsverarbeiter, E-Mail-Sequenz und Abmelderecht ergänzen

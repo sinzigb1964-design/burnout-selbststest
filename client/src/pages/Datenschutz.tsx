@@ -25,7 +25,7 @@ export default function Datenschutz() {
 
       <div className="container py-12 max-w-3xl">
         <h1 className="text-3xl font-bold text-foreground mb-2">Datenschutzerklärung</h1>
-        <p className="text-sm text-muted-foreground mb-8">Version 15.12.2025</p>
+        <p className="text-sm text-muted-foreground mb-8">Version 01.03.2026</p>
 
         <div className="space-y-8 text-foreground">
 
@@ -120,6 +120,7 @@ export default function Datenschutz() {
             <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2">
               <li>Bereitstellung und Betrieb der Burnout-Selbsttest-App</li>
               <li>Berechnung und Darstellung der 14-Tage-Auswertung</li>
+              <li>Versand automatischer Erinnerungs-E-Mails während des laufenden 14-Tage-Zyklus</li>
               <li>Optionale Freigabe der Ergebnisse an einen Coach (nur mit Ihrer ausdrücklichen Einwilligung)</li>
               <li>Weiterentwicklung und Verbesserung des Angebots</li>
             </ul>
@@ -127,6 +128,69 @@ export default function Datenschutz() {
               Soweit Sie uns eine Einwilligung zur Bearbeitung Ihrer Personaldaten für bestimmte
               Zwecke erteilt haben, bearbeiten wir Ihre Personendaten auf dieser Grundlage. Sie
               können erteilte Einwilligungen jederzeit widerrufen.
+            </p>
+          </section>
+
+          {/* 4a */}
+          <section>
+            <h2 className="text-xl font-semibold mb-3">4a. E-Mail-Kommunikation und Erinnerungs-E-Mails</h2>
+            <p className="text-muted-foreground mb-3">
+              Mit der Registrierung und dem Start eines 14-Tage-Testzyklus erklären Sie sich damit
+              einverstanden, automatische E-Mails zu erhalten, die Sie an das tägliche Ausfüllen
+              des Fragebogens erinnern. Diese E-Mails werden ausschließlich während eines aktiven
+              Zyklus versendet und dienen allein der Unterstützung Ihrer regelmäßigen Teilnahme.
+            </p>
+            <p className="text-muted-foreground mb-3">
+              Im Einzelnen werden folgende E-Mails automatisch versendet:
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2 mb-3">
+              <li><strong>Willkommens-E-Mail</strong> beim Start eines neuen Zyklus (einmalig)</li>
+              <li><strong>Tägliche Erinnerungs-E-Mail</strong> an Tagen, an denen noch kein Eintrag vorgenommen wurde (täglich um ca. 09:00 Uhr MEZ)</li>
+              <li><strong>Abschluss-E-Mail</strong> nach Abschluss des 14-Tage-Zyklus mit Link zum persönlichen Auswertungsbericht (einmalig)</li>
+            </ul>
+
+            <h3 className="font-medium mb-2">Abmelderecht / Opt-out</h3>
+            <p className="text-muted-foreground mb-3">
+              Sie können den Empfang dieser automatischen E-Mails jederzeit und ohne Angabe von
+              Gründen abbestellen. Jede E-Mail enthält am Ende einen persönlichen
+              Abmeldelink. Ein Klick auf diesen Link genügt, um alle weiteren automatischen
+              Erinnerungs-E-Mails dauerhaft zu deaktivieren. Ihre Nutzerdaten und Testergebnisse
+              bleiben dabei vollständig erhalten.
+            </p>
+            <p className="text-muted-foreground">
+              Die Abmeldung gilt ausschließlich für automatische Erinnerungs-E-Mails. Sie
+              berührt nicht die Möglichkeit, die App weiterhin zu nutzen oder sich erneut
+              anzumelden.
+            </p>
+          </section>
+
+          {/* 4b */}
+          <section>
+            <h2 className="text-xl font-semibold mb-3">4b. Auftragsverarbeitung – Brevo (E-Mail-Versand)</h2>
+            <p className="text-muted-foreground mb-3">
+              Für den Versand der automatischen E-Mails nutzen wir den Dienst{" "}
+              <strong>Brevo</strong> (ehemals Sendinblue) der Sendinblue SAS, 55 rue d’Amsterdam,
+              75008 Paris, Frankreich. Brevo ist als Auftragsverarbeiter gemäß Art. 28 DSGVO
+              tätig. Es besteht ein Auftragsverarbeitungsvertrag (AVV). Brevo verarbeitet Ihre
+              E-Mail-Adresse und Ihren Vornamen ausschließlich zum Zweck der
+              E-Mail-Zustellung im Auftrag des App-Betreibers.
+            </p>
+            <p className="text-muted-foreground mb-3">
+              Die Datenverarbeitung durch Brevo erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b
+              DSGVO (Vertragserfüllung) sowie Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Brevo
+              speichert Daten auf Servern innerhalb der Europäischen Union.
+            </p>
+            <p className="text-muted-foreground">
+              Weitere Informationen zum Datenschutz bei Brevo finden Sie unter:{" "}
+              <a
+                href="https://www.brevo.com/de/legal/privacypolicy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                www.brevo.com/de/legal/privacypolicy
+              </a>
+              .
             </p>
           </section>
 
