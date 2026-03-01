@@ -78,3 +78,9 @@
 - [x] Einleitungsabsatz: In PDF-Export (generatePdf.ts) nach dem Header einbinden
 - [x] Einleitungsabsatz: In Coach-Klienten-Detailansicht (CoachKlient.tsx) einbinden
 - [x] Bugfix: React Error #310 (useMemo) auf Auswertungsseite nach Abschluss des letzten Tages
+- [ ] Login-Seite: Platzhalter-iframe für externes E-Mail-Anmeldeformular einbauen
+- [x] E-Mail-Sequenz: Brevo API-Key als Secret eintragen
+- [x] E-Mail-Sequenz: Brevo-Helper (server/email.ts) mit sendEmail-Funktion
+- [x] E-Mail-Sequenz: Willkommens-E-Mail bei Zyklusstart
+- [x] E-Mail-Sequenz: Täglicher Cron-Job für Erinnerungs-E-Mails (nur wenn nicht ausgefüllt)
+- [x] E-Mail-Sequenz: Abschluss-E-Mail mit Link zum Auswertungsbericht

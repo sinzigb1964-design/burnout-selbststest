@@ -31,6 +31,13 @@ import {
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
 import { ENV } from "./_core/env";
+import { sendEmail, buildWelcomeEmail, buildCompletionEmail } from "./email";
+import { startEmailCron } from "./emailCron";
+
+// Cron-Job beim Serverstart registrieren
+startEmailCron();
+
+const APP_URL = process.env.APP_URL || "https://selbsttest.burnout-lifeback-guide.click";
 
 // ─── ANSWER SCHEMA ────────────────────────────────────────────────────────────
 
@@ -128,6 +135,22 @@ export const appRouter = router({
       const existing = await getActiveTestCycle(ctx.user.id);
       if (existing) throw new TRPCError({ code: "BAD_REQUEST", message: "Ein aktiver Zyklus laeuft bereits." });
       const cycle = await createTestCycle({ userId: ctx.user.id, status: "active" });
+
+      // Willkommens-E-Mail senden
+      if (ctx.user.email) {
+        const firstName = ctx.user.name?.split(" ")[0] || "du";
+        const startDate = new Date(cycle.startDate).toLocaleDateString("de-DE", {
+          day: "2-digit", month: "long", year: "numeric"
+        });
+        const { subject, htmlContent } = buildWelcomeEmail({
+          firstName,
+          appUrl: APP_URL,
+          startDate,
+        });
+        sendEmail({ to: { email: ctx.user.email, name: ctx.user.name || undefined }, subject, htmlContent })
+          .catch((e) => console.error("[email] Willkommens-E-Mail fehlgeschlagen:", e));
+      }
+
       return cycle;
     }),
 
@@ -213,6 +236,18 @@ export const appRouter = router({
         // Auto-complete after day 14
         if (dayNumber >= 14) {
           await completeTestCycle(cycle.id);
+
+          // Abschluss-E-Mail senden
+          if (ctx.user.email) {
+            const firstName = ctx.user.name?.split(" ")[0] || "du";
+            const { subject, htmlContent } = buildCompletionEmail({
+              firstName,
+              appUrl: APP_URL,
+              cycleId: cycle.id,
+            });
+            sendEmail({ to: { email: ctx.user.email, name: ctx.user.name || undefined }, subject, htmlContent })
+              .catch((e) => console.error("[email] Abschluss-E-Mail fehlgeschlagen:", e));
+          }
         }
 
         return { entry, dayNumber, isComplete: dayNumber >= 14 };
