@@ -9,6 +9,7 @@ import {
   AREA_TEXTS,
   GLOBAL_TEXTS,
   PATTERN_TEXTS,
+  PATTERN_INFO,
   QUESTIONNAIRE_AREAS,
   getAreaLevel,
   getTotalLevel,
@@ -300,22 +301,47 @@ export default function Auswertung() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {patterns.map((pattern) => (
-                <div
-                  key={pattern}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-muted/50 border border-border"
-                >
-                  <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">
-                      Muster {pattern}
-                    </p>
-                    <p className="text-sm text-foreground leading-relaxed">
-                      {PATTERN_TEXTS[pattern]}
-                    </p>
+              {patterns.map((pattern) => {
+                const info = PATTERN_INFO[pattern];
+                const isCritical = info?.severity === "critical";
+                return (
+                  <div
+                    key={pattern}
+                    className={`flex items-start gap-3 p-4 rounded-lg border ${
+                      isCritical
+                        ? "bg-red-50 border-red-200 dark:bg-red-950/20 dark:border-red-800"
+                        : "bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-800"
+                    }`}
+                  >
+                    <AlertTriangle
+                      className={`w-5 h-5 mt-0.5 shrink-0 ${
+                        isCritical ? "text-red-600" : "text-amber-600"
+                      }`}
+                    />
+                    <div className="flex-1 min-w-0">
+                      {info ? (
+                        <>
+                          <p className={`text-sm font-bold mb-0.5 ${
+                            isCritical ? "text-red-800 dark:text-red-300" : "text-amber-800 dark:text-amber-300"
+                          }`}>
+                            {info.title}
+                          </p>
+                          <p className="text-xs text-muted-foreground mb-2 italic">
+                            {info.subtitle}
+                          </p>
+                          <p className="text-sm text-foreground leading-relaxed">
+                            {info.description}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-sm text-foreground leading-relaxed">
+                          {PATTERN_TEXTS[pattern]}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </CardContent>
           </Card>
         )}

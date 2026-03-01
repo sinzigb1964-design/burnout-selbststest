@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import AppFooter from "@/components/AppFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { QUESTIONNAIRE_AREAS, getAreaLevel } from "../../../shared/questionnaire";
+import { QUESTIONNAIRE_AREAS, getAreaLevel, PATTERN_INFO } from "../../../shared/questionnaire";
 import { buildIntroText } from "../../../shared/introText";
 import { ArrowLeft, BarChart3, Heart, Info } from "lucide-react";
 import { useState } from "react";
@@ -202,19 +202,36 @@ export default function CoachKlient() {
             {evalData.evaluation.patterns.length > 0 && (
               <Card className="border-border">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-semibold">Erkannte Muster</CardTitle>
+                  <CardTitle className="text-sm font-semibold">Erkannte Belastungsmuster</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {evalData.evaluation.patterns.map((p) => (
-                      <span
+                <CardContent className="space-y-3">
+                  {evalData.evaluation.patterns.map((p) => {
+                    const info = PATTERN_INFO[p];
+                    const isCritical = info?.severity === "critical";
+                    return (
+                      <div
                         key={p}
-                        className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium"
+                        className={`p-3 rounded-lg border text-sm ${
+                          isCritical
+                            ? "bg-red-50 border-red-200 dark:bg-red-950/20 dark:border-red-800"
+                            : "bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-800"
+                        }`}
                       >
-                        Muster {p}
-                      </span>
-                    ))}
-                  </div>
+                        {info ? (
+                          <>
+                            <p className={`font-semibold mb-0.5 ${
+                              isCritical ? "text-red-800 dark:text-red-300" : "text-amber-800 dark:text-amber-300"
+                            }`}>
+                              {info.title}
+                            </p>
+                            <p className="text-xs text-muted-foreground italic">{info.subtitle}</p>
+                          </>
+                        ) : (
+                          <p className="text-muted-foreground">Muster {p}</p>
+                        )}
+                      </div>
+                    );
+                  })}
                 </CardContent>
               </Card>
             )}

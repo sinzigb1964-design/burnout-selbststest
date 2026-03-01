@@ -221,18 +221,84 @@ export const AREA_TEXTS: Record<number, { green: string; yellow: string; red: st
   },
 };
 
-/** Musterbeschreibungen */
-export const PATTERN_TEXTS: Record<string, string> = {
-  A1: "Körper & Nervensystem im Dauerstress (alle drei Bereiche kritisch): Dein Schlaf, deine Energie und dein Nervensystem sind gleichzeitig stark belastet. Das ist ein ernstes Warnsignal für ein tiefes Erschöpfungssyndrom. Dein gesamtes System befindet sich im Überlebensmodus. Professionelle Unterstützung ist dringend empfohlen.",
-  A2: "Körper & Nervensystem unter Druck: Mindestens zwei der drei Grundbereiche – Schlaf, Energie und Nervensystem – zeigen starke Belastung. Dein Körper und Geist kämpfen gegen die Erschöpfung. Ohne Entlastung droht eine Verschlechterung.",
-  B1: "Sinnverlust & innere Distanz (beide Bereiche kritisch): Du hast den Zugang zu Sinn, Freude und echten Verbindungen weitgehend verloren. Das ist das klassische Bild von fortgeschrittenem Burnout – emotionale Erschöpfung kombiniert mit Depersonalisierung. Professionelle Begleitung ist hier besonders wichtig.",
-  B2: "Sinnverlust & innere Distanz (beginnend): Die Freude an der Arbeit und das Gefühl echter Verbindung zu anderen nehmen ab. Das sind frühe, aber wichtige Warnsignale, die ernst genommen werden sollten.",
-  C: "Kognitiv-körperliche Überlastung: Dein Kopf und dein Körper sind gleichzeitig stark belastet. Die Kombination aus mentalem Nebel und körperlichen Stresssignalen zeigt, dass dein gesamtes System überlastet ist.",
-  D: "Soziale Isolation als Schutzmodus: Du hast dich sowohl sozial als auch emotional stark zurückgezogen. Dieser Rückzug ist ein Schutzmechanismus – aber er verstärkt langfristig die Erschöpfung und Isolation.",
-  E1: "Mehrfachbelastung (6+ Bereiche kritisch): Fast alle Lebensbereiche sind stark belastet. Das ist ein deutliches Zeichen für ein umfassendes Erschöpfungssyndrom. Bitte suche professionelle Unterstützung.",
-  E2: "Mehrfachbelastung (4–5 Bereiche kritisch): Mehrere Lebensbereiche sind gleichzeitig stark belastet. Das zeigt, dass die Erschöpfung systemisch ist und nicht nur einzelne Bereiche betrifft.",
-  F: "Verdeckte Hochbelastung: Obwohl die Gesamtbelastung im mittleren Bereich liegt, zeigen mehrere Bereiche kritische Werte. Das kann bedeuten, dass du die Belastung kompensierst – aber die Warnsignale sollten ernst genommen werden.",
+/** Musterbeschreibungen mit nutzerfreundlichem Titel und Erklärung */
+export interface PatternInfo {
+  title: string;       // Kurze, verständliche Bezeichnung
+  subtitle: string;    // Ergänzender Kontext in einem Satz
+  description: string; // Ausführliche Erklärung für den User
+  severity: "warning" | "critical"; // Schweregrad für visuelle Hervorhebung
+}
+
+export const PATTERN_INFO: Record<string, PatternInfo> = {
+  A1: {
+    title: "Dein Körper läuft auf dem letzten Reserve",
+    subtitle: "Schlaf, Energie und Nervensystem sind gleichzeitig stark belastet.",
+    description:
+      "Wenn Schlaf, Energie und emotionale Stabilität gleichzeitig zusammenbrechen, befindet sich dein gesamtes System im Überlebensmodus. Du funktionierst noch – aber dein Körper und Geist zahlen dafür einen hohen Preis. Dieses Muster ist ein ernstes Warnsignal für ein tiefes Erschöpfungssyndrom. Professionelle Unterstützung ist dringend empfohlen.",
+    severity: "critical",
+  },
+  A2: {
+    title: "Dein Körper sendet deutliche Stresssignale",
+    subtitle: "Mindestens zwei deiner körperlichen Grundbereiche sind stark belastet.",
+    description:
+      "Schlaf, Energie oder Nervensystem – wenn zwei dieser Grundpfeiler gleichzeitig wackeln, kämpft dein Körper gegen die Erschöpfung an. Du merkst es vielleicht daran, dass du dich auch nach Ruhe nicht wirklich erholt fühlst. Ohne gezielte Entlastung droht eine Verschlechterung.",
+    severity: "warning",
+  },
+  B1: {
+    title: "Du hast den Zugang zu Freude und echten Verbindungen verloren",
+    subtitle: "Sinnverlust und innere Distanz zu anderen Menschen sind stark ausgeprägt.",
+    description:
+      "Wenn Arbeit sich nur noch nach Pflicht anfühlt und Menschen sich wie Anforderungen statt wie echte Begegnungen anfühlen, ist das ein klassisches Bild von fortgeschrittenem Burnout. Fachleute nennen das emotionale Erschöpfung kombiniert mit Depersonalisierung. Du bist nicht kaputt – aber du brauchst jetzt Unterstützung, um den Weg zurück zu finden.",
+    severity: "critical",
+  },
+  B2: {
+    title: "Freude und Verbindung beginnen zu verblassen",
+    subtitle: "Erste Zeichen von Sinnverlust und emotionalem Rückzug sind erkennbar.",
+    description:
+      "Die Frage \u201eWofür mache ich das eigentlich noch?\u201c und das Gefühl, innerlich etwas auf Abstand zu halten – das sind frühe, aber wichtige Signale. Sie zeigen, dass deine emotionalen Ressourcen zur Neige gehen. Jetzt ist ein guter Zeitpunkt, gegenzusteuern, bevor diese Muster tiefer werden.",
+    severity: "warning",
+  },
+  C: {
+    title: "Dein Kopf und dein Körper sind gleichzeitig überlastet",
+    subtitle: "Mentaler Nebel und körperliche Stresssignale treten gemeinsam auf.",
+    description:
+      "Wenn du gleichzeitig Konzentrationsprobleme hast und dein Körper mit Verspannungen, Kopfschmerzen oder Magenprobleme reagiert, zeigt das: Die Belastung ist nicht nur im Kopf. Dein gesamtes System – Gehirn und Körper – ist überlastet. Dieses Muster braucht Entlastung auf beiden Ebenen.",
+    severity: "warning",
+  },
+  D: {
+    title: "Du hast dich in den Rückzug geflüchtet",
+    subtitle: "Sozialer und emotionaler Rückzug als Schutzmechanismus.",
+    description:
+      "Wenn du dich sowohl von Menschen als auch innerlich stark zurückziehst, ist das kein Versagen – es ist ein Schutzmechanismus deines überlasteten Systems. Doch langfristig verstärkt Isolation die Erschöpfung. Kleine Schritte zurück in echte Verbindung können hier einen großen Unterschied machen.",
+    severity: "warning",
+  },
+  E1: {
+    title: "Fast alle Lebensbereiche sind stark belastet",
+    subtitle: "6 oder mehr Bereiche zeigen kritische Werte – ein umfassendes Erschöpfungssyndrom.",
+    description:
+      "Wenn nahezu alle Bereiche deines Lebens – Schlaf, Energie, Gefühle, Konzentration, Körper, soziale Verbindungen, Sinn und Beziehungen – gleichzeitig stark belastet sind, ist das ein klares Zeichen für ein umfassendes Erschöpfungssyndrom. Bitte such dir jetzt professionelle Unterstützung. Du musst das nicht alleine tragen.",
+    severity: "critical",
+  },
+  E2: {
+    title: "Mehrere Lebensbereiche sind gleichzeitig betroffen",
+    subtitle: "4 bis 5 Bereiche zeigen kritische Werte – die Erschöpfung ist systemisch.",
+    description:
+      "Wenn vier oder fünf Bereiche deines Lebens gleichzeitig stark belastet sind, ist das kein Zufall und kein persönliches Versagen. Es zeigt, dass die Erschöpfung dein gesamtes System erfasst hat – nicht nur einzelne Bereiche. Jetzt ist der richtige Zeitpunkt, aktiv gegenzusteuern.",
+    severity: "warning",
+  },
+  F: {
+    title: "Du kompensierst – aber die Warnsignale sind da",
+    subtitle: "Trotz mittlerer Gesamtbelastung zeigen mehrere Bereiche kritische Werte.",
+    description:
+      "Deine Gesamtbelastung wirkt auf den ersten Blick moderat – aber einzelne Bereiche zeigen bereits kritische Werte. Das ist oft ein Zeichen dafür, dass du die Belastung durch große Anstrengung kompensierst. Das funktioniert eine Weile, aber nicht dauerhaft. Die Warnsignale sollten ernst genommen werden, bevor die Kompensation zusammenbricht.",
+    severity: "warning",
+  },
 };
+
+/** Rückwärtskompatibilität: einfacher String-Zugriff */
+export const PATTERN_TEXTS: Record<string, string> = Object.fromEntries(
+  Object.entries(PATTERN_INFO).map(([k, v]) => [k, `${v.title}: ${v.description}`])
+);
 
 /** Globale Auswertungstexte */
 export const GLOBAL_TEXTS = {

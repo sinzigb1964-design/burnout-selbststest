@@ -2,6 +2,7 @@ import {
   AREA_TEXTS,
   GLOBAL_TEXTS,
   PATTERN_TEXTS,
+  PATTERN_INFO,
   QUESTIONNAIRE_AREAS,
   computePatterns,
   getAreaLevel,
@@ -427,14 +428,29 @@ export async function generatePDF(data: {
 
       for (const p of patterns) {
         if (y > 250) { doc.addPage(); y = margin; }
-        const pText = PATTERN_TEXTS[p] ?? "";
+        const info = PATTERN_INFO[p];
         doc.setFontSize(9);
         doc.setFont("helvetica", "bold");
-        doc.text(`Muster ${p}`, margin, y);
+        // Titel
+        const titleText = info ? info.title : `Muster ${p}`;
+        const titleLines = doc.splitTextToSize(titleText, contentW) as string[];
+        doc.text(titleLines, margin, y);
+        y += titleLines.length * 4.5 + 1;
+        // Subtitle kursiv
+        if (info?.subtitle) {
+          doc.setFont("helvetica", "italic");
+          doc.setFontSize(8);
+          const subLines = doc.splitTextToSize(info.subtitle, contentW) as string[];
+          doc.text(subLines, margin, y);
+          y += subLines.length * 4 + 2;
+        }
+        // Beschreibung
         doc.setFont("helvetica", "normal");
-        const lines = doc.splitTextToSize(pText, contentW) as string[];
-        doc.text(lines, margin, y + 5);
-        y += lines.length * 4.5 + 8;
+        doc.setFontSize(9);
+        const descText = info ? info.description : (PATTERN_TEXTS[p] ?? "");
+        const descLines = doc.splitTextToSize(descText, contentW) as string[];
+        doc.text(descLines, margin, y);
+        y += descLines.length * 4.5 + 8;
       }
     }
 

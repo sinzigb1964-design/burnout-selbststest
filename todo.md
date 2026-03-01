@@ -91,3 +91,4 @@
 - [x] Magic-Link-Login: Verify-Seite (Token aus URL prüfen, Session setzen)
 - [x] Magic-Link-Login: Manus-OAuth aus App entfernen, Auth-Kontext anpassen
 - [x] Magic-Link-Login: Session 14 Tage gültig
+- [x] Auswertungsbericht: Verständliche Bezeichnungen und Erklärungen für erkannte Belastungsmuster
