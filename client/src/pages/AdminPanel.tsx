@@ -142,6 +142,14 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
     onError: (err: { message?: string }) => toast.error(err.message || "Fehler beim Ändern der Rollen."),
   });
 
+  const deleteUser = trpc.admin.deleteUser.useMutation({
+    onSuccess: () => {
+      toast.success("Nutzer und alle zugehörigen Daten wurden gelöscht.");
+      utils.admin.listUsers.invalidate();
+    },
+    onError: (err) => toast.error(err.message || "Fehler beim Löschen."),
+  });
+
   const { data: testModeData, refetch: refetchTestMode } = trpc.admin.getTestMode.useQuery(
     { adminPassword },
     { enabled: !!adminPassword }
@@ -365,6 +373,40 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
                         </label>
                       </div>
 
+                      {/* Nutzer löschen */}
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            disabled={deleteUser.isPending}
+                            className="h-8 text-xs border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+                          >
+                            <svg className="w-3.5 h-3.5 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                            Löschen
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Nutzer endgültig löschen?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              <strong>{user.name || "Dieser Nutzer"}</strong> ({user.email}) wird zusammen mit
+                              allen Testzyklen, Tageseinträgen und Coach-Freigaben unwiderruflich gelöscht.
+                              Diese Aktion kann nicht rückgängig gemacht werden.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteUser.mutate({ adminPassword, userId: user.id })}
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            >
+                              Ja, endgültig löschen
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+
                       {/* Zyklus zurücksetzen */}
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
@@ -423,6 +465,7 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
 
 function AdminCoachSection({ adminPassword }: { adminPassword: string }) {
   const [expanded, setExpanded] = useState(false);
+  const [selectedClient, setSelectedClient] = useState<{ userId: number; cycleId: number; name: string } | null>(null);
 
   const { data: coachGroups, isLoading } = trpc.admin.listAllClients.useQuery(
     { adminPassword },
@@ -481,24 +524,14 @@ function AdminCoachSection({ adminPassword }: { adminPassword: string }) {
                     </span>
                   </div>
                   <div className="space-y-2 pl-9">
-                    {clients.map(({ user: client, access }) => (
-                      <div
+                    {clients.map(({ user: client }) => (
+                      <ClientRowWithCycles
                         key={client.id}
-                        className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border bg-muted/20 text-sm"
-                      >
-                        <div className="flex items-center gap-2 min-w-0">
-                          <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">
-                            {client.name?.charAt(0) || "U"}
-                          </div>
-                          <div className="min-w-0">
-                            <p className="font-medium text-foreground truncate">{client.name || "Unbekannt"}</p>
-                            <p className="text-xs text-muted-foreground truncate">{client.email}</p>
-                          </div>
-                        </div>
-                        <span className="text-xs text-muted-foreground shrink-0">
-                          seit {new Date(access.grantedAt).toLocaleDateString("de-DE")}
-                        </span>
-                      </div>
+                        client={client}
+                        adminPassword={adminPassword}
+                        selectedClient={selectedClient}
+                        onSelectClient={setSelectedClient}
+                      />
                     ))}
                   </div>
                 </div>
@@ -508,5 +541,183 @@ function AdminCoachSection({ adminPassword }: { adminPassword: string }) {
         </CardContent>
       )}
     </Card>
+  );
+}
+
+// ─── Client Row with Cycles ──────────────────────────────────────────────────
+
+type ClientUser = { id: number; name: string | null; email: string | null };
+
+function ClientRowWithCycles({
+  client,
+  adminPassword,
+  selectedClient,
+  onSelectClient,
+}: {
+  client: ClientUser;
+  adminPassword: string;
+  selectedClient: { userId: number; cycleId: number; name: string } | null;
+  onSelectClient: (v: { userId: number; cycleId: number; name: string } | null) => void;
+}) {
+  const [showCycles, setShowCycles] = useState(false);
+
+  const { data: cycles, isLoading: cyclesLoading } = trpc.admin.listUserCycles.useQuery(
+    { adminPassword, userId: client.id },
+    { enabled: !!adminPassword && showCycles }
+  );
+
+  const isSelected = selectedClient?.userId === client.id;
+
+  return (
+    <div className="rounded-lg border border-border bg-muted/20 text-sm overflow-hidden">
+      <div className="flex items-center justify-between gap-3 p-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">
+            {client.name?.charAt(0) || "U"}
+          </div>
+          <div className="min-w-0">
+            <p className="font-medium text-foreground truncate">{client.name || "Unbekannt"}</p>
+            <p className="text-xs text-muted-foreground truncate">{client.email}</p>
+          </div>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-7 text-xs shrink-0"
+          onClick={() => setShowCycles((v) => !v)}
+        >
+          {showCycles ? <ChevronUp className="w-3.5 h-3.5 mr-1" /> : <ChevronDown className="w-3.5 h-3.5 mr-1" />}
+          Auswertung
+        </Button>
+      </div>
+
+      {showCycles && (
+        <div className="border-t border-border bg-background px-3 pb-3 pt-2">
+          {cyclesLoading ? (
+            <div className="flex items-center gap-2 text-muted-foreground py-2 text-xs">
+              <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Lade Zyklen …
+            </div>
+          ) : !cycles || cycles.length === 0 ? (
+            <p className="text-xs text-muted-foreground py-2">Noch keine abgeschlossenen Zyklen.</p>
+          ) : (
+            <div className="space-y-1.5 mt-1">
+              {cycles.map((cycle) => (
+                <button
+                  key={cycle.id}
+                  onClick={() =>
+                    onSelectClient(
+                      isSelected && selectedClient?.cycleId === cycle.id
+                        ? null
+                        : { userId: client.id, cycleId: cycle.id, name: client.name || "Unbekannt" }
+                    )
+                  }
+                  className={`w-full text-left px-3 py-2 rounded-md border text-xs transition-colors ${
+                    selectedClient?.cycleId === cycle.id && isSelected
+                      ? "border-primary bg-primary/5 text-primary font-medium"
+                      : "border-border hover:bg-muted/40 text-foreground"
+                  }`}
+                >
+                  Zyklus #{cycle.id} – gestartet {new Date(cycle.startDate).toLocaleDateString("de-DE")}
+                  {cycle.endDate && (
+                    <span className="text-muted-foreground ml-2">
+                      · abgeschlossen {new Date(cycle.endDate).toLocaleDateString("de-DE")}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {isSelected && selectedClient && (
+            <AdminClientEvalView
+              adminPassword={adminPassword}
+              userId={selectedClient.userId}
+              cycleId={selectedClient.cycleId}
+              clientName={selectedClient.name}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Admin Client Evaluation View ────────────────────────────────────────────
+
+function AdminClientEvalView({
+  adminPassword,
+  userId,
+  cycleId,
+  clientName,
+}: {
+  adminPassword: string;
+  userId: number;
+  cycleId: number;
+  clientName: string;
+}) {
+  const { data, isLoading, error } = trpc.admin.adminClientEvaluation.useQuery(
+    { adminPassword, userId, cycleId },
+    { enabled: !!adminPassword && !!userId && !!cycleId }
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center gap-2 text-muted-foreground py-4 text-xs mt-3">
+        <RefreshCw className="w-3.5 h-3.5 animate-spin" /> Lade Auswertung …
+      </div>
+    );
+  }
+
+  if (error || !data?.evaluation) {
+    return (
+      <p className="text-xs text-muted-foreground mt-3 py-2">
+        Keine Auswertungsdaten verfügbar.
+      </p>
+    );
+  }
+
+  const { evaluation } = data;
+  const AREA_LABELS = ["Arbeit", "Erholung", "Soziales", "Körper", "Emotion", "Sinn", "Kontrolle", "Selbstbild"];
+  // totalLevel: "low" | "medium" | "high"; areaLevel: "green" | "yellow" | "red"
+  const TOTAL_LEVEL_COLORS: Record<string, string> = {
+    low: "bg-green-100 text-green-700",
+    medium: "bg-amber-100 text-amber-700",
+    high: "bg-red-100 text-red-700",
+  };
+  const AREA_LEVEL_COLORS: Record<string, string> = {
+    green: "bg-green-100 text-green-700",
+    yellow: "bg-amber-100 text-amber-700",
+    red: "bg-red-100 text-red-700",
+  };
+
+  return (
+    <div className="mt-4 border-t border-border pt-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-semibold text-foreground">
+          Auswertung – {clientName} · Zyklus #{cycleId}
+        </p>
+        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${TOTAL_LEVEL_COLORS[evaluation.totalLevel] || "bg-muted text-muted-foreground"}`}>
+          Gesamtniveau: {evaluation.totalLevel === "low" ? "Niedrig" : evaluation.totalLevel === "medium" ? "Mittel" : "Hoch"}
+        </span>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {AREA_LABELS.map((label, i) => (
+          <div key={label} className="rounded-md border border-border bg-background p-2 text-center">
+            <p className="text-xs text-muted-foreground mb-1">{label}</p>
+            <p className="text-sm font-bold text-foreground">{evaluation.avgs[i]?.toFixed(1)}</p>
+            <span className={`text-xs px-1.5 py-0.5 rounded-full ${AREA_LEVEL_COLORS[evaluation.areaLevels[i]] || ""}`}>
+              {evaluation.areaLevels[i] === "green" ? "Niedrig" : evaluation.areaLevels[i] === "yellow" ? "Mittel" : "Hoch"}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+        <span>Tage erfasst: <strong className="text-foreground">{evaluation.daysCompleted}</strong></span>
+        <span>Gesamtscore: <strong className="text-foreground">{evaluation.totalSum.toFixed(1)}</strong></span>
+        <span>Muster erkannt: <strong className="text-foreground">{evaluation.patterns.length}</strong></span>
+      </div>
+    </div>
   );
 }

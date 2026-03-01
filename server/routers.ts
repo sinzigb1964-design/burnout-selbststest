@@ -438,6 +438,27 @@ export const appRouter = router({
         return { user, cycle, entries, evaluation, completedCycles };
       }),
 
+    /** Nutzer löschen (inkl. aller Daten) */
+    deleteUser: publicProcedure
+      .input(z.object({ adminPassword: z.string(), userId: z.number() }))
+      .mutation(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        await deleteUserData(input.userId);
+        return { success: true };
+      }),
+
+    /** Abgeschlossene Zyklen eines Nutzers (für Admin-Auswertung) */
+    listUserCycles: publicProcedure
+      .input(z.object({ adminPassword: z.string(), userId: z.number() }))
+      .query(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        return getCompletedCycles(input.userId);
+      }),
+
     /** Aktuellen Test-Modus-Status lesen */
     getTestMode: publicProcedure
       .input(z.object({ adminPassword: z.string() }))
