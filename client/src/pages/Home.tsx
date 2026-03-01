@@ -323,7 +323,7 @@ export default function Home() {
                 <p>
                   Nach der Therapie erkannte ich: Ein „Weiter so“ hätte Rückfall bedeutet. Nach
                   Zusatzausbildungen begann ich, Burnout-Betroffene zu begleiten. Zurück ins Leben. Punkt.
-                  Bisher ist das bei mehr als 250 Klienten sehr gut gelungen.
+                  Bisher ist das bei mehr als 250 Klientinnen und Klienten gelungen.
                 </p>
                 <p>
                   Vorsorge ist viel leichter als Nachsorge.
@@ -354,8 +354,9 @@ export default function Home() {
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
                 <p className="text-foreground font-medium text-lg leading-relaxed italic mb-4">
-                  „Jeden Tag, an dem du nicht daran arbeitest, in dein Leben zurückzufinden,
-                  bringt dich einen Tag einem Rückfall näher. Nicht nett – aber wahr.“
+                  „Jeder Tag, an dem du weißst, es gibt keine Gefahr aus dem System zu kippen,
+                  lässt dich in Gesundheit. Vorsorge ist viel besser als Nachsorge.
+                  Lüg dir nicht in die eigene Tasche.“
                 </p>
                 <p className="text-sm text-muted-foreground">Bernd Sinzig</p>
               </div>
