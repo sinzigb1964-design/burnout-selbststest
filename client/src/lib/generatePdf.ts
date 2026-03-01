@@ -358,7 +358,7 @@ export async function generatePDF(data: {
         doc.setFont("helvetica", "normal");
         doc.setFontSize(6);
         doc.setTextColor(100, 100, 100);
-        doc.text(`T${entry.dayNumber}`, px, lineAreaBottom + 4, { align: "center" });
+        doc.text(`Tag ${entry.dayNumber}`, px, lineAreaBottom + 4, { align: "center" });
       }
     } else {
       doc.setFontSize(9);

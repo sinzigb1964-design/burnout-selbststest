@@ -68,3 +68,4 @@
 - [x] PDF-Fußzeile: Text auf 'Selbsttest Burnout Belastung . Burnout LIFEBACK™ Guide 2026' geändert
 - [x] PDF-Export: Liniendiagramm Gesamtscore über 14 Tage hinzugefügt
 - [x] Auswertungsseite: Drucken-Button für direkten PDF-Export hinzugefügt
+- [x] PDF-Tagesverlauf: T1–T14 durch 'Tag 1'–'Tag 14' ersetzt
