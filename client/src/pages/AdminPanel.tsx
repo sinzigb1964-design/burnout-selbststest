@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog, LayoutDashboard, FlaskConical, CheckCircle2, AlertTriangle } from "lucide-react";
+import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog, LayoutDashboard, FlaskConical, CheckCircle2, AlertTriangle, Heart, ChevronDown, ChevronUp } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function AdminPanel() {
@@ -407,27 +407,7 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
         </Card>
 
         {/* Coach-Bereich */}
-        <Card className="mt-6">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base flex items-center gap-2">
-              <UserCog className="w-4 h-4" />
-              Coach-Bereich
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">
-              Hier gelangst du zur Coach-Übersicht mit allen freigegebenen Klientinnen und Klienten und deren Auswertungen.
-            </p>
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto"
-              onClick={() => navigate("/coach")}
-            >
-              <Users className="w-4 h-4 mr-2" />
-              Meine Klienten anzeigen
-            </Button>
-          </CardContent>
-        </Card>
+        <AdminCoachSection adminPassword={adminPassword} />
 
         {/* Hinweis */}
         <p className="text-xs text-muted-foreground text-center mt-6">
@@ -436,5 +416,97 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
       </div>
       <AppFooter />
     </div>
+  );
+}
+
+// ─── Admin Coach Section ─────────────────────────────────────────────────────
+
+function AdminCoachSection({ adminPassword }: { adminPassword: string }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const { data: coachGroups, isLoading } = trpc.admin.listAllClients.useQuery(
+    { adminPassword },
+    { enabled: !!adminPassword && expanded }
+  );
+
+  return (
+    <Card className="mt-6">
+      <CardHeader className="pb-4">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-base flex items-center gap-2">
+            <UserCog className="w-4 h-4" />
+            Coach-Bereich – Klientenübersicht
+          </CardTitle>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setExpanded((v) => !v)}
+            className="text-xs"
+          >
+            {expanded ? (
+              <><ChevronUp className="w-4 h-4 mr-1" /> Einklappen</>
+            ) : (
+              <><ChevronDown className="w-4 h-4 mr-1" /> Klienten anzeigen</>
+            )}
+          </Button>
+        </div>
+      </CardHeader>
+
+      {expanded && (
+        <CardContent>
+          {isLoading ? (
+            <div className="flex items-center gap-2 text-muted-foreground py-4">
+              <RefreshCw className="w-4 h-4 animate-spin" />
+              <span className="text-sm">Lade Klientendaten …</span>
+            </div>
+          ) : !coachGroups || coachGroups.length === 0 ? (
+            <div className="text-center py-8">
+              <Users className="w-8 h-8 text-muted-foreground mx-auto mb-2 opacity-40" />
+              <p className="text-sm text-muted-foreground">Noch keine Coach-Klienten-Zuordnungen vorhanden.</p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {coachGroups.map(({ coach, clients }) => (
+                <div key={coach?.id}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-xs font-bold text-blue-700">
+                      {coach?.name?.charAt(0) || "C"}
+                    </div>
+                    <div>
+                      <span className="font-medium text-sm text-foreground">{coach?.name || "Unbekannter Coach"}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{coach?.email}</span>
+                    </div>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium ml-auto">
+                      {clients.length} Klient{clients.length !== 1 ? "en" : ""}
+                    </span>
+                  </div>
+                  <div className="space-y-2 pl-9">
+                    {clients.map(({ user: client, access }) => (
+                      <div
+                        key={client.id}
+                        className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border bg-muted/20 text-sm"
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">
+                            {client.name?.charAt(0) || "U"}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-medium text-foreground truncate">{client.name || "Unbekannt"}</p>
+                            <p className="text-xs text-muted-foreground truncate">{client.email}</p>
+                          </div>
+                        </div>
+                        <span className="text-xs text-muted-foreground shrink-0">
+                          seit {new Date(access.grantedAt).toLocaleDateString("de-DE")}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      )}
+    </Card>
   );
 }

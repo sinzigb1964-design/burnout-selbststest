@@ -406,6 +406,38 @@ export const appRouter = router({
         return { success: true };
       }),
 
+    /** Alle Coach-Klienten (Admin-Zugriff ohne OAuth) */
+    listAllClients: publicProcedure
+      .input(z.object({ adminPassword: z.string() }))
+      .query(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        const coaches = await getAllCoaches();
+        const result: { coach: Awaited<ReturnType<typeof getUserById>>; clients: Awaited<ReturnType<typeof getCoachClients>> }[] = [];
+        for (const coach of coaches) {
+          const clients = await getCoachClients(coach.id);
+          if (clients.length > 0) result.push({ coach, clients });
+        }
+        return result;
+      }),
+
+    /** Klienten-Auswertung für Admin (ohne OAuth) */
+    adminClientEvaluation: publicProcedure
+      .input(z.object({ adminPassword: z.string(), userId: z.number(), cycleId: z.number() }))
+      .query(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        const cycle = await getTestCycleById(input.cycleId);
+        if (!cycle || cycle.userId !== input.userId) throw new TRPCError({ code: "NOT_FOUND" });
+        const entries = await getDailyEntriesForCycle(input.cycleId);
+        const evaluation = computeEvaluation(entries);
+        const user = await getUserById(input.userId);
+        const completedCycles = await getCompletedCycles(input.userId);
+        return { user, cycle, entries, evaluation, completedCycles };
+      }),
+
     /** Aktuellen Test-Modus-Status lesen */
     getTestMode: publicProcedure
       .input(z.object({ adminPassword: z.string() }))
