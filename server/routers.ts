@@ -363,7 +363,7 @@ export const appRouter = router({
       }),
 
     /** Alle Nutzer mit Zyklusinfo */
-    listUsers: protectedProcedure
+    listUsers: publicProcedure
       .input(z.object({ adminPassword: z.string() }))
       .query(async ({ input }) => {
         if (input.adminPassword !== ENV.adminPanelPassword) {
@@ -380,7 +380,7 @@ export const appRouter = router({
       }),
 
     /** Zyklus eines Nutzers zurücksetzen */
-    resetCycle: protectedProcedure
+    resetCycle: publicProcedure
       .input(z.object({ adminPassword: z.string(), userId: z.number() }))
       .mutation(async ({ input }) => {
         if (input.adminPassword !== ENV.adminPanelPassword) {
@@ -391,7 +391,7 @@ export const appRouter = router({
       }),
 
     /** Rollen eines Nutzers ändern (Admin + Coach unabhängig) */
-    setRoles: protectedProcedure
+    setRoles: publicProcedure
       .input(z.object({
         adminPassword: z.string(),
         userId: z.number(),
