@@ -35,7 +35,7 @@ export default function Consent() {
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2">Willkommen, {user?.name || ""}!</h1>
           <p className="text-muted-foreground">
-            Bevor du startest, benoetigen wir deine Einwilligung zur Datenverarbeitung.
+            Bevor du startest, benötigen wir deine Einwilligung zur Datenverarbeitung.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function Consent() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Was wir speichern</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
-                    Deine täglich ausgefuellten Fragebogen-Antworten (Skala 0-3), berechnete
+                    Deine täglich ausgefüllten Fragebogen-Antworten (Skala 0–3), berechnete
                     Bereichssummen und Gesamtscores über 14 Tage.
                   </p>
                 </div>
@@ -62,10 +62,10 @@ export default function Consent() {
               <div className="flex items-start gap-3 p-3 rounded-lg bg-accent/50">
                 <Lock className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-medium text-foreground">Wie wir deine Daten schuetzen</p>
+                  <p className="text-sm font-medium text-foreground">Wie wir deine Daten schützen</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
                     Alle Daten werden verschlüsselt übertragen (HTTPS) und auf EU-Servern
-                    gespeichert. Passwoerter werden gehasht. Keine Weitergabe an Dritte.
+                    gespeichert. Passwörter werden gehasht. Keine Weitergabe an Dritte.
                   </p>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default function Consent() {
               <div>
                 <p className="text-sm font-medium text-yellow-800">Wichtiger Hinweis</p>
                 <p className="text-sm text-yellow-700 mt-0.5">
-                  Dieser Test ist kein medizinisches Diagnosewerkzeug. Er dient der persoenlichen
+                  Dieser Test ist kein medizinisches Diagnosewerkzeug. Er dient der persönlichen
                   Reflexion. Bei ernsthaften Beschwerden wende dich bitte an einen Arzt oder
                   Therapeuten.
                 </p>
@@ -95,7 +95,10 @@ export default function Consent() {
             </div>
 
             {/* Consent checkbox */}
-            <div className="flex items-start gap-3 p-4 rounded-lg border-2 border-border hover:border-primary/50 transition-colors cursor-pointer" onClick={() => setAgreed(!agreed)}>
+            <div
+              className="flex items-start gap-3 p-4 rounded-lg border-2 border-border hover:border-primary/50 transition-colors cursor-pointer"
+              onClick={() => setAgreed(!agreed)}
+            >
               <Checkbox
                 id="consent"
                 checked={agreed}
@@ -103,13 +106,13 @@ export default function Consent() {
                 className="mt-0.5"
               />
               <label htmlFor="consent" className="text-sm text-foreground cursor-pointer leading-relaxed">
-                Ich stimme der Verarbeitung meiner Gesundheitsdaten (Fragebogen-Antworten) gemaess
+                Ich stimme der Verarbeitung meiner Gesundheitsdaten (Fragebogen-Antworten) gemäß
                 Art. 9 Abs. 2 lit. a DSGVO zu. Ich habe die{" "}
                 <a href="/datenschutz" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
                   Datenschutzerklärung
                 </a>{" "}
-                gelesen und verstanden. Ich weiss, dass ich diese Einwilligung jederzeit widerrufen
-                kann, indem ich mein Konto und alle Daten loesche.
+                gelesen und verstanden. Ich weiß, dass ich diese Einwilligung jederzeit widerrufen
+                kann, indem ich mein Konto und alle Daten lösche.
               </label>
             </div>
 
@@ -119,7 +122,7 @@ export default function Consent() {
               className="w-full"
               size="lg"
             >
-              {giveConsent.isPending ? "Wird gespeichert..." : "Einwilligung erteilen & starten"}
+              {giveConsent.isPending ? "Wird gespeichert …" : "Einwilligung erteilen & starten"}
             </Button>
           </CardContent>
         </Card>
