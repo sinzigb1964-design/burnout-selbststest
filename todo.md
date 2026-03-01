@@ -47,7 +47,7 @@
 
 ## Post-MVP (ausstehend)
 - [ ] E-Mail-Benachrichtigungen (tägliche Erinnerung)
-- [ ] PDF-Export der Auswertung
+- [x] PDF-Export der Auswertung (ersetzt JSON-Export in Einstellungen)
 - [ ] Impressum und Datenschutzseiten (statisch)
 - [ ] Admin-Panel für Coach-Rollenvergabe
 - [ ] Mehrsprachigkeit (EN)
