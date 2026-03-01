@@ -141,22 +141,24 @@ export default function Auswertung() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-border bg-card">
+      <div className="border-b border-border bg-primary">
         <div className="container py-4">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/dashboard")}>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/dashboard")} className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <div className="flex items-center gap-2 flex-1">
-              <Heart className="w-5 h-5 text-primary" />
-              <h1 className="text-lg font-bold text-foreground">14-Tage-Auswertung</h1>
+              <div className="w-7 h-7 rounded-md bg-primary-foreground/20 flex items-center justify-center shrink-0">
+                <Heart className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <h1 className="text-lg font-bold text-primary-foreground">Selbsttest Burnout Check</h1>
             </div>
             <Button
               variant="outline"
               size="sm"
               onClick={handlePrint}
               disabled={isPrinting}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
             >
               <Printer className="w-4 h-4" />
               {isPrinting ? "Wird erstellt…" : "PDF herunterladen"}
@@ -458,20 +460,27 @@ export default function Auswertung() {
                     </p>
                   ))}
                 </div>
-                {closingContent.ctaLabel && closingContent.ctaUrl && (
-                  <div className="mt-5">
+                <div className="mt-5 flex flex-col gap-3">
+                  {closingContent.ctaLabel && closingContent.ctaUrl && (
                     <a
                       href={closingContent.ctaUrl}
-                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-colors ${
-                        totalLevelKey === "high"
-                          ? "bg-red-600 hover:bg-red-700"
-                          : "bg-amber-600 hover:bg-amber-700"
-                      }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary/90 transition-colors w-fit"
                     >
                       {closingContent.ctaLabel}
                     </a>
-                  </div>
-                )}
+                  )}
+                  <a
+                    href="https://zeeg.me/bsinzig/P00U26"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline w-fit"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    Kontakt zu Bernd
+                  </a>
+                </div>
                 <p className="text-xs text-muted-foreground mt-5 whitespace-pre-line font-medium">
                   {closingContent.signature}
                 </p>
