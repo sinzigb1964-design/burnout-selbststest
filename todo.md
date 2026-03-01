@@ -62,3 +62,4 @@
 - [x] Datenschutzerklärung-Seite (/datenschutz) erstellen
 - [x] Einheitlicher Footer mit Impressum/Datenschutz-Links auf allen Seiten
 - [x] Admin-Panel: Mehrfach-Rollenvergabe (Admin + Coach gleichzeitig möglich)
+- [x] Bugfix: Zurück-Link in Datenschutz- und Impressum-Kopfzeile führt auf 404

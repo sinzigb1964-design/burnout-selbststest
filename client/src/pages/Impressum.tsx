@@ -17,8 +17,8 @@ export default function Impressum() {
             </div>
             <span className="font-semibold text-foreground">Burnout Selbsttest</span>
           </div>
-          <Button variant="ghost" size="sm" onClick={() => navigate(-1 as any)}>
-            ← Zurück
+          <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
+            ← Zurück zur Startseite
           </Button>
         </div>
       </nav>
