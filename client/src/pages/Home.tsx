@@ -245,6 +245,93 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Über Bernd Sinzig */}
+      <section className="py-20 bg-background">
+        <div className="container">
+          <div className="max-w-5xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Wer begleitet dich?</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                Bernd Sinzig – Burnout LIFEBACK<sup className="text-base font-normal">™</sup> Guide
+              </h2>
+            </div>
+
+            {/* Foto + Geschichte */}
+            <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
+              <div className="flex flex-col items-center md:items-start gap-6">
+                <img
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663325194886/kUhDEWUQxkuYXEHuB7K7Rz/bernd-sinzig-profilbild_abb6ce9e.jpg"
+                  alt="Bernd Sinzig – Burnout LIFEBACK™ Guide"
+                  className="w-56 h-56 rounded-2xl object-cover object-top shadow-lg ring-4 ring-primary/10"
+                />
+                <div className="text-center md:text-left">
+                  <p className="font-bold text-foreground text-lg">Bernd Sinzig</p>
+                  <p className="text-muted-foreground text-sm">Life- &amp; Businesscoach | Burnout Mentor</p>
+                  <p className="text-muted-foreground text-sm">Jahrgang 1964 | Zürich &amp; DACH-Raum</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p className="text-foreground font-semibold text-lg">
+                  54 Jahre lang funktioniert – dann kam der Totalausfall.
+                </p>
+                <p>
+                  Ich war Musterschüler, Beststudent, Leistungsträger. Arbeit machte Freude, Zeit war
+                  vernachlässigbar. Bis zum Zusammenbruch. Ich lag 20 Stunden am Tag im Bett.
+                </p>
+                <p>
+                  Nach der Therapie erkannte ich: Ein „Weiter so“ hätte Rückfall bedeutet. Ich begann,
+                  Burnout-Betroffene zu begleiten – weil ich sah, dass viele von ihnen in das
+                  zurückfielen, was ich als <strong className="text-foreground">Posttherapeutischen Schock™</strong> definiere:
+                  Angst vor der Zeit zu Hause, Unsicherheit in der Arbeit, Ratlosigkeit bei der
+                  Umsetzung therapeutischer Erkenntnisse.
+                </p>
+                <p>
+                  Heute begleite ich Menschen in der Transition nach der Burnout-Therapie, Führungskräfte
+                  bei Return-to-Work-Prozessen und Organisationen bei der Entwicklung nachhaltiger
+                  Gesundheitspolicies.
+                </p>
+              </div>
+            </div>
+
+            {/* Arbeitsprinzipien */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              {[
+                { title: "Professionalität", desc: "Evidenzbasierte Methoden und klare Grenzen" },
+                { title: "Empathie", desc: "Immer in einem sicheren Raum für Fortschritte" },
+                { title: "Transparenz", desc: "Klare Ziele, klare Schritte, ehrliche Fragen" },
+                { title: "Wirksamkeit", desc: "Im Blick: konkrete, messbare Veränderungen" },
+              ].map((p) => (
+                <div key={p.title} className="bg-muted/40 rounded-xl p-5 border border-border">
+                  <p className="font-semibold text-foreground mb-1">{p.title}</p>
+                  <p className="text-sm text-muted-foreground">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Zitat + CTA */}
+            <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-1">
+                <p className="text-foreground font-medium text-lg leading-relaxed italic mb-4">
+                  „Jeden Tag, an dem du nicht daran arbeitest, in dein Leben zurückzufinden,
+                  bringt dich einen Tag einem Rückfall näher. Nicht nett – aber wahr.“
+                </p>
+                <p className="text-sm text-muted-foreground">Bernd Sinzig</p>
+              </div>
+              <a
+                href="https://zeeg.me/bsinzig/P00U26"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-7 py-3.5 rounded-xl hover:bg-primary/90 transition-colors text-sm"
+              >
+                Gespräch mit Bernd vereinbaren
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <AppFooter />
     </div>
   );

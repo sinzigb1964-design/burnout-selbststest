@@ -104,3 +104,4 @@
 - [x] CTA-Link im Abschlusstext: Zeeg-Buchungslink https://zeeg.me/bsinzig/P00U26 einsetzen
 - [x] Abschlusstext: Profilfoto von Bernd Sinzig einbinden (CDN-Upload + Avatar-Ersatz)
 - [x] Abschluss-E-Mail: Zeeg-Buchungslink https://zeeg.me/bsinzig/P00U26 ergänzen
+- [x] Startseite: Über-mich-Abschnitt mit Profilfoto (Quelle: burnout-lifeback-guide.online/ueber-mich)
