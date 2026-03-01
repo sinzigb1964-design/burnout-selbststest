@@ -440,9 +440,11 @@ export default function Auswertung() {
         }`}>
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5 text-lg font-bold text-primary">
-                B
-              </div>
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663325194886/kUhDEWUQxkuYXEHuB7K7Rz/bernd-sinzig-profilbild_abb6ce9e.jpg"
+                alt="Bernd Sinzig – Burnout LIFEBACK™ Guide"
+                className="w-14 h-14 rounded-full object-cover object-top shrink-0 mt-0.5 ring-2 ring-primary/20"
+              />
               <div className="flex-1">
                 <h3 className="font-bold text-foreground mb-4 text-base">{closingContent.heading}</h3>
                 <div className="space-y-3">
