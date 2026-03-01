@@ -318,6 +318,104 @@ async function generatePDF(data: {
     y += chartH + 8;
     doc.setTextColor(0, 0, 0);
 
+    // ── Liniendiagramm: Tagesverlauf Gesamtscore ──
+    if (y > 200) { doc.addPage(); y = margin; }
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(0, 0, 0);
+    doc.text("Tagesverlauf Gesamtbelastung (14 Tage)", margin, y);
+    y += 6;
+
+    const lineChartH = 55;
+    const lineAreaTop = y + 6;
+    const lineAreaH = 38;
+    const lineAreaBottom = lineAreaTop + lineAreaH;
+    const lineAreaLeft = margin + 14;  // Platz für Y-Achse
+    const lineAreaRight = margin + contentW - 4;
+    const lineAreaW = lineAreaRight - lineAreaLeft;
+    const maxScore = 168;  // Maximaler Tagesgesamtscore (8 Bereiche × 7 Fragen × 3)
+
+    // Hintergrundfläche
+    doc.setFillColor(245, 248, 250);
+    doc.roundedRect(margin, y, contentW, lineChartH, 2, 2, "F");
+
+    // Schwellenwert-Linien
+    const thresholds = [
+      { value: 56,  color: GREEN_C as [number,number,number],  label: "56" },
+      { value: 112, color: YELLOW_C as [number,number,number], label: "112" },
+    ];
+    for (const t of thresholds) {
+      const ty = lineAreaBottom - (t.value / maxScore) * lineAreaH;
+      doc.setDrawColor(...t.color);
+      doc.setLineWidth(0.3);
+      doc.setLineDashPattern([1.5, 1], 0);
+      doc.line(lineAreaLeft, ty, lineAreaRight, ty);
+      doc.setFontSize(6);
+      doc.setTextColor(...t.color);
+      doc.text(t.label, margin + 2, ty + 1.5);
+    }
+    doc.setLineDashPattern([], 0);
+    doc.setLineWidth(0.1);
+    doc.setTextColor(0, 0, 0);
+
+    // X-Achse (Grundlinie)
+    doc.setDrawColor(180, 180, 180);
+    doc.setLineWidth(0.3);
+    doc.line(lineAreaLeft, lineAreaBottom, lineAreaRight, lineAreaBottom);
+
+    // Datenpunkte sortiert nach dayNumber
+    const sortedEntries = [...cycleEntries].sort((a, b) => a.dayNumber - b.dayNumber);
+    const n = sortedEntries.length;
+
+    if (n > 0) {
+      const stepX = n > 1 ? lineAreaW / (n - 1) : lineAreaW / 2;
+
+      // Linie zeichnen
+      doc.setDrawColor(...PRIMARY);
+      doc.setLineWidth(0.8);
+      for (let d = 0; d < n - 1; d++) {
+        const x1 = lineAreaLeft + d * stepX;
+        const y1 = lineAreaBottom - ((sortedEntries[d]!.totalDayScore / maxScore) * lineAreaH);
+        const x2 = lineAreaLeft + (d + 1) * stepX;
+        const y2 = lineAreaBottom - ((sortedEntries[d + 1]!.totalDayScore / maxScore) * lineAreaH);
+        doc.line(x1, y1, x2, y2);
+      }
+
+      // Datenpunkte (Kreise) und Tagnummern
+      for (let d = 0; d < n; d++) {
+        const entry = sortedEntries[d]!;
+        const px = lineAreaLeft + d * (n > 1 ? stepX : lineAreaW / 2);
+        const py = lineAreaBottom - ((entry.totalDayScore / maxScore) * lineAreaH);
+        const score = entry.totalDayScore;
+        const ptLevel = score <= 56 ? "green" : score <= 112 ? "yellow" : "red";
+        const ptColor = levelColor(ptLevel);
+
+        // Kreis
+        doc.setFillColor(...ptColor);
+        doc.circle(px, py, 1.2, "F");
+
+        // Score-Wert über dem Punkt
+        doc.setFontSize(5.5);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 0, 0);
+        doc.text(String(score), px, py - 2.5, { align: "center" });
+
+        // Tag-Nummer unter der X-Achse
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(6);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`T${entry.dayNumber}`, px, lineAreaBottom + 4, { align: "center" });
+      }
+    } else {
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "italic");
+      doc.setTextColor(150, 150, 150);
+      doc.text("Keine Tagesdaten vorhanden", lineAreaLeft + lineAreaW / 2, lineAreaTop + lineAreaH / 2, { align: "center" });
+    }
+
+    y += lineChartH + 8;
+    doc.setTextColor(0, 0, 0);
+
     // ── Bereichsspezifische Texte ──
     if (y > 230) { doc.addPage(); y = margin; }
     doc.setFontSize(10);

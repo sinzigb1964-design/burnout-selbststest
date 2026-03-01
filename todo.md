@@ -66,3 +66,4 @@
 - [x] PDF-Export: Balkendiagramm-Grafik aus dem Auswertungsbericht einbetten
 - [x] PDF-Diagramm: Kürzel B1–B8 durch vollständige Bereichsnamen mit schräger Beschriftung ersetzen
 - [x] PDF-Fußzeile: Text auf 'Selbsttest Burnout Belastung . Burnout LIFEBACK™ Guide 2026' geändert
+- [x] PDF-Export: Liniendiagramm Gesamtscore über 14 Tage hinzugefügt
