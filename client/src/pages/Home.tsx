@@ -245,6 +245,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ein letzter Gedanke */}
+      <section className="py-20 bg-primary">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-sm font-semibold text-primary-foreground/60 uppercase tracking-widest mb-6">
+              Ein letzter Gedanke
+            </p>
+            <blockquote className="space-y-5">
+              <p className="text-2xl md:text-3xl font-bold text-primary-foreground leading-snug">
+                Burnout ist keine Schwäche.
+              </p>
+              <p className="text-xl md:text-2xl text-primary-foreground/90 leading-relaxed">
+                Du bist ein Mensch. Und jeder von uns hat seine Grenzen.
+              </p>
+              <p className="text-xl md:text-2xl text-primary-foreground/90 leading-relaxed">
+                Die Frage ist: Bist du bereit, hinzuschauen?
+              </p>
+              <p className="text-2xl md:text-3xl font-bold text-primary-foreground leading-snug pt-2">
+                Du hast diesen Check gemacht.
+                <br />
+                <span className="text-primary-foreground/80">Das zeigt: Du bist bereit.</span>
+              </p>
+            </blockquote>
+            <div className="mt-10 flex items-center justify-center gap-3">
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663325194886/kUhDEWUQxkuYXEHuB7K7Rz/bernd-sinzig-profilbild_abb6ce9e.jpg"
+                alt="Bernd Sinzig"
+                className="w-10 h-10 rounded-full object-cover object-top ring-2 ring-primary-foreground/30"
+              />
+              <div className="text-left">
+                <p className="text-sm font-semibold text-primary-foreground">Bernd Sinzig</p>
+                <p className="text-xs text-primary-foreground/60">Burnout LIFEBACK™ Guide</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Über Bernd Sinzig */}
       <section className="py-20 bg-background">
         <div className="container">
