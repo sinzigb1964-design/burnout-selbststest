@@ -46,6 +46,7 @@
 - [x] Alle Texte auf korrekte deutsche Umlaute und Rechtschreibung umgestellt
 
 ## Post-MVP (ausstehend)
+- [x] Test-Modus: Tagessperre deaktivierbar für schnelles Durchlaufen des 14-Tage-Zyklus
 - [ ] E-Mail-Benachrichtigungen (tägliche Erinnerung)
 - [x] PDF-Export der Auswertung (ersetzt JSON-Export in Einstellungen)
 - [ ] Impressum und Datenschutzseiten (statisch)

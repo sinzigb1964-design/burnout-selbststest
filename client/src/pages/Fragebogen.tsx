@@ -27,6 +27,7 @@ export default function Fragebogen() {
   const [submitted, setSubmitted] = useState(false);
 
   const { data: todayData } = trpc.entry.today.useQuery();
+  const isTestMode = todayData?.testMode ?? false;
   const utils = trpc.useUtils();
 
   const submitEntry = trpc.entry.submit.useMutation({
@@ -79,8 +80,8 @@ export default function Fragebogen() {
     submitEntry.mutate(input as Parameters<typeof submitEntry.mutate>[0]);
   };
 
-  // Already filled today
-  if (todayData?.entry) {
+  // Already filled today (nur im Normalmodus)
+  if (todayData?.entry && !isTestMode) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
@@ -145,6 +146,11 @@ export default function Fragebogen() {
             </span>
           </div>
           <Progress value={totalProgress} className="h-1.5" />
+          {isTestMode && (
+            <div className="mt-2 text-xs text-yellow-600 bg-yellow-50 border border-yellow-200 rounded px-2 py-1 text-center">
+              ⚡ Test-Modus aktiv – Tagessperre deaktiviert
+            </div>
+          )}
         </div>
       </div>
 

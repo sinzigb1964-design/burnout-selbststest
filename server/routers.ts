@@ -25,6 +25,7 @@ import {
   updateUserConsent,
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
+import { ENV } from "./_core/env";
 
 // ─── ANSWER SCHEMA ────────────────────────────────────────────────────────────
 
@@ -150,13 +151,23 @@ export const appRouter = router({
       const cycle = await getActiveTestCycle(ctx.user.id);
       if (!cycle) return { cycle: null, entry: null, dayNumber: null };
 
-      const startDate = new Date(cycle.startDate);
-      const now = new Date();
-      const diffMs = now.getTime() - startDate.getTime();
-      const dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+      let dayNumber: number;
+      if (ENV.testMode) {
+        // Test-Modus: nächsten noch nicht ausgefüllten Tag ermitteln
+        const entries = await getDailyEntriesForCycle(cycle.id);
+        const usedDays = new Set(entries.map((e) => e.dayNumber));
+        dayNumber = 1;
+        while (usedDays.has(dayNumber) && dayNumber <= 14) dayNumber++;
+        dayNumber = Math.min(dayNumber, 14);
+      } else {
+        const startDate = new Date(cycle.startDate);
+        const now = new Date();
+        const diffMs = now.getTime() - startDate.getTime();
+        dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+      }
 
       const entry = await getTodayEntry(cycle.id, dayNumber);
-      return { cycle, entry, dayNumber };
+      return { cycle, entry, dayNumber, testMode: ENV.testMode };
     }),
 
     submit: protectedProcedure
@@ -165,13 +176,23 @@ export const appRouter = router({
         const cycle = await getActiveTestCycle(ctx.user.id);
         if (!cycle) throw new TRPCError({ code: "NOT_FOUND", message: "Kein aktiver Zyklus." });
 
-        const startDate = new Date(cycle.startDate);
-        const now = new Date();
-        const diffMs = now.getTime() - startDate.getTime();
-        const dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+        let dayNumber: number;
+        if (ENV.testMode) {
+          // Test-Modus: nächsten noch nicht ausgefüllten Tag ermitteln
+          const entries = await getDailyEntriesForCycle(cycle.id);
+          const usedDays = new Set(entries.map((e) => e.dayNumber));
+          dayNumber = 1;
+          while (usedDays.has(dayNumber) && dayNumber <= 14) dayNumber++;
+          dayNumber = Math.min(dayNumber, 14);
+        } else {
+          const startDate = new Date(cycle.startDate);
+          const now = new Date();
+          const diffMs = now.getTime() - startDate.getTime();
+          dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
 
-        const existing = await getTodayEntry(cycle.id, dayNumber);
-        if (existing) throw new TRPCError({ code: "BAD_REQUEST", message: "Heute bereits ausgefuellt." });
+          const existing = await getTodayEntry(cycle.id, dayNumber);
+          if (existing) throw new TRPCError({ code: "BAD_REQUEST", message: "Heute bereits ausgefüllt." });
+        }
 
         const sums = computeSums(input);
         const entry = await saveDailyEntry({

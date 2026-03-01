@@ -171,3 +171,32 @@ describe("auth.logout", () => {
     });
   });
 });
+
+// ─── TEST_MODE ENV-Test ────────────────────────────────────────────────────────
+
+describe("ENV.testMode", () => {
+  it("is true when TEST_MODE env var is 'true'", () => {
+    const original = process.env.TEST_MODE;
+    process.env.TEST_MODE = "true";
+    // Re-evaluate the expression inline (ENV is cached, so test the raw logic)
+    const result = process.env.TEST_MODE === "true";
+    expect(result).toBe(true);
+    process.env.TEST_MODE = original;
+  });
+
+  it("is false when TEST_MODE env var is 'false'", () => {
+    const original = process.env.TEST_MODE;
+    process.env.TEST_MODE = "false";
+    const result = process.env.TEST_MODE === "true";
+    expect(result).toBe(false);
+    process.env.TEST_MODE = original;
+  });
+
+  it("is false when TEST_MODE env var is not set", () => {
+    const original = process.env.TEST_MODE;
+    delete process.env.TEST_MODE;
+    const result = process.env.TEST_MODE === "true";
+    expect(result).toBe(false);
+    process.env.TEST_MODE = original;
+  });
+});

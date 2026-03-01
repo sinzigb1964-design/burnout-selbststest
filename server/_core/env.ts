@@ -7,4 +7,6 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
+  /** TEST_MODE=true deaktiviert die Tagessperre im 14-Tage-Zyklus */
+  testMode: process.env.TEST_MODE === "true",
 };
