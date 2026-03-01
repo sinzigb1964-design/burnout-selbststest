@@ -131,7 +131,7 @@ export function buildWelcomeEmail(params: {
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
       <strong>Was dich erwartet:</strong> Jeden Tag beantwortest du 56 kurze Fragen zu 8 Lebensbereichen.
       Das dauert ca. 5–10 Minuten. Nach 14 Tagen erhältst du eine detaillierte, persönliche Auswertung
-      mit Mustererkennung – entwickelt auf Basis meiner eigenen Burnout-Erfahrung und meiner Arbeit als Coach.
+      mit Mustererkennung – entwickelt auf der Basis evidenzbasierter wissenschaftlicher Fragetools und meiner Arbeit als Coach und Mentor.
     </p>
     <p style="margin:0 0 8px;color:#3a5050;font-size:15px;line-height:1.7;">
       <strong>Mein Tipp:</strong> Fülle den Fragebogen jeden Tag zur gleichen Zeit aus – am besten abends,
@@ -144,11 +144,11 @@ export function buildWelcomeEmail(params: {
     <p style="margin:16px 0 0;color:#3a5050;font-size:14px;line-height:1.7;">
       Ich begleite dich auf diesem Weg,<br/>
       <strong>Bernd Sinzig</strong><br/>
-      <span style="color:#7a9090;">Life- &amp; Businesscoach | Burnout LIFEBACK&reg; Guide</span>
+      <span style="color:#7a9090;">Burnout LIFEBACK&reg; Guide | Life- &amp; Businesscoach</span>
     </p>`;
 
   return {
-    subject: `🟢 Dein 14-Tage Burnout-Selbsttest hat begonnen – Tag 1 wartet auf dich`,
+    subject: `🟢 Dein 14-Tage Selbsttest Burnout Check hat begonnen – Tag 1 wartet auf dich`,
     htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }
