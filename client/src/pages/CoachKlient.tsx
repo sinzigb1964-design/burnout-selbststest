@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import AppFooter from "@/components/AppFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { QUESTIONNAIRE_AREAS, getAreaLevel } from "../../../shared/questionnaire";
@@ -197,6 +198,7 @@ export default function CoachKlient() {
           </Card>
         )}
       </div>
+      <AppFooter />
     </div>
   );
 }

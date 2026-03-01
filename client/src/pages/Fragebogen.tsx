@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import AppFooter from "@/components/AppFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { trpc } from "@/lib/trpc";
@@ -255,6 +256,7 @@ export default function Fragebogen() {
           ))}
         </div>
       </div>
+      <AppFooter />
     </div>
   );
 }

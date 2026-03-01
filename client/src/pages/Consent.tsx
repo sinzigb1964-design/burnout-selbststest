@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -127,6 +128,7 @@ export default function Consent() {
           </CardContent>
         </Card>
       </div>
+      <AppFooter />
     </div>
   );
 }

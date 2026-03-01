@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import AppFooter from "@/components/AppFooter";
 import { Heart } from "lucide-react";
 import { useLocation } from "wouter";
 
@@ -120,6 +121,7 @@ export default function Impressum() {
           </Button>
         </div>
       </div>
+      <AppFooter />
     </div>
   );
 }

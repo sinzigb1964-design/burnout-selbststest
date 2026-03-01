@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
@@ -328,6 +329,7 @@ export default function Auswertung() {
           </Button>
         </div>
       </div>
+      <AppFooter />
     </div>
   );
 }

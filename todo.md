@@ -60,3 +60,4 @@
 - [x] Dashboard.tsx: Alle ASCII-Umschreibungen durch korrekte Umlaute ersetzen
 - [x] Impressum-Seite (/impressum) erstellen
 - [x] Datenschutzerklärung-Seite (/datenschutz) erstellen
+- [x] Einheitlicher Footer mit Impressum/Datenschutz-Links auf allen Seiten

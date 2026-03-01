@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import AppFooter from "@/components/AppFooter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -354,6 +355,7 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
           Das Admin-Panel ist nur für autorisierte Personen zugänglich. Alle Aktionen werden serverseitig mit dem Admin-Passwort verifiziert.
         </p>
       </div>
+      <AppFooter />
     </div>
   );
 }

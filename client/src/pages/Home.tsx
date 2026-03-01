@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getLoginUrl } from "@/const";
@@ -244,20 +245,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="container flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <span>© 2026 Burnout Selbsttest – Bernd Sinzig</span>
-          <div className="flex gap-6">
-            <a href="/datenschutz" className="hover:text-foreground transition-colors">
-              Datenschutz
-            </a>
-            <a href="/impressum" className="hover:text-foreground transition-colors">
-              Impressum
-            </a>
-          </div>
-        </div>
-      </footer>
+      <AppFooter />
     </div>
   );
 }
