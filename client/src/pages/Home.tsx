@@ -260,12 +260,11 @@ export default function Home() {
                 Du bist ein Mensch. Und jeder von uns hat seine Grenzen.
               </p>
               <p className="text-xl md:text-2xl text-primary-foreground/90 leading-relaxed">
-                Die Frage ist: Bist du bereit, hinzuschauen?
+                Bist du bereit, genau hinzuschauen?<br />
+                Bist du bereit zu wissen, wo du genau stehst?
               </p>
               <p className="text-2xl md:text-3xl font-bold text-primary-foreground leading-snug pt-2">
-                Du hast diesen Check gemacht.
-                <br />
-                <span className="text-primary-foreground/80">Das zeigt: Du bist bereit.</span>
+                Mach den Selbstcheck nur für dich.
               </p>
             </blockquote>
             <div className="mt-10 flex items-center justify-center gap-3">
