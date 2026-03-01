@@ -367,7 +367,7 @@ export default function Home() {
                 <p className="text-foreground font-medium text-lg leading-relaxed italic mb-4">
                   „Jeder Tag, an dem du weisst, es gibt keine Gefahr aus dem System zu kippen,
                   lässt dich in Gesundheit. Vorsorge ist viel besser als Nachsorge.
-                  Lüg dir nicht in die eigene Tasche.“
+                  Du brauchst jetzt Antworten?“
                 </p>
                 <p className="text-sm text-muted-foreground">Bernd Sinzig</p>
               </div>
