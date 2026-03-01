@@ -314,8 +314,8 @@ export default function Home() {
                   54 Jahre lang funktioniert – dann kam der Totalausfall.
                 </p>
                 <p>
-                  Ich war Musterschüler, Beststudent, Leistungsträger. Arbeit machte Freude, Zeit war
-                  vernachlässigbar. Bis zum Zusammenbruch. Ich lag 20 Stunden am Tag im Bett.
+                  Arbeit machte Freude, Zeit war vernachlässigbar. Bis zum Zusammenbruch. Ich lag 20
+                  Stunden am Tag im Bett.
                   <br /><br />
                   Das war vor 7 Jahren. Als Life- &amp; Business Coach und HR Führungskraft hätte ich es
                   besser wissen müssen.
@@ -323,10 +323,14 @@ export default function Home() {
                 <p>
                   Nach der Therapie erkannte ich: Ein „Weiter so“ hätte Rückfall bedeutet. Nach
                   Zusatzausbildungen begann ich, Burnout-Betroffene zu begleiten. Zurück ins Leben. Punkt.
+                  Bisher ist das bei mehr als 250 Klienten sehr gut gelungen.
                 </p>
                 <p>
-                  Vorsorge ist viel leichter als Nachsorge. Aus diesem Grund ist dieser Selbsttest für
-                  dich entstanden. Kein Falsch – kein Richtig. Sondern ein Ergebnis für dich.
+                  Vorsorge ist viel leichter als Nachsorge.
+                  <br />
+                  Aus diesem Grund ist dieser kostenfreie Selbsttest für dich entstanden. Kein Falsch –
+                  kein Richtig. Du erhältst ein Ergebnis für dich. Wo stehe ich, kannst du dann für dich
+                  beantworten.
                 </p>
               </div>
             </div>
