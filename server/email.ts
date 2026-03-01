@@ -174,6 +174,10 @@ export function buildReminderEmail(params: {
       Jeder ausgefüllte Tag macht dein Ergebnis aussagekräftiger.
     </p>
     ${ctaButton(fragebogenUrl, `Tag ${dayNumber} jetzt ausfüllen →`)}
+    <p style="margin:12px 0 16px;font-size:12px;color:#7a9090;">
+      Oder direkt aufrufen:
+      <a href="${fragebogenUrl}" style="color:#1a6b6b;word-break:break-all;">${fragebogenUrl}</a>
+    </p>
     <p style="margin:24px 0 0;color:#3a5050;font-size:14px;line-height:1.7;">
       Auf deinem Weg,<br/>
       <strong>Bernd Sinzig</strong><br/>
