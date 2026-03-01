@@ -304,8 +304,8 @@ export default function Home() {
                 />
                 <div className="text-center md:text-left">
                   <p className="font-bold text-foreground text-lg">Bernd Sinzig</p>
-                  <p className="text-muted-foreground text-sm">Life- &amp; Businesscoach | Burnout Mentor</p>
-                  <p className="text-muted-foreground text-sm">Jahrgang 1964 | Zürich &amp; DACH-Raum</p>
+                  <p className="text-muted-foreground text-sm">Burnout LIFEBACK<sup className="text-xs">™</sup> Guide</p>
+                  <p className="text-muted-foreground text-sm">Jahrgang 1964 | Bern – Zürich &amp; DACH-Raum</p>
                 </div>
               </div>
 
@@ -316,18 +316,17 @@ export default function Home() {
                 <p>
                   Ich war Musterschüler, Beststudent, Leistungsträger. Arbeit machte Freude, Zeit war
                   vernachlässigbar. Bis zum Zusammenbruch. Ich lag 20 Stunden am Tag im Bett.
+                  <br /><br />
+                  Das war vor 7 Jahren. Als Life- &amp; Business Coach und HR Führungskraft hätte ich es
+                  besser wissen müssen.
                 </p>
                 <p>
-                  Nach der Therapie erkannte ich: Ein „Weiter so“ hätte Rückfall bedeutet. Ich begann,
-                  Burnout-Betroffene zu begleiten – weil ich sah, dass viele von ihnen in das
-                  zurückfielen, was ich als <strong className="text-foreground">Posttherapeutischen Schock™</strong> definiere:
-                  Angst vor der Zeit zu Hause, Unsicherheit in der Arbeit, Ratlosigkeit bei der
-                  Umsetzung therapeutischer Erkenntnisse.
+                  Nach der Therapie erkannte ich: Ein „Weiter so“ hätte Rückfall bedeutet. Nach
+                  Zusatzausbildungen begann ich, Burnout-Betroffene zu begleiten. Zurück ins Leben. Punkt.
                 </p>
                 <p>
-                  Heute begleite ich Menschen in der Transition nach der Burnout-Therapie, Führungskräfte
-                  bei Return-to-Work-Prozessen und Organisationen bei der Entwicklung nachhaltiger
-                  Gesundheitspolicies.
+                  Vorsorge ist viel leichter als Nachsorge. Aus diesem Grund ist dieser Selbsttest für
+                  dich entstanden. Kein Falsch – kein Richtig. Sondern ein Ergebnis für dich.
                 </p>
               </div>
             </div>
