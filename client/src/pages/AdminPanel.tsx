@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog, LayoutDashboard } from "lucide-react";
+import { Shield, Users, RotateCcw, Lock, Eye, EyeOff, RefreshCw, UserCog, LayoutDashboard, FlaskConical, CheckCircle2, AlertTriangle } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function AdminPanel() {
@@ -142,6 +142,22 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
     onError: (err: { message?: string }) => toast.error(err.message || "Fehler beim Ändern der Rollen."),
   });
 
+  const { data: testModeData, refetch: refetchTestMode } = trpc.admin.getTestMode.useQuery(
+    { adminPassword },
+    { enabled: !!adminPassword }
+  );
+
+  const setTestMode = trpc.admin.setTestMode.useMutation({
+    onSuccess: (data) => {
+      toast.success(data.testMode
+        ? "Test-Modus aktiviert – mehrere Einträge pro Tag erlaubt."
+        : "Normaler Betrieb aktiv – 1 Eintrag pro Tag."
+      );
+      refetchTestMode();
+    },
+    onError: (err) => toast.error(err.message || "Fehler beim Umschalten."),
+  });
+
   const stats = useMemo(() => {
     if (!users) return null;
     return {
@@ -202,6 +218,74 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
             ))}
           </div>
         )}
+
+        {/* Test-Modus-Schalter */}
+        <Card className={`mb-6 border-2 ${
+          testModeData?.testMode
+            ? "border-amber-300 bg-amber-50/60"
+            : "border-green-200 bg-green-50/40"
+        }`}>
+          <CardContent className="p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex items-start gap-3 flex-1">
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
+                  testModeData?.testMode ? "bg-amber-100" : "bg-green-100"
+                }`}>
+                  <FlaskConical className={`w-5 h-5 ${
+                    testModeData?.testMode ? "text-amber-600" : "text-green-600"
+                  }`} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="font-semibold text-foreground text-sm">Betriebsmodus</h3>
+                    {testModeData?.testMode ? (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3" /> Test-Modus
+                      </span>
+                    ) : (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Normalbetrieb
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {testModeData?.testMode
+                      ? "Test-Modus: Mehrere Einträge pro Tag erlaubt. Tage werden sequenziell vergeben. Nur für interne Tests verwenden."
+                      : "Normalbetrieb: 1 Eintrag pro Tag, Tagnummer ergibt sich aus dem Startdatum des Zyklus (14-Tage-Lauf)."}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-2 shrink-0">
+                <Button
+                  size="sm"
+                  variant={testModeData?.testMode ? "outline" : "default"}
+                  className={testModeData?.testMode
+                    ? "border-green-300 text-green-700 hover:bg-green-50"
+                    : "bg-green-600 hover:bg-green-700 text-white"
+                  }
+                  disabled={!testModeData?.testMode || setTestMode.isPending}
+                  onClick={() => setTestMode.mutate({ adminPassword, enabled: false })}
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 mr-1.5" />
+                  Normalbetrieb
+                </Button>
+                <Button
+                  size="sm"
+                  variant={testModeData?.testMode ? "default" : "outline"}
+                  className={testModeData?.testMode
+                    ? "bg-amber-500 hover:bg-amber-600 text-white"
+                    : "border-amber-300 text-amber-700 hover:bg-amber-50"
+                  }
+                  disabled={testModeData?.testMode || setTestMode.isPending}
+                  onClick={() => setTestMode.mutate({ adminPassword, enabled: true })}
+                >
+                  <FlaskConical className="w-3.5 h-3.5 mr-1.5" />
+                  Test-Modus
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Nutzerliste */}
         <Card>

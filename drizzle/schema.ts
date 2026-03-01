@@ -184,3 +184,15 @@ export const coachAccess = mysqlTable("coach_access", {
 
 export type CoachAccess = typeof coachAccess.$inferSelect;
 export type InsertCoachAccess = typeof coachAccess.$inferInsert;
+
+/**
+ * App-weite Einstellungen (Key-Value-Store).
+ * Ermöglicht Laufzeit-Konfiguration ohne Serverneustart.
+ */
+export const appSettings = mysqlTable("app_settings", {
+  key: varchar("key", { length: 128 }).primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AppSetting = typeof appSettings.$inferSelect;

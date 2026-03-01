@@ -354,7 +354,7 @@ export default function Home() {
             <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
                 <p className="text-foreground font-medium text-lg leading-relaxed italic mb-4">
-                  „Jeder Tag, an dem du weißst, es gibt keine Gefahr aus dem System zu kippen,
+                  „Jeder Tag, an dem du weisst, es gibt keine Gefahr aus dem System zu kippen,
                   lässt dich in Gesundheit. Vorsorge ist viel besser als Nachsorge.
                   Lüg dir nicht in die eigene Tasche.“
                 </p>

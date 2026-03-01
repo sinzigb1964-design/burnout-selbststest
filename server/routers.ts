@@ -29,6 +29,8 @@ import {
   updateUserConsent,
   updateUserRole,
   updateUserRoles,
+  getTestModeSetting,
+  setTestModeSetting,
 } from "./db";
 import { computePatterns, getAreaLevel, getTotalLevel } from "../shared/questionnaire";
 import { ENV } from "./_core/env";
@@ -184,8 +186,9 @@ export const appRouter = router({
       const cycle = await getActiveTestCycle(ctx.user.id);
       if (!cycle) return { cycle: null, entry: null, dayNumber: null };
 
+      const testMode = await getTestModeSetting();
       let dayNumber: number;
-      if (ENV.testMode) {
+      if (testMode) {
         // Test-Modus: nächsten noch nicht ausgefüllten Tag ermitteln
         const entries = await getDailyEntriesForCycle(cycle.id);
         const usedDays = new Set(entries.map((e) => e.dayNumber));
@@ -200,7 +203,7 @@ export const appRouter = router({
       }
 
       const entry = await getTodayEntry(cycle.id, dayNumber);
-      return { cycle, entry, dayNumber, testMode: ENV.testMode };
+      return { cycle, entry, dayNumber, testMode };
     }),
 
     submit: protectedProcedure
@@ -209,8 +212,9 @@ export const appRouter = router({
         const cycle = await getActiveTestCycle(ctx.user.id);
         if (!cycle) throw new TRPCError({ code: "NOT_FOUND", message: "Kein aktiver Zyklus." });
 
+        const testMode = await getTestModeSetting();
         let dayNumber: number;
-        if (ENV.testMode) {
+        if (testMode) {
           // Test-Modus: nächsten noch nicht ausgefüllten Tag ermitteln
           const entries = await getDailyEntriesForCycle(cycle.id);
           const usedDays = new Set(entries.map((e) => e.dayNumber));
@@ -400,6 +404,28 @@ export const appRouter = router({
         }
         await updateUserRoles(input.userId, input.isAdmin, input.isCoach);
         return { success: true };
+      }),
+
+    /** Aktuellen Test-Modus-Status lesen */
+    getTestMode: publicProcedure
+      .input(z.object({ adminPassword: z.string() }))
+      .query(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        const enabled = await getTestModeSetting();
+        return { testMode: enabled };
+      }),
+
+    /** Test-Modus ein- oder ausschalten */
+    setTestMode: publicProcedure
+      .input(z.object({ adminPassword: z.string(), enabled: z.boolean() }))
+      .mutation(async ({ input }) => {
+        if (input.adminPassword !== ENV.adminPanelPassword) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Nicht autorisiert." });
+        }
+        await setTestModeSetting(input.enabled);
+        return { success: true, testMode: input.enabled };
       }),
   }),
 

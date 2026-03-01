@@ -16,6 +16,7 @@ import {
   magicTokens,
   testCycles,
   users,
+  appSettings,
 } from "../drizzle/schema";
 import { ENV } from "./_core/env";
 
@@ -508,4 +509,46 @@ export async function isEmailOptedOut(userId: number): Promise<boolean> {
     .limit(1);
 
   return result[0]?.emailOptOut ?? false;
+}
+
+// ─── APP SETTINGS ─────────────────────────────────────────────────────────────
+
+const TEST_MODE_KEY = "testMode";
+
+/**
+ * Liest den aktuellen Test-Modus aus der Datenbank.
+ * Fallback: ENV.testMode (aus Umgebungsvariable).
+ */
+export async function getTestModeSetting(): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return ENV.testMode;
+
+  const result = await db
+    .select()
+    .from(appSettings)
+    .where(eq(appSettings.key, TEST_MODE_KEY))
+    .limit(1);
+
+  if (result[0]) {
+    return result[0].value === "true";
+  }
+  // Noch kein DB-Eintrag → ENV-Wert als Startwert schreiben und zurückgeben
+  await db
+    .insert(appSettings)
+    .values({ key: TEST_MODE_KEY, value: ENV.testMode ? "true" : "false" })
+    .onDuplicateKeyUpdate({ set: { value: ENV.testMode ? "true" : "false" } });
+  return ENV.testMode;
+}
+
+/**
+ * Setzt den Test-Modus in der Datenbank.
+ */
+export async function setTestModeSetting(enabled: boolean): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .insert(appSettings)
+    .values({ key: TEST_MODE_KEY, value: enabled ? "true" : "false" })
+    .onDuplicateKeyUpdate({ set: { value: enabled ? "true" : "false" } });
 }
