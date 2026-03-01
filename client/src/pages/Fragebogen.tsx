@@ -86,9 +86,9 @@ export default function Fragebogen() {
         <Card className="max-w-md w-full text-center">
           <CardContent className="p-8">
             <CheckCircle2 className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-foreground mb-2">Heute bereits ausgefuellt!</h2>
+            <h2 className="text-xl font-bold text-foreground mb-2">Heute bereits ausgefüllt!</h2>
             <p className="text-muted-foreground mb-6">
-              Du hast den Fragebogen fuer heute bereits abgeschlossen. Morgen geht es weiter.
+              Du hast den Fragebogen für heute bereits abgeschlossen. Morgen geht es weiter.
             </p>
             <Button onClick={() => navigate("/dashboard")}>Zum Dashboard</Button>
           </CardContent>
@@ -215,12 +215,12 @@ export default function Fragebogen() {
               {submitEntry.isPending ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Wird gespeichert...
+                  Wird gespeichert …
                 </>
               ) : (
                 <>
                   <CheckCircle2 className="w-4 h-4 mr-2" />
-                  Abschliessen & speichern
+                  Abschließen & speichern
                 </>
               )}
             </Button>
