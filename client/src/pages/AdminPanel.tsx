@@ -46,70 +46,73 @@ export default function AdminPanel() {
   };
 
   // ─── Passwort-Gate ──────────────────────────────────────────────────────────
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="w-full max-w-sm">
-          <CardHeader className="text-center pb-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-              <Shield className="w-6 h-6 text-primary" />
-            </div>
-            <CardTitle className="text-xl">Admin-Panel</CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              Bitte geben Sie das Admin-Passwort ein.
-            </p>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="admin-password">Passwort</Label>
-                <div className="relative">
-                  <Input
-                    id="admin-password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Admin-Passwort eingeben"
-                    autoFocus
-                    className="pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    tabIndex={-1}
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
+  // Wichtig: Kein bedingter Return vor Hooks – stattdessen JSX-Bedingung
+  return (
+    <>
+      {!isAuthenticated ? (
+        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+          <Card className="w-full max-w-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <Shield className="w-6 h-6 text-primary" />
               </div>
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={!password || verifyPassword.isPending}
-              >
-                {verifyPassword.isPending ? (
-                  <><RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Prüfe …</>
-                ) : (
-                  <><Lock className="w-4 h-4 mr-2" /> Anmelden</>
-                )}
-              </Button>
-              <Button
-                type="button"
-                variant="ghost"
-                className="w-full"
-                onClick={() => navigate("/")}
-              >
-                Zurück zur Startseite
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  return <AdminDashboard adminPassword={adminPassword} onLogout={() => setIsAuthenticated(false)} />;
+              <CardTitle className="text-xl">Admin-Panel</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">
+                Bitte geben Sie das Admin-Passwort ein.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="admin-password">Passwort</Label>
+                  <div className="relative">
+                    <Input
+                      id="admin-password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Admin-Passwort eingeben"
+                      autoFocus
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      tabIndex={-1}
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={!password || verifyPassword.isPending}
+                >
+                  {verifyPassword.isPending ? (
+                    <><RefreshCw className="w-4 h-4 mr-2 animate-spin" /> Prüfe …</>
+                  ) : (
+                    <><Lock className="w-4 h-4 mr-2" /> Anmelden</>
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="w-full"
+                  onClick={() => navigate("/")}
+                >
+                  Zurück zur Startseite
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
+        <AdminDashboard adminPassword={adminPassword} onLogout={() => setIsAuthenticated(false)} />
+      )}
+    </>
+  );
 }
 
 // ─── Admin Dashboard (nach Authentifizierung) ───────────────────────────────
