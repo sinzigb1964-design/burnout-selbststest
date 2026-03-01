@@ -93,3 +93,8 @@
 - [x] Magic-Link-Login: Session 14 Tage gültig
 - [x] Auswertungsbericht: Verständliche Bezeichnungen und Erklärungen für erkannte Belastungsmuster
 - [x] Bugfix: NotFoundError (removeChild) beim Login-Versuch eines bereits registrierten Users
+- [x] DSGVO: emailOptOut-Feld und unsubscribeToken in users-Tabelle
+- [x] DSGVO: Server-Route GET /api/unsubscribe?token=... zum Abmelden
+- [x] DSGVO: E-Mail-Versand-Guard (keine E-Mails an abgemeldete User)
+- [x] DSGVO: Abmeldelink in alle E-Mail-Templates (Willkommen, Erinnerung, Abschluss)
+- [x] DSGVO: Bestätigungsseite /abmeldung im Frontend

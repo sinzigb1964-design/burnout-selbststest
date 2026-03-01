@@ -16,6 +16,7 @@ import {
   getCoachClients,
   getCompletedCycles,
   getDailyEntriesForCycle,
+  getOrCreateUnsubscribeToken,
   getTestCycleById,
   getTodayEntry,
   getUserById,
@@ -137,15 +138,18 @@ export const appRouter = router({
       const cycle = await createTestCycle({ userId: ctx.user.id, status: "active" });
 
       // Willkommens-E-Mail senden
-      if (ctx.user.email) {
+      if (ctx.user.email && !ctx.user.emailOptOut) {
         const firstName = ctx.user.name?.split(" ")[0] || "du";
         const startDate = new Date(cycle.startDate).toLocaleDateString("de-DE", {
           day: "2-digit", month: "long", year: "numeric"
         });
+        const unsubToken = await getOrCreateUnsubscribeToken(ctx.user.id).catch(() => null);
+        const unsubscribeUrl = unsubToken ? `${APP_URL}/api/unsubscribe?token=${unsubToken}` : undefined;
         const { subject, htmlContent } = buildWelcomeEmail({
           firstName,
           appUrl: APP_URL,
           startDate,
+          unsubscribeUrl,
         });
         sendEmail({ to: { email: ctx.user.email, name: ctx.user.name || undefined }, subject, htmlContent })
           .catch((e) => console.error("[email] Willkommens-E-Mail fehlgeschlagen:", e));
@@ -238,12 +242,15 @@ export const appRouter = router({
           await completeTestCycle(cycle.id);
 
           // Abschluss-E-Mail senden
-          if (ctx.user.email) {
+          if (ctx.user.email && !ctx.user.emailOptOut) {
             const firstName = ctx.user.name?.split(" ")[0] || "du";
+            const unsubToken = await getOrCreateUnsubscribeToken(ctx.user.id).catch(() => null);
+            const unsubscribeUrl = unsubToken ? `${APP_URL}/api/unsubscribe?token=${unsubToken}` : undefined;
             const { subject, htmlContent } = buildCompletionEmail({
               firstName,
               appUrl: APP_URL,
               cycleId: cycle.id,
+              unsubscribeUrl,
             });
             sendEmail({ to: { email: ctx.user.email, name: ctx.user.name || undefined }, subject, htmlContent })
               .catch((e) => console.error("[email] Abschluss-E-Mail fehlgeschlagen:", e));

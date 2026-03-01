@@ -452,3 +452,60 @@ export async function cleanupExpiredTokens(): Promise<void> {
     .delete(magicTokens)
     .where(eq(magicTokens.createdAt, oneHourAgo));
 }
+
+/**
+ * Gibt den Unsubscribe-Token eines Users zurück (oder erstellt einen neuen).
+ * Wird beim E-Mail-Versand verwendet um den Abmeldelink zu generieren.
+ */
+export async function getOrCreateUnsubscribeToken(userId: number): Promise<string> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+  const user = result[0];
+  if (!user) throw new Error("User not found");
+
+  if (user.unsubscribeToken) return user.unsubscribeToken;
+
+  // Neuen Token generieren
+  const { randomBytes } = await import("crypto");
+  const token = randomBytes(32).toString("hex");
+  await db.update(users).set({ unsubscribeToken: token }).where(eq(users.id, userId));
+  return token;
+}
+
+/**
+ * Verarbeitet eine Abmeldung über den Unsubscribe-Token.
+ * Gibt den User zurück oder null wenn Token ungültig.
+ */
+export async function unsubscribeByToken(token: string): Promise<User | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  const result = await db
+    .select()
+    .from(users)
+    .where(eq(users.unsubscribeToken, token))
+    .limit(1);
+
+  const user = result[0];
+  if (!user) return null;
+
+  await db.update(users).set({ emailOptOut: true }).where(eq(users.id, user.id));
+  return { ...user, emailOptOut: true };
+}
+
+/**
+ * Prüft ob ein User E-Mails empfangen möchte.
+ */
+export async function isEmailOptedOut(userId: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  const result = await db.select({ emailOptOut: users.emailOptOut })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  return result[0]?.emailOptOut ?? false;
+}

@@ -18,6 +18,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import Login from "./pages/Login";
 import AuthVerify from "./pages/AuthVerify";
+import Abmeldung from "./pages/Abmeldung";
 import { useAuth } from "./_core/hooks/useAuth";
 import { getLoginUrl } from "./const";
 
@@ -91,6 +92,7 @@ function Router() {
       <Route path="/admin" component={AdminPanel} />
       <Route path="/login" component={Login} />
       <Route path="/auth/verify" component={AuthVerify} />
+      <Route path="/abmeldung" component={Abmeldung} />
       <Route path="/impressum" component={Impressum} />
       <Route path="/datenschutz" component={Datenschutz} />
       <Route path="/404" component={NotFound} />

@@ -52,7 +52,7 @@ export async function sendEmail(params: SendEmailParams): Promise<boolean> {
 
 // ─── E-Mail-Templates ─────────────────────────────────────────────────────────
 
-function baseTemplate(content: string): string {
+function baseTemplate(content: string, unsubscribeUrl?: string): string {
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -84,6 +84,10 @@ function baseTemplate(content: string): string {
               Diese E-Mail wurde automatisch vom Burnout Selbsttest-System gesendet.<br/>
               Bernd Sinzig &bull; Burnout LIFEBACK&reg; Guide &bull; <a href="https://selbsttest.burnout-lifeback-guide.click" style="color:#1a6b6b;">selbsttest.burnout-lifeback-guide.click</a>
             </p>
+            ${unsubscribeUrl ? `<p style="margin:12px 0 0;font-size:11px;color:#aababa;">
+              Du möchtest keine weiteren Erinnerungen erhalten?
+              <a href="${unsubscribeUrl}" style="color:#aababa;text-decoration:underline;">Hier von automatischen E-Mails abmelden</a>
+            </p>` : ""}
           </td>
         </tr>
       </table>
@@ -103,8 +107,9 @@ export function buildWelcomeEmail(params: {
   firstName: string;
   appUrl: string;
   startDate: string;
+  unsubscribeUrl?: string;
 }): { subject: string; htmlContent: string } {
-  const { firstName, appUrl, startDate } = params;
+  const { firstName, appUrl, startDate, unsubscribeUrl } = params;
   const fragebogenUrl = `${appUrl}/fragebogen`;
 
   const content = `
@@ -134,7 +139,7 @@ export function buildWelcomeEmail(params: {
 
   return {
     subject: `🟢 Dein 14-Tage Burnout-Selbsttest hat begonnen – Tag 1 wartet auf dich`,
-    htmlContent: baseTemplate(content),
+    htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }
 
@@ -145,8 +150,9 @@ export function buildReminderEmail(params: {
   appUrl: string;
   dayNumber: number;
   daysLeft: number;
+  unsubscribeUrl?: string;
 }): { subject: string; htmlContent: string } {
-  const { firstName, appUrl, dayNumber, daysLeft } = params;
+  const { firstName, appUrl, dayNumber, daysLeft, unsubscribeUrl } = params;
   const fragebogenUrl = `${appUrl}/fragebogen`;
 
   const urgency = daysLeft <= 2
@@ -176,7 +182,7 @@ export function buildReminderEmail(params: {
   const subjectEmoji = daysLeft <= 2 ? "🔔" : "📋";
   return {
     subject: `${subjectEmoji} Erinnerung: Tag ${dayNumber} deines Burnout-Selbsttests wartet`,
-    htmlContent: baseTemplate(content),
+    htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }
 
@@ -186,8 +192,9 @@ export function buildCompletionEmail(params: {
   firstName: string;
   appUrl: string;
   cycleId: number;
+  unsubscribeUrl?: string;
 }): { subject: string; htmlContent: string } {
-  const { firstName, appUrl, cycleId } = params;
+  const { firstName, appUrl, cycleId, unsubscribeUrl } = params;
   const reportUrl = `${appUrl}/auswertung/${cycleId}`;
 
   const content = `
@@ -214,6 +221,6 @@ export function buildCompletionEmail(params: {
 
   return {
     subject: `✅ Dein Burnout-Selbsttest ist abgeschlossen – dein Bericht ist bereit`,
-    htmlContent: baseTemplate(content),
+    htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }

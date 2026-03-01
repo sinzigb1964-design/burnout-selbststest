@@ -10,6 +10,7 @@ import {
   getAllUsers,
   getActiveTestCycle,
   getDailyEntriesForCycle,
+  getOrCreateUnsubscribeToken,
 } from "./db";
 import {
   sendEmail,
@@ -40,6 +41,8 @@ export async function runDailyReminderJob(): Promise<void> {
 
     for (const user of allUsers) {
       if (!user.email) { skipped++; continue; }
+      // DSGVO: Abgemeldete User überspringen
+      if (user.emailOptOut) { skipped++; continue; }
 
       const cycle = await getActiveTestCycle(user.id);
       if (!cycle) { skipped++; continue; }
@@ -55,11 +58,18 @@ export async function runDailyReminderJob(): Promise<void> {
       const daysLeft = 14 - dayNumber + 1;
       const firstName = user.name?.split(" ")[0] || "du";
 
+      // Abmeldelink generieren
+      const unsubscribeToken = await getOrCreateUnsubscribeToken(user.id).catch(() => null);
+      const unsubscribeUrl = unsubscribeToken
+        ? `${APP_URL}/api/unsubscribe?token=${unsubscribeToken}`
+        : undefined;
+
       const { subject, htmlContent } = buildReminderEmail({
         firstName,
         appUrl: APP_URL,
         dayNumber,
         daysLeft,
+        unsubscribeUrl,
       });
 
       const ok = await sendEmail({

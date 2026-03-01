@@ -24,6 +24,9 @@ export const users = mysqlTable("users", {
   // DSGVO: Einwilligung
   consentGiven: boolean("consentGiven").default(false).notNull(),
   consentGivenAt: timestamp("consentGivenAt"),
+  // DSGVO: E-Mail-Abmeldung (Opt-out für automatische Erinnerungs-E-Mails)
+  emailOptOut: boolean("emailOptOut").default(false).notNull(),
+  unsubscribeToken: varchar("unsubscribeToken", { length: 128 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
