@@ -92,3 +92,4 @@
 - [x] Magic-Link-Login: Manus-OAuth aus App entfernen, Auth-Kontext anpassen
 - [x] Magic-Link-Login: Session 14 Tage gültig
 - [x] Auswertungsbericht: Verständliche Bezeichnungen und Erklärungen für erkannte Belastungsmuster
+- [x] Bugfix: NotFoundError (removeChild) beim Login-Versuch eines bereits registrierten Users
