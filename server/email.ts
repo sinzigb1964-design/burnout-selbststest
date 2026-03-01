@@ -179,9 +179,9 @@ export function buildReminderEmail(params: {
       <span style="color:#7a9090;">Life- &amp; Businesscoach | Burnout LIFEBACK&reg; Guide</span>
     </p>`;
 
-  const subjectEmoji = daysLeft <= 2 ? "🔔" : "📋";
+  const subjectEmoji = daysLeft <= 2 ? "🔔" : "🌙";
   return {
-    subject: `${subjectEmoji} Erinnerung: Tag ${dayNumber} deines Burnout-Selbsttests wartet`,
+    subject: `${subjectEmoji} Abend-Erinnerung: Tag ${dayNumber} deines Burnout-Selbsttests wartet auf dich`,
     htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }
