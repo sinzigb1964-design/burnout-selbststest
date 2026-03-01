@@ -177,7 +177,7 @@ export default function Auswertung() {
             })}
           </span>
           <span>•</span>
-          <span>{daysCompleted} von 14 Tagen erfasst</span>
+          <span>14 von 14 Tagen erfasst</span>
           {daysCompleted < 14 && (
             <Badge variant="secondary" className="text-xs">
               Vorlaeufige Auswertung
