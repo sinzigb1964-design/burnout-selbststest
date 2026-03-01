@@ -275,7 +275,7 @@ export default function Home() {
               />
               <div className="text-left">
                 <p className="text-sm font-semibold text-primary-foreground">Bernd Sinzig</p>
-                <p className="text-xs text-primary-foreground/60">Burnout LIFEBACK™ Guide</p>
+                <p className="text-xs text-primary-foreground/60">Burnout LIFEBACK<sup>®</sup> Guide</p>
               </div>
             </div>
           </div>
@@ -290,7 +290,7 @@ export default function Home() {
             <div className="text-center mb-14">
               <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Wer begleitet dich?</p>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Bernd Sinzig – Burnout LIFEBACK<sup className="text-base font-normal">™</sup> Guide
+                Bernd Sinzig – Burnout LIFEBACK<sup className="text-base font-normal">®</sup> Guide
               </h2>
             </div>
 
@@ -299,12 +299,12 @@ export default function Home() {
               <div className="flex flex-col items-center md:items-start gap-6">
                 <img
                   src="https://d2xsxph8kpxj0f.cloudfront.net/310519663325194886/kUhDEWUQxkuYXEHuB7K7Rz/bernd-sinzig-profilbild_abb6ce9e.jpg"
-                  alt="Bernd Sinzig – Burnout LIFEBACK™ Guide"
+                  alt="Bernd Sinzig – Burnout LIFEBACK® Guide"
                   className="w-56 h-56 rounded-2xl object-cover object-top shadow-lg ring-4 ring-primary/10"
                 />
                 <div className="text-center md:text-left">
                   <p className="font-bold text-foreground text-lg">Bernd Sinzig</p>
-                  <p className="text-muted-foreground text-sm">Burnout LIFEBACK<sup className="text-xs">™</sup> Guide</p>
+                  <p className="text-muted-foreground text-sm">Burnout LIFEBACK<sup className="text-xs">®</sup> Guide</p>
                   <p className="text-muted-foreground text-sm">Jahrgang 1964 | Bern – Zürich &amp; DACH-Raum</p>
                 </div>
               </div>
