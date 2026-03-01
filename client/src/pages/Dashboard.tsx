@@ -70,7 +70,7 @@ export default function Dashboard() {
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Heart className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="font-semibold text-foreground">Burnout Selbsttest</span>
+            <span className="font-semibold text-foreground">Selbsttest Burnout Check</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground hidden sm:block">{user?.name}</span>
@@ -191,11 +191,10 @@ export default function Dashboard() {
                       <Activity className="w-7 h-7 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Kein aktiver Zyklus
+                      Selbsttest Burnout Check
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich den Fragebogen
-                      aus und erhalte nach zwei Wochen eine detaillierte Auswertung.
+                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich am Abend den Fragebogen aus und erhalte nach zwei Wochen eine sehr detaillierte Auswertung. Du erhältst jeden Tag ein Erinnerungsmail, damit du am Ende wirklich weißt, wo du stehst.
                     </p>
                     <Button
                       onClick={() => startCycle.mutate()}
