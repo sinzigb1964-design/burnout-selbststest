@@ -54,8 +54,8 @@ export default function Consent() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Was wir speichern</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
-                    Deine taeglich ausgefuellten Fragebogen-Antworten (Skala 0-3), berechnete
-                    Bereichssummen und Gesamtscores ueber 14 Tage.
+                    Deine täglich ausgefuellten Fragebogen-Antworten (Skala 0-3), berechnete
+                    Bereichssummen und Gesamtscores über 14 Tage.
                   </p>
                 </div>
               </div>
@@ -64,7 +64,7 @@ export default function Consent() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Wie wir deine Daten schuetzen</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
-                    Alle Daten werden verschluesselt uebertragen (HTTPS) und auf EU-Servern
+                    Alle Daten werden verschlüsselt übertragen (HTTPS) und auf EU-Servern
                     gespeichert. Passwoerter werden gehasht. Keine Weitergabe an Dritte.
                   </p>
                 </div>
@@ -75,7 +75,7 @@ export default function Consent() {
                   <p className="text-sm font-medium text-foreground">Deine Rechte</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
                     Du kannst jederzeit alle deine Daten exportieren oder dein Konto mit allen
-                    gespeicherten Daten loeschen. Coach-Zugriff erteilst und widerrufst du selbst.
+                    gespeicherten Daten löschen. Coach-Zugriff erteilst und widerrufst du selbst.
                   </p>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function Consent() {
                 Ich stimme der Verarbeitung meiner Gesundheitsdaten (Fragebogen-Antworten) gemaess
                 Art. 9 Abs. 2 lit. a DSGVO zu. Ich habe die{" "}
                 <a href="/datenschutz" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
-                  Datenschutzerklaerung
+                  Datenschutzerklärung
                 </a>{" "}
                 gelesen und verstanden. Ich weiss, dass ich diese Einwilligung jederzeit widerrufen
                 kann, indem ich mein Konto und alle Daten loesche.

@@ -220,7 +220,7 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         const coach = await getUserById(input.coachId);
         if (!coach || coach.role !== "coach") {
-          throw new TRPCError({ code: "BAD_REQUEST", message: "Ungueltige Coach-ID." });
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Ungültige Coach-ID." });
         }
         await grantCoachAccess(ctx.user.id, input.coachId);
         return { success: true };

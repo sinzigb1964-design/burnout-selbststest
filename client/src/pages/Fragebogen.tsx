@@ -203,7 +203,7 @@ export default function Fragebogen() {
             disabled={currentArea === 0}
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Zurueck
+            Zurück
           </Button>
 
           {isLastArea ? (

@@ -31,12 +31,12 @@ export default function Home() {
     {
       icon: <Brain className="w-6 h-6" />,
       title: "8 Lebensbereiche",
-      desc: "Schlaf, Energie, Nervensystem, Konzentration, Koerper, Soziales, Sinn und innere Distanz.",
+      desc: "Schlaf, Energie, Nervensystem, Konzentration, Körper, Soziales, Sinn und innere Distanz.",
     },
     {
       icon: <Activity className="w-6 h-6" />,
       title: "14-Tage-Monitoring",
-      desc: "Taeglich 56 Fragen (8 x 7) fuer ein praezises Bild deiner Belastung ueber zwei Wochen.",
+      desc: "Täglich 56 Fragen (8 × 7) für ein präzises Bild deiner Belastung über zwei Wochen.",
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
@@ -46,17 +46,17 @@ export default function Home() {
     {
       icon: <Users className="w-6 h-6" />,
       title: "Coach-Zugriff",
-      desc: "Erteile deinem Coach Zugriff auf deine Ergebnisse - vollstaendig unter deiner Kontrolle.",
+      desc: "Erteile deinem Coach Zugriff auf deine Ergebnisse – vollständig unter deiner Kontrolle.",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "DSGVO-konform",
-      desc: "Deine Daten gehoeren dir. Export und Loeschung jederzeit moeglich.",
+      desc: "Deine Daten gehören dir. Export und Löschung jederzeit möglich.",
     },
     {
       icon: <Lock className="w-6 h-6" />,
       title: "Sicher & vertraulich",
-      desc: "Verschluesselte Uebertragung, kein Verkauf von Daten, kein Tracking.",
+      desc: "Verschlüsselte Übertragung, kein Verkauf von Daten, kein Tracking.",
     },
   ];
 
@@ -65,7 +65,7 @@ export default function Home() {
     { icon: <Activity className="w-5 h-5" />, label: "Energie" },
     { icon: <Heart className="w-5 h-5" />, label: "Nervensystem" },
     { icon: <Brain className="w-5 h-5" />, label: "Konzentration" },
-    { icon: <Activity className="w-5 h-5" />, label: "Koerper" },
+    { icon: <Activity className="w-5 h-5" />, label: "Körper" },
     { icon: <Users className="w-5 h-5" />, label: "Soziales" },
     { icon: <CheckCircle2 className="w-5 h-5" />, label: "Sinn & Freude" },
     { icon: <Heart className="w-5 h-5" />, label: "Innere Distanz" },
@@ -110,8 +110,8 @@ export default function Home() {
               <span className="text-primary">bevor sie dich einholen.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-              Der 14-Tage-Selbsttest erfasst taeglich deine Belastung in 8 Lebensbereichen und
-              liefert nach zwei Wochen eine praezise, mehrdimensionale Auswertung mit
+              Der 14-Tage-Selbsttest erfasst täglich deine Belastung in 8 Lebensbereichen und
+              liefert nach zwei Wochen eine präzise, mehrdimensionale Auswertung mit
               Mustererkennung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -146,7 +146,7 @@ export default function Home() {
       <section className="py-16 bg-muted/50">
         <div className="container">
           <p className="text-center text-sm font-medium text-muted-foreground uppercase tracking-wider mb-8">
-            8 Bereiche werden taeglich erfasst
+            8 Bereiche werden täglich erfasst
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {areas.map((area) => (
@@ -168,25 +168,25 @@ export default function Home() {
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-foreground mb-4">So funktioniert der Test</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              In drei einfachen Schritten zu einer fundierten Selbsteinschaetzung.
+              In drei einfachen Schritten zu einer fundierten Selbsteinschätzung.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 step: "01",
-                title: "Taeglich ausfuellen",
-                desc: "Beantworte jeden Tag 56 Fragen in 8 Bereichen. Das dauert ca. 5-10 Minuten.",
+                title: "Täglich ausfüllen",
+                desc: "Beantworte jeden Tag 56 Fragen in 8 Bereichen. Das dauert ca. 5–10 Minuten.",
               },
               {
                 step: "02",
                 title: "14 Tage durchhalten",
-                desc: "Nach 14 Tagen hat das System genuegend Daten fuer eine aussagekraeftige Analyse.",
+                desc: "Nach 14 Tagen hat das System genügend Daten für eine aussagekräftige Analyse.",
               },
               {
                 step: "03",
                 title: "Auswertung erhalten",
-                desc: "Du bekommst eine detaillierte Auswertung mit Mustern, Farben und erklaerenden Texten.",
+                desc: "Du bekommst eine detaillierte Auswertung mit Mustern, Farben und erklärenden Texten.",
               },
             ].map((item) => (
               <div key={item.step} className="relative">
@@ -226,10 +226,10 @@ export default function Home() {
         <div className="container">
           <div className="bg-primary rounded-2xl p-10 md:p-16 text-center">
             <h2 className="text-3xl font-bold text-primary-foreground mb-4">
-              Bereit fuer Klarheit?
+              Bereit für Klarheit?
             </h2>
             <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
-              Starte jetzt deinen persoenlichen 14-Tage-Belastungstest. Kostenlos, anonym und
+              Starte jetzt deinen persönlichen 14-Tage-Belastungstest. Kostenlos, anonym und
               DSGVO-konform.
             </p>
             <Button

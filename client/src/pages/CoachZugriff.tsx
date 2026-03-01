@@ -61,7 +61,7 @@ export default function CoachZugriff() {
                   Du hast die volle Kontrolle
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Coaches koennen deine Testergebnisse nur sehen, wenn du ihnen explizit Zugriff
+                  Coaches können deine Testergebnisse nur sehen, wenn du ihnen explizit Zugriff
                   erteilst. Du kannst den Zugriff jederzeit widerrufen.
                 </p>
               </div>
@@ -117,7 +117,7 @@ export default function CoachZugriff() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base font-semibold flex items-center gap-2">
               <Users className="w-4 h-4 text-primary" />
-              Verfuegbare Coaches
+              Verfügbare Coaches
             </CardTitle>
           </CardHeader>
           <CardContent>

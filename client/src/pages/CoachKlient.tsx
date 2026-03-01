@@ -133,7 +133,7 @@ export default function CoachKlient() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-base font-semibold flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-primary" />
-                  Bereichsuebersicht
+                  Bereichsübersicht
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -192,7 +192,7 @@ export default function CoachKlient() {
         ) : (
           <Card className="border-border">
             <CardContent className="p-8 text-center text-muted-foreground">
-              <p className="text-sm">Keine Auswertung verfuegbar.</p>
+              <p className="text-sm">Keine Auswertung verfügbar.</p>
             </CardContent>
           </Card>
         )}

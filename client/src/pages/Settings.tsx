@@ -28,7 +28,7 @@ export default function Settings() {
 
   const deleteAccount = trpc.gdpr.deleteAccount.useMutation({
     onSuccess: () => {
-      toast.success("Konto und alle Daten wurden geloescht.");
+      toast.success("Konto und alle Daten wurden gelöscht.");
       logout();
     },
     onError: (err) => toast.error(err.message),
@@ -106,8 +106,8 @@ export default function Settings() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="p-3 rounded-lg bg-muted/50 text-sm text-muted-foreground leading-relaxed">
-              Gemaess DSGVO hast du das Recht auf Auskunft, Berichtigung, Loeschung und
-              Datenuebertragbarkeit. Nutze die folgenden Optionen, um deine Rechte wahrzunehmen.
+              Gemaess DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung und
+              Datenübertragbarkeit. Nutze die folgenden Optionen, um deine Rechte wahrzunehmen.
             </div>
 
             {/* Export */}
@@ -116,7 +116,7 @@ export default function Settings() {
                 <p className="text-sm font-medium text-foreground">Daten exportieren</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
                   Lade alle deine gespeicherten Daten als JSON-Datei herunter (Art. 20 DSGVO –
-                  Datenuebertragbarkeit).
+                  Datenübertragbarkeit).
                 </p>
               </div>
               <Button
@@ -134,9 +134,9 @@ export default function Settings() {
             {/* Delete */}
             <div className="flex items-start justify-between gap-4 p-4 rounded-lg border border-destructive/30 bg-destructive/5">
               <div>
-                <p className="text-sm font-medium text-destructive">Konto loeschen</p>
+                <p className="text-sm font-medium text-destructive">Konto löschen</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Loescht dein Konto und alle gespeicherten Daten unwiderruflich (Art. 17 DSGVO –
+                  Löscht dein Konto und alle gespeicherten Daten unwiderruflich (Art. 17 DSGVO –
                   Recht auf Vergessenwerden).
                 </p>
               </div>
@@ -144,15 +144,15 @@ export default function Settings() {
                 <DialogTrigger asChild>
                   <Button variant="destructive" size="sm" className="shrink-0">
                     <Trash2 className="w-4 h-4 mr-2" />
-                    Loeschen
+                    Löschen
                   </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Konto wirklich loeschen?</DialogTitle>
+                    <DialogTitle>Konto wirklich löschen?</DialogTitle>
                     <DialogDescription>
                       Diese Aktion ist unwiderruflich. Alle deine Daten – Fragebogen-Antworten,
-                      Auswertungen und Coach-Freigaben – werden permanent geloescht. Du wirst
+                      Auswertungen und Coach-Freigaben – werden permanent gelöscht. Du wirst
                       sofort abgemeldet.
                     </DialogDescription>
                   </DialogHeader>
@@ -165,7 +165,7 @@ export default function Settings() {
                       onClick={() => deleteAccount.mutate()}
                       disabled={deleteAccount.isPending}
                     >
-                      {deleteAccount.isPending ? "Wird geloescht..." : "Ja, Konto loeschen"}
+                      {deleteAccount.isPending ? "Wird gelöscht..." : "Ja, Konto löschen"}
                     </Button>
                   </DialogFooter>
                 </DialogContent>

@@ -43,6 +43,8 @@
 - [x] Auth-Guard für alle geschützten Routen
 - [x] Checkpoint erstellen
 
+- [x] Alle Texte auf korrekte deutsche Umlaute und Rechtschreibung umgestellt
+
 ## Post-MVP (ausstehend)
 - [ ] E-Mail-Benachrichtigungen (tägliche Erinnerung)
 - [ ] PDF-Export der Auswertung

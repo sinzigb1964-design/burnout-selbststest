@@ -67,7 +67,7 @@ export default function Auswertung() {
         <Card className="max-w-md w-full text-center">
           <CardContent className="p-8">
             <AlertTriangle className="w-10 h-10 text-destructive mx-auto mb-4" />
-            <h2 className="text-lg font-bold text-foreground mb-2">Keine Auswertung verfuegbar</h2>
+            <h2 className="text-lg font-bold text-foreground mb-2">Keine Auswertung verfügbar</h2>
             <p className="text-muted-foreground text-sm mb-4">
               {data?.entries?.length
                 ? `Es wurden ${data.entries.length} von 14 Tagen erfasst. Fuelle alle 14 Tage aus fuer eine vollstaendige Auswertung.`
@@ -165,7 +165,7 @@ export default function Auswertung() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base font-semibold flex items-center gap-2">
               <BarChart3 className="w-4 h-4 text-primary" />
-              Uebersicht nach Bereichen
+              Übersicht nach Bereichen
             </CardTitle>
           </CardHeader>
           <CardContent>

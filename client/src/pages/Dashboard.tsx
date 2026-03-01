@@ -43,7 +43,7 @@ export default function Dashboard() {
   const canFillToday = activeCycle && !todayEntry;
 
   const motivationMessages = [
-    "Jeder Tag zaehlt. Du machst das grossartig!",
+    "Jeder Tag zählt. Du machst das grossartig!",
     "Schon mehr als die Haelfte geschafft. Weiter so!",
     "Du bist fast am Ziel. Noch ein paar Tage!",
     "Fantastisch! Du hast alle 14 Tage abgeschlossen.",
@@ -172,7 +172,7 @@ export default function Dashboard() {
                         onClick={() => navigate("/fragebogen")}
                       >
                         <ClipboardList className="w-4 h-4 mr-2" />
-                        Fragebogen fuer Tag {dayNumber} ausfuellen
+                        Fragebogen fuer Tag {dayNumber} ausfüllen
                       </Button>
                     ) : (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted rounded-lg px-3 py-2">
@@ -192,7 +192,7 @@ export default function Dashboard() {
                       Kein aktiver Zyklus
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                      Starte jetzt deinen 14-Tage-Belastungstest. Fuelle taeglich den Fragebogen
+                      Starte jetzt deinen 14-Tage-Belastungstest. Fuelle täglich den Fragebogen
                       aus und erhalte nach zwei Wochen eine detaillierte Auswertung.
                     </p>
                     <Button
