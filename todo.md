@@ -103,3 +103,4 @@
 - [x] Auswertungsbericht: Dynamischer Abschlusstext von Bernd Sinzig (3 Varianten je Belastungsniveau, CTA ab mittel)
 - [x] CTA-Link im Abschlusstext: Zeeg-Buchungslink https://zeeg.me/bsinzig/P00U26 einsetzen
 - [x] Abschlusstext: Profilfoto von Bernd Sinzig einbinden (CDN-Upload + Avatar-Ersatz)
+- [x] Abschluss-E-Mail: Zeeg-Buchungslink https://zeeg.me/bsinzig/P00U26 ergänzen

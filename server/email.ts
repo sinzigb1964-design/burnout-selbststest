@@ -210,9 +210,22 @@ export function buildCompletionEmail(params: {
     </p>
     ${ctaButton(reportUrl, "Meinen Auswertungsbericht öffnen →")}
     <p style="margin:24px 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      <strong>Was jetzt?</strong> Lies den Bericht in Ruhe. Wenn du Fragen hast oder professionelle
-      Begleitung möchtest – ich bin für dich da.
+      <strong>Was jetzt?</strong> Lies den Bericht in Ruhe. Lass die Zahlen auf dich wirken.
+      Wenn du merkst, dass du Klarheit brauchst – nicht irgendwann, sondern jetzt – dann lass uns sprechen.
     </p>
+    <p style="margin:0 0 8px;color:#3a5050;font-size:14px;line-height:1.7;font-style:italic;padding:12px 16px;background:#fff8f0;border-left:3px solid #c07830;border-radius:4px;">
+      „Die meisten, die zu mir kommen, sagen: ich hätte früher kommen sollen. Nicht weil es dann leichter
+      gewesen wäre, sondern weil sie Wochen, manchmal schon Monate verloren haben, in denen sie dachten,
+      es wird schon von alleine.“
+    </p>
+    <p style="margin:16px 0 20px;color:#3a5050;font-size:14px;line-height:1.7;">
+      Kein Verkaufsgespräch. Nur Klarheit, wo du wirklich stehst.
+    </p>
+    <a href="https://zeeg.me/bsinzig/P00U26"
+       style="display:inline-block;padding:12px 24px;background:#c07830;color:#ffffff;text-decoration:none;
+              border-radius:6px;font-size:14px;font-weight:600;margin-bottom:24px;">
+      Gespräch mit Bernd vereinbaren →
+    </a>
     <p style="margin:0;color:#3a5050;font-size:14px;line-height:1.7;">
       Mit Respekt für deinen Mut,<br/>
       <strong>Bernd Sinzig</strong><br/>
