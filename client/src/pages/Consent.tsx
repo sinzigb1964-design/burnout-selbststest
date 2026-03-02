@@ -17,6 +17,7 @@ export default function Consent() {
   const giveConsent = trpc.auth.giveConsent.useMutation({
     onSuccess: async () => {
       await utils.auth.me.invalidate();
+      await utils.cycle.status.invalidate();
       navigate("/dashboard");
     },
   });
@@ -123,7 +124,7 @@ export default function Consent() {
               className="w-full"
               size="lg"
             >
-              {giveConsent.isPending ? "Wird gespeichert …" : "Einwilligung erteilen & starten"}
+              {giveConsent.isPending ? "Test wird gestartet …" : "Einwilligung erteilen & Test starten"}
             </Button>
           </CardContent>
         </Card>
