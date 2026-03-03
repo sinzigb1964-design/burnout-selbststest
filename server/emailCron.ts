@@ -1,6 +1,6 @@
 /**
  * Täglicher Cron-Job für die Burnout-Selbsttest E-Mail-Sequenz.
- * Läuft täglich um 17:00 Uhr UTC (= 18:00 Uhr MEZ / 19:00 Uhr MESZ).
+ * Server-Zeitzone: EST (UTC-5). Ziel: 18:00 MEZ = 17:00 UTC = 12:00 EST.
  * Sendet Erinnerungs-E-Mails an alle Nutzer mit aktivem Zyklus,
  * die den heutigen Tag noch nicht ausgefüllt haben.
  */
@@ -91,12 +91,14 @@ export async function runDailyReminderJob(): Promise<void> {
 }
 
 /**
- * Startet den Cron-Job (täglich 08:00 Uhr UTC).
+ * Startet den Cron-Job.
+ * Server läuft in EST (UTC-5).
+ * Ziel: 18:00 MEZ = 17:00 UTC = 12:00 EST
  */
 export function startEmailCron(): void {
-  // Täglich um 17:00 Uhr UTC (= 18:00 Uhr MEZ / 19:00 Uhr MESZ)
-  cron.schedule("0 17 * * *", async () => {
+  // 12:00 EST = 17:00 UTC = 18:00 MEZ (Normalzeit) / 19:00 MESZ (Sommerzeit)
+  cron.schedule("0 12 * * *", async () => {
     await runDailyReminderJob();
   });
-  console.log("[emailCron] Täglicher Erinnerungs-Job registriert (17:00 UTC = 18:00 MEZ)");
+  console.log("[emailCron] Täglicher Erinnerungs-Job registriert (12:00 EST = 17:00 UTC = 18:00 MEZ)");
 }
