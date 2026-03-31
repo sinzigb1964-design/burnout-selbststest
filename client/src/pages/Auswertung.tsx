@@ -498,7 +498,7 @@ export default function Auswertung() {
                 Diese Auswertung ist kein medizinisches Diagnosewerkzeug. Sie dient deiner
                 persönlichen Reflexion und Selbsteinschätzung. Bei ernsthaften Beschwerden oder
                 Unsicherheiten wende dich bitte an eine Ärztin, einen Arzt, eine Therapeutin,
-                einen Therapeuten oder eine qualifizierte Fachperson.
+                einen Therapeuten.
               </p>
             </div>
           </CardContent>
