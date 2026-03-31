@@ -94,13 +94,13 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Nach einem langen Tag hast du eigentlich Menschen, die dir wichtig sind – aber du sagst Treffen ab, weil du keine Energie mehr übrig hast. Du bist unter Leuten und fühlst dich trotzdem allein. Gespräche strengen dich an, und manchmal denkst du: Ich will einfach meine Ruhe – nichts und niemand.",
     questions: [
-      "Sagst du Treffen mit Freunden oder Familie ab, weil du keine Energie hast?",
-      "Fühlst du dich einsam, selbst wenn andere Menschen um dich herum sind?",
-      "Hast du oft das Gefühl, niemand versteht, wie es dir wirklich geht?",
-      "Vermeidest du soziale Kontakte oder Meetings, weil sie sich anstrengend anfühlen?",
-      "Denkst du häufiger: Ich will einfach nur meine Ruhe und allein sein.",
-      "Öffnest du dich kaum noch anderen, weil du niemanden belasten willst?",
-      "Hast du das Gefühl, dich innerlich von wichtigen Menschen zu entfernen?",
+      "Hast du Treffen mit Freunden oder Familie abgesagt, weil du keine Energie hast?",
+      "Hast du dich heute einsam gefühlt, selbst wenn andere Menschen um dich herum waren?",
+      "Hattest du das Gefühl, niemand versteht, wie es dir wirklich geht?",
+      "Hast du soziale Kontakte oder Meetings vermieden, weil sie sich anstrengend anfühlen?",
+      "Hast du heute gedacht: Ich will einfach nur meine Ruhe und allein sein.",
+      "War dein Gefühl: Ich öffne mich kaum noch anderen, weil ich niemanden belasten will?",
+      "Hattest du das Gefühl, dich innerlich von wichtigen Menschen zu entfernen?",
     ],
   },
   {
