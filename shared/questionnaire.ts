@@ -64,13 +64,13 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Früher konntest du dich hinsetzen, loslegen und Dinge einfach erledigen. Heute merkst du: Du springst zwischen Aufgaben hin und her, liest dieselbe Zeile mehrfach und machst Fehler, die dir sonst nicht passiert wären. Entscheidungen fühlen sich schwer an – sogar bei Dingen, die früher nebenbei gingen.",
     questions: [
-      "Fällt es dir schwer, dich längere Zeit auf eine Aufgabe zu konzentrieren?",
-      "Machst du häufiger Fehler, die dir früher nicht passiert wären?",
-      "Vergisst du Termine, Namen oder Aufgaben, obwohl du sie dir vorgenommen hattest?",
-      "Fällt es dir schwer, Entscheidungen zu treffen, selbst bei einfachen Dingen?",
-      "Fühlst du dich mental vernebelt, als wäre dein Kopf nicht ganz klar?",
-      "Hast du das Gefühl, ständig zwischen Aufgaben hin- und herzuschalten, ohne etwas fertig zu bekommen?",
-      "Liest du Texte oder E-Mails mehrfach, weil du sie beim ersten Mal nicht richtig aufgenommen hast?",
+      "Fiel es dir schwer, dich längere Zeit auf eine Aufgabe zu konzentrieren?",
+      "Sind dir häufiger Fehler passiert, die dir früher nicht passiert wären?",
+      "Hast du Termine, Namen oder Aufgaben vergessen, obwohl du sie dir vorgenommen hattest?",
+      "Ist es dir schwergefallen, Entscheidungen zu treffen, selbst bei einfachen Dingen?",
+      "Hast du dich mental vernebelt gefühlt, als wäre dein Kopf nicht ganz klar?",
+      "Hattest du das Gefühl, ständig zwischen Aufgaben hin- und herzuschalten, ohne etwas fertig zu bekommen?",
+      "Hast du Texte oder E-Mails mehrfach gelesen, weil du sie beim ersten Mal nicht richtig aufgenommen hast?",
     ],
   },
   {
