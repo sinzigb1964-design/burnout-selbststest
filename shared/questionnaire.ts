@@ -3,7 +3,7 @@
  * Skala: 0 = nie, 1 = selten, 2 = oft, 3 = immer
  */
 
-export const ANSWER_LABELS = ["nein", "ein wenig", "halb und halb", "wie nicht geschlafen"] as const;
+export const ANSWER_LABELS = ["nein", "ein wenig", "halb und halb", "ja"] as const;
 
 export interface QuestionArea {
   id: number;
@@ -20,7 +20,7 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
       "Es gibt Nächte, in denen du im Bett liegst und dein Körper müde ist, aber dein Kopf einfach weitermacht. Du wachst auf und fühlst dich, als hättest du gar nicht wirklich geschlafen. Tagsüber rettest du dich mit Kaffee oder Snacks über die Runden – und hoffst jeden Abend, dass es diesmal besser wird.",
     questions: [
       "Bist du heute erschöpft aufgewacht, obwohl du eigentlich genug geschlafen hast?",
-      "Hast du Schwierigkeiten einzuschlafen, weil deine Gedanken kreisen?",
+      "Hattest du Schwierigkeiten einzuschlafen, weil deine Gedanken kreisen?",
       "Wachst du nachts auf und grübelst über die Arbeit oder Probleme?",
       "Brauchst du tagsüber Koffein, um überhaupt funktionieren zu können?",
       "Denkst du öfter: Ich würde so gerne mal wieder richtig durchschlafen.",
