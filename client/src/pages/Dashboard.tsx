@@ -194,7 +194,7 @@ export default function Dashboard() {
                       Selbsttest Burnout Check
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich am Abend den Fragebogen aus und erhalte nach zwei Wochen eine sehr detaillierte Auswertung. Du erhältst jeden Tag ein Erinnerungsmail, damit du am Ende wirklich weißt, wo du stehst.
+                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich am Abend den Fragebogen aus und erhalte nach zwei Wochen eine sehr detaillierte Auswertung. Jede Teilnehmerin und jeder Teilnehmer erhält jeden Abend über den gesamten Zeitraum von 14 Tagen eine Erinnerungsmail – damit du am Ende wirklich weißt, wo du stehst.
                     </p>
                     <Button
                       onClick={() => startCycle.mutate()}
