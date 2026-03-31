@@ -346,7 +346,7 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
               {[
                 { title: "Professionalität", desc: "Evidenzbasierte Methoden und klare Grenzen" },
-                { title: "Empathie", desc: "Immer in einem sicheren Raum für Fortschritte" },
+                { title: "Empathie", desc: "Immer in einem sicheren Raum für alle Teilnehmenden" },
                 { title: "Transparenz", desc: "Klare Ziele, klare Schritte, ehrliche Fragen" },
                 { title: "Wirksamkeit", desc: "Im Blick: konkrete, messbare Veränderungen" },
               ].map((p) => (
