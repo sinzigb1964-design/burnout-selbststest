@@ -79,13 +79,13 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Dein Körper meldet sich – mit Kopfschmerzen, einem verkrampften Nacken, Magenziehen oder ständiger Müdigkeit. Vielleicht sagst du dir: Das ist halt so oder Dafür habe ich jetzt keine Zeit. Gleichzeitig spürst du, dass dein Körper längst Stopp sagt, während dein Kopf noch auf weiter, weiter besteht.",
     questions: [
-      "Hast du regelmäßig Kopfschmerzen, Rückenschmerzen oder starke Verspannungen?",
-      "Hast du öfter Magen-Darm-Beschwerden (z. B. Druck im Magen, Übelkeit, Durchfall, Verstopfung)?",
-      "Bist du häufig krank – z. B. Erkältungen oder Infekte, die lange nicht weggehen?",
-      "Ignorierst du körperliche Warnsignale, weil du keine Zeit hast, dich darum zu kümmern?",
-      "Nimmst du Schmerzmittel oder andere Mittel, um weitermachen zu können?",
-      "Fühlst du dich körperlich oft angespannt, z. B. Kiefer verkrampft, Schultern hochgezogen?",
-      "Hast du das Gefühl, dein Körper ist ständig müde, auch wenn du funktionierst?",
+      "Hattest du Kopfschmerzen, Rückenschmerzen oder starke Verspannungen?",
+      "Hattest du Magen-Darm-Beschwerden (z. B. Druck im Magen, Übelkeit, Durchfall, Verstopfung)?",
+      "Hast du dich krank gefühlt– z. B. Erkältungen oder Infekte, und das schon über eine lange Zeit?",
+      "Hast du körperliche Warnsignale ignoriert, weil du keine Zeit hattest, dich darum zu kümmern?",
+      "Hast du Schmerzmittel oder andere Mittel genommen, um weitermachen zu können?",
+      "Hast du dich körperlich angespannt gefühlt, z. B. Kiefer verkrampft, Schultern hochgezogen?",
+      "Hattest du das Gefühl, dein Körper war ständig müde, obwohl du funktioniert hast?",
     ],
   },
   {
