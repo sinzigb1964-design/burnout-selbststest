@@ -49,13 +49,13 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Kleinigkeiten bringen dich aus der Fassung: eine Mail, ein Kommentar, ein kleines Missverständnis. Du merkst, dass du schneller gereizt bist, dünnhäutiger, näher an Tränen oder Explosion als früher. Abends liegst du auf dem Sofa und willst einfach nur Ruhe, aber in dir drin läuft alles weiter.",
     questions: [
-      "Reagierst du gereizt auf Dinge, die dich früher kaum gestört haben?",
+      "Hast du auf Dinge gereizt reagiert, die dich früher kaum gestört haben?",
       "Fällt es dir schwer, abends innerlich zur Ruhe zu kommen und abzuschalten?",
-      "Fühlst du dich innerlich leer oder emotional abgestumpft?",
-      "Hast du oft das Gefühl, dass dir alles zu viel wird?",
-      "Bist du häufiger nah am Weinen, ohne genau sagen zu können, warum?",
-      "Hast du das Gefühl, ständig unter Strom zu stehen, selbst in Pausen?",
-      "Zählst du innerlich die Tage bis zum Wochenende oder Urlaub, um endlich zu entkommen?",
+      "Fühlst du dich heute innerlich leer oder emotional abgestumpft?",
+      "Hattest du das Gefühl, dass dir alles zu viel wird?",
+      "Warst du häufiger nah am Weinen, ohne genau sagen zu können, warum?",
+      "Hattest du das Gefühl, ständig unter Strom zu stehen, selbst in Pausen?",
+      "Hast du innerlich die Tage bis zum Wochenende oder Urlaub gezählt, um endlich zu entkommen?",
     ],
   },
   {
