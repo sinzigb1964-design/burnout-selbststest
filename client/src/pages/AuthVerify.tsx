@@ -56,7 +56,7 @@ export default function AuthVerify() {
       },
       invalid_token: {
         title: "Link abgelaufen oder ungültig",
-        desc: "Der Anmeldelink ist abgelaufen (gültig für 15 Minuten) oder wurde bereits verwendet. Bitte fordere einen neuen Link an.",
+        desc: "Der Anmeldelink ist abgelaufen (gültig für 45 Minuten) oder wurde bereits verwendet. Bitte fordere einen neuen Link an.",
       },
       server_error: {
         title: "Serverfehler",

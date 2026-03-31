@@ -165,7 +165,7 @@ export default function Login() {
                 <p className="font-semibold text-foreground mb-4">{email}</p>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-8">
                   gesendet. Klicke auf den Link in der E-Mail, um dich anzumelden.
-                  Der Link ist <strong>15 Minuten</strong> gültig.
+                  Der Link ist <strong>45 Minuten</strong> gültig.
                 </p>
 
                 <div className="p-4 rounded-lg bg-muted/50 border border-border text-sm text-muted-foreground text-left space-y-1">
