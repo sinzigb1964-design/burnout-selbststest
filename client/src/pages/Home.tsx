@@ -81,7 +81,7 @@ export default function Home() {
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Heart className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="font-semibold text-foreground text-lg">Selbsttest Burnout Check</span>
+            <span className="font-semibold text-foreground text-lg">Selbsttest – Erkenne Burnout-Risiken, bevor sie dich einholen.</span>
           </div>
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
