@@ -401,13 +401,13 @@ export async function findOrCreateUserByEmail(
 
 /**
  * Erstellt einen neuen Magic-Link-Token für einen User.
- * Gültig für 15 Minuten.
+ * Gültig für 45 Minuten.
  */
 export async function createMagicToken(userId: number, token: string): Promise<void> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 Minuten
+  const expiresAt = new Date(Date.now() + 45 * 60 * 1000); // 45 Minuten
   await db.insert(magicTokens).values({ userId, token, expiresAt });
 }
 

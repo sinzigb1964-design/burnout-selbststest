@@ -42,7 +42,7 @@ function baseTemplate(content: string): string {
         <tr>
           <td class="email-footer" style="background:#f0f4f4;padding:18px 32px;border-top:1px solid #e2e8e8;">
             <p style="margin:0;font-size:12px;color:#7a9090;line-height:1.6;word-break:break-word;">
-              Dieser Link ist <strong>15 Minuten</strong> gültig und kann nur einmal verwendet werden.<br/>
+              Dieser Link ist <strong>45 Minuten</strong> gültig und kann nur einmal verwendet werden.<br/>
               Falls du diese E-Mail nicht angefordert hast, kannst du sie ignorieren.<br/>
               Bernd Sinzig &bull; Burnout LIFEBACK&reg; Guide &bull; <a href="https://selbsttest.burnout-lifeback-guide.click" style="color:#1a6b6b;">selbsttest.burnout-lifeback-guide.click</a>
             </p>
