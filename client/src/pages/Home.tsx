@@ -305,7 +305,7 @@ export default function Home() {
                 <div className="text-center md:text-left">
                   <p className="font-bold text-foreground text-lg">Bernd Sinzig</p>
                   <p className="text-muted-foreground text-sm">Burnout LIFEBACK<sup className="text-xs">®</sup> Guide</p>
-                  <p className="text-muted-foreground text-sm">Jahrgang 1964 | Bern – Zürich &amp; DACH-Raum</p>
+                  <p className="text-muted-foreground text-sm">DACH-Raum</p>
                   <a
                     href="https://www.linkedin.com/in/bernd-sinzig"
                     target="_blank"
