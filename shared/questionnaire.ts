@@ -122,15 +122,15 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     id: 8,
     title: "Innere Distanz zu anderen",
     intro:
-      "Du merkst, dass du innerlich zumachst. Menschen, mit denen du arbeitest oder lebst, fühlen sich eher wie Anforderungen an als wie echte Begegnungen. Du bist freundlich, professionell, funktionierend – aber innerlich ziehst du dich zurück. Manchmal erschreckt dich der Gedanke: Ich werde immer kälter – und gleichzeitig weißt du, dass du einfach nicht mehr viel zu geben hast.",
+      "Du merkst, dass du innerlich zumachst. Menschen, mit denen du arbeitest oder lebst, fühlen sich eher wie Anforderungen an als wie echte Begegnungen. Du bist freundlich, professionell, funktionierend – aber innerlich ziehst du dich zurück. Manchmal erschreckt dich der Gedanke: Ich werde immer kälter und gleichzeitig weißt du, dass du einfach nicht mehr viel zu geben hast.",
     questions: [
-      "Hast du das Gefühl, dass dir andere Menschen egal werden, obwohl dir Beziehungen früher wichtig waren?",
-      "Erledigst du deine Arbeit mit Menschen (Kund:innen, Klient:innen, Kolleg:innen) eher wie Fälle oder To-dos als wie echte Begegnungen?",
-      "Denkst du manchmal abwertend über Menschen, die etwas von dir wollen (z. B. Die nerven mich alle nur noch)?",
-      "Fühlst du dich innerlich wie hinter einer Glasscheibe, wenn du mit anderen in Kontakt bist?",
-      "Tust du freundlich nach außen, fühlst dich innerlich aber kalt, genervt oder völlig leer?",
-      "Hast du das Gefühl, du spielst nur noch eine Rolle (z. B. die/der Funktionierende, die/der Professionelle), statt wirklich du selbst zu sein?",
-      "Ziehst du dich emotional zurück, um nicht noch mehr geben zu müssen – auch bei Menschen, die dir eigentlich wichtig sind?",
+      "Hattest du das Gefühl, dass dir andere Menschen egal werden, obwohl dir Beziehungen früher wichtig waren?",
+      "War das dein Gefühl: Ich erledige meine Arbeit mit Menschen (Kund:innen, Klient:innen, Kolleg:innen) eher wie Fälle oder To-dos als wie echte Begegnungen?",
+      "Hast du manchmal abwertend über Menschen gedacht, die etwas von dir wollen (z. B. Die nerven mich alle nur noch)?",
+      "Hast du dich innerlich wie hinter einer Glasscheibe gefühlt, wenn du mit anderen in Kontakt bist?",
+      "Warst du über dich erschrocken: Du hast freundlich nach außen getan, fühlst dich aber eigentlich innerlich kalt, genervt oder völlig leer?",
+      "Hattest du das Gefühl, du spielst nur noch eine Rolle (z. B. die/der Funktionierende, die/der Professionelle), statt wirklich du selbst zu sein?",
+      "Hast du dich emotional zurück gezogen, um nicht noch mehr geben zu müssen, auch bei Menschen, die dir eigentlich wichtig sind?",
     ],
   },
 ];
