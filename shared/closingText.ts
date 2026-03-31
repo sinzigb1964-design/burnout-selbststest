@@ -61,7 +61,7 @@ export function buildClosingText(
     heading: "Ein Wort zum Abschluss \u2013 direkt und ohne Umwege",
     paragraphs: [
       `${name}, ich sage dir das ohne Besch\u00f6nigung: Dein Ergebnis zeigt eine hohe Belastung. Das ist kein schlechter Tag und kein vor\u00fcbergehender Stress. Das ist ein Muster \u2013 und Muster verst\u00e4rken sich, wenn sie nicht unterbrochen werden.`,
-      `Ich kenne diesen Zustand. Nicht aus B\u00fcchern. Ich habe selbst einen Burnout erlebt, war station\u00e4r in Therapie und musste den nicht einfachen Weg gehen. Was ich dabei gelernt habe, ist: Der Moment, in dem man Hilfe sucht, ist nie zu fr\u00fch \u2013 aber er kann zu sp\u00e4t sein.`,
+      `Ich kenne diesen Zustand. Nicht aus B\u00fcchern. Ich habe selbst einen Burnout erlebt, war station\u00e4r in Therapie und musste den nicht einfachen Weg gehen. Was ich dabei gelernt habe:\nDer Moment, in dem man Hilfe sucht, ist nie zu fr\u00fch \u2013 aber er kann zu sp\u00e4t sein.`,
       `Du hast jetzt ein klares Bild. Du wei\u00dft, wo die Belastung sitzt. Das ist mehr, als die meisten Menschen \u00fcber sich wissen.`,
       `Jetzt ist der Moment, dieses Wissen zu nutzen.`,
       `\u201eLass uns miteinander sprechen. Kein Verkaufsgespr\u00e4ch, nur Klarheit, wo du wirklich stehst. Die meisten, die zu mir kommen, sagen: Ich h\u00e4tte fr\u00fcher kommen sollen. Nicht weil es dann leichter gewesen w\u00e4re, sondern weil sie Wochen, manchmal schon Monate verloren haben, in denen sie dachten, es wird schon von alleine.\u201c`,
