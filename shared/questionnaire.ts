@@ -109,13 +109,13 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Du machst, was du immer gemacht hast – arbeitest, leistest, funktionierst. Aber das Gefühl dahinter hat sich verändert. Erfolge fühlen sich flach an, Aufgaben werden zu To-dos, nicht zu etwas, das dich innerlich berührt. Immer öfter taucht der Gedanke auf: Wofür mache ich das alles eigentlich noch?",
     questions: [
-      "Fühlst du dich leer, wenn du etwas erreichst, das dich früher gefreut hätte?",
-      "Fragst du dich: Wofür mache ich das alles überhaupt?",
-      "Hast du das Gefühl, deine Arbeit hat wenig oder keine Bedeutung mehr?",
-      "Machst du deinen Job überwiegend nur noch funktional, um ihn hinter dich zu bringen?",
-      "Denkst du öfter: Ich weiß nicht, wie lange ich das noch durchhalte.",
-      "Hast du das Interesse an Hobbys verloren, die dir früher Freude gemacht haben?",
-      "Fühlt sich dein Alltag mehr nach Überleben als nach Leben an?",
+      "Hast du dich leer gefühlt, obwohl du etwas erreicht hast, das dich früher gefreut hätte?",
+      "Hast du dich heute gefragt: Wofür mache ich das alles überhaupt?",
+      "Hattest du das Gefühl, deine Arbeit hat wenig oder keine Bedeutung mehr?",
+      "Hattest du das Gefühl, du machst deinen Job überwiegend nur noch funktional, um ihn hinter dich zu bringen?",
+      "Hast du heute gedacht: Ich weiß nicht, wie lange ich das noch durchhalte.",
+      "Hast du heute an deine Hobbys gedacht, die dir früher Freude gemacht haben?",
+      "War das heute dein Gefühl: Mein Alltag fühlt sich mehr nach Überleben als nach Leben an?",
     ],
   },
   {
