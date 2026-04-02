@@ -37,22 +37,22 @@ export default function Home() {
     {
       icon: <Activity className="w-6 h-6" />,
       title: "14-Tage-Monitoring",
-      desc: "Täglich 56 Fragen (8 × 7) für ein präzises Bild deiner Belastung über zwei Wochen.",
+      desc: "Täglich 56 Fragen (8 × 7) für ein präzises Bild deines Status über zwei Wochen.",
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
       title: "Automatische Auswertung",
-      desc: "Farbkodierte Ergebnisse mit Mustererkennung und bereichsspezifischen Texten.",
+      desc: "Ampelkodierte Ergebnisse (ROT, GELB, GRÜN) mit einer individuellen Mustererkennung und Texten zu den einzelnen Lebensbereichen.",
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: "Coach-Zugriff",
-      desc: "Erteile deinem Coach Zugriff auf deine Ergebnisse – vollständig unter deiner Kontrolle.",
+      desc: "Mache einen Coach zu deinem Coach und erteile ihm Zugriff auf deine Ergebnisse. Erhalte Antworten auf deine Fragen.",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "DSGVO-konform",
-      desc: "Deine Daten gehören dir. Export und Löschung jederzeit möglich.",
+      desc: "Deine Daten gehören dir. Sie sind geschützt und anonymisiert. Export und Löschung jederzeit möglich.",
     },
     {
       icon: <Lock className="w-6 h-6" />,
