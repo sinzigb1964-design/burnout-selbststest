@@ -117,7 +117,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" onClick={handleStart} className="text-base px-8">
-                Kostenlos starten
+                Starten
               </Button>
               <Button
                 size="lg"
