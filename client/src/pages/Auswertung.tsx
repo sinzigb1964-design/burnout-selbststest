@@ -26,6 +26,7 @@ import {
   MessageSquare,
   Printer,
   TrendingUp,
+  Share2,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -509,6 +510,57 @@ export default function Auswertung() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Zum Dashboard
           </Button>
+        </div>
+
+        {/* Feedback & Share Section */}
+        <div className="mt-12 pt-12 border-t border-border">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 bg-muted/30 rounded-xl border border-border">
+            <div>
+              <p className="font-medium text-foreground">Hat Ihnen dieser Beitrag gefallen?</p>
+            </div>
+            <button
+              onClick={() => {
+                const url = window.location.href;
+                const text = "Burnout Selbsttest – Erkenne Burnout-Risiken, bevor sie dich einholen.";
+                
+                // Create share menu
+                const menu = document.createElement('div');
+                menu.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl p-4 z-50 min-w-48';
+                menu.innerHTML = `
+                  <div class="space-y-2">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" target="_blank" class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-sm">
+                      <svg class="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                      Facebook
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-sm">
+                      <svg class="w-5 h-5" fill="#0A66C2" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                      LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}" target="_blank" class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-sm">
+                      <svg class="w-5 h-5" fill="#000" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 002.856-3.586c-1.017.507-2.12.88-3.286 1.071 1.182-.711 2.088-1.84 2.513-3.179-1.107.656-2.333 1.132-3.644 1.39-1.043-1.112-2.527-1.8-4.163-1.8-3.15 0-5.7 2.55-5.7 5.7 0 .448.056.885.167 1.307-4.73-.24-8.93-2.502-11.74-5.942-.49.84-.77 1.817-.77 2.86 0 1.98 1.008 3.73 2.542 4.76-.938-.03-1.82-.288-2.59-.717v.07c0 2.76 1.96 5.06 4.56 5.576-.476.13-.98.2-1.5.2-.366 0-.72-.035-1.066-.104.722 2.213 2.8 3.82 5.274 3.864-1.95 1.527-4.4 2.44-7.07 2.44-.46 0-.91-.026-1.35-.078 2.54 1.627 5.56 2.576 8.76 2.576 10.51 0 16.24-8.7 16.24-16.24 0-.248-.005-.494-.015-.74 1.116-.805 2.083-1.81 2.847-2.96z"/></svg>
+                      Twitter
+                    </a>
+                    <a href="mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}" class="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg text-sm">
+                      <svg class="w-5 h-5" fill="#EA4335" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                      E-Mail
+                    </a>
+                  </div>
+                `;
+                document.body.appendChild(menu);
+                
+                // Close menu on click outside
+                const closeMenu = () => {
+                  menu.remove();
+                  document.removeEventListener('click', closeMenu);
+                };
+                setTimeout(() => document.addEventListener('click', closeMenu), 0);
+              }}
+              className="inline-flex items-center gap-2 px-6 py-2 bg-background border border-border rounded-lg hover:bg-muted transition-colors text-sm font-medium"
+            >
+              <Share2 className="w-4 h-4" />
+              Teilen
+            </button>
+          </div>
         </div>
       </div>
       <AppFooter />
