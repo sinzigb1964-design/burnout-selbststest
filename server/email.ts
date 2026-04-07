@@ -123,18 +123,19 @@ export function buildWelcomeEmail(params: {
   const fragebogenUrl = `${appUrl}/fragebogen`;
 
   const content = `
-    <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Hallo ${firstName},</h2>
+    <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Guten Tag, ${firstName},</h2>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
       dein persönlicher <strong>14-Tage Burnout-Selbsttest</strong> hat heute begonnen (${startDate}).
       Herzlichen Glückwunsch – du hast einen wichtigen Schritt für deine Gesundheit gemacht.
     </p>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      <strong>Was dich erwartet:</strong> Jeden Tag beantwortest du 56 kurze Fragen zu 8 Lebensbereichen.
+      <strong>Was dich erwartet:</strong> Jeden Tag beantwortest du 56 kurze Fragen zu 8 Lebensbereichen:
+      Schlaf, Energie, Nervensystem, Konzentration, Körper, Soziales, Sinn & Freude, Innere Distanz.
       Das dauert ca. 5–10 Minuten. Nach 14 Tagen erhältst du eine detaillierte, persönliche Auswertung
       mit Mustererkennung – entwickelt auf der Basis evidenzbasierter wissenschaftlicher Fragetools und meiner Arbeit als Coach und Mentor.
     </p>
     <p style="margin:0 0 8px;color:#3a5050;font-size:15px;line-height:1.7;">
-      <strong>Mein Tipp:</strong> Fülle den Fragebogen jeden Tag zur gleichen Zeit aus – am besten abends,
+      <strong>Mein Tipp:</strong> Fülle den Fragebogen jeden Tag zur gleichen Zeit aus – am besten abends um 18:00 Uhr,
       wenn du den Tag überblicken kannst.
     </p>
     ${ctaButton(fragebogenUrl, "Jetzt Tag 1 ausfüllen →")}
@@ -148,7 +149,7 @@ export function buildWelcomeEmail(params: {
     </p>`;
 
   return {
-    subject: `🟢 Dein 14-Tage Selbsttest Burnout Check hat begonnen – Tag 1 wartet auf dich`,
+    subject: `🟢 Dein Burnout-Selbsttest startet heute – Tag 1 wartet auf dich`,
     htmlContent: baseTemplate(content, unsubscribeUrl),
   };
 }
