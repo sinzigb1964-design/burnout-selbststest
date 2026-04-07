@@ -174,12 +174,12 @@ export function buildReminderEmail(params: {
   const content = `
     <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Guten Abend, ${firstName},</h2>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      bevor der Tag endet – hast du heute schon deinen Fragebogen ausgefüllt?
+      Falls du heute noch nicht ausgefüllt hast – hier ist deine Erinnerung:
       Heute ist <strong>Tag ${dayNumber}</strong> deines 14-Tage Burnout-Selbsttests.
     </p>
     ${urgency}
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      Jetzt, am Abend, hast du den besten Überblick über deinen Tag. Genau der richtige Moment,
+      Am Abend hast du meist den besten Überblick über deinen Tag. Genau der richtige Moment,
       um ehrlich auf dich selbst zu schauen – es dauert nur 5–10 Minuten.
       Jeder ausgefüllte Tag macht dein Ergebnis aussagekräftiger.
     </p>
