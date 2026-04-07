@@ -144,7 +144,7 @@ export function buildWelcomeEmail(params: {
     <p style="margin:16px 0 0;color:#3a5050;font-size:14px;line-height:1.7;">
       Ich begleite dich auf diesem Weg,<br/>
       <strong>Bernd Sinzig</strong><br/>
-      <span style="color:#7a9090;">Burnout LIFEBACK&reg; Guide | Life- &amp; Businesscoach</span>
+      <span style="color:#7a9090;">Burnout LIFEBACK&reg; Guide | Burnout- &amp; Stresscoach</span>
     </p>`;
 
   return {
@@ -191,7 +191,7 @@ export function buildReminderEmail(params: {
     <p style="margin:24px 0 0;color:#3a5050;font-size:14px;line-height:1.7;">
       Auf deinem Weg,<br/>
       <strong>Bernd Sinzig</strong><br/>
-      <span style="color:#7a9090;">Life- &amp; Businesscoach | Burnout LIFEBACK&reg; Guide</span>
+      <span style="color:#7a9090;">Burnout- &amp; Stresscoach | Burnout LIFEBACK&reg; Guide</span>
     </p>`;
 
   const subjectEmoji = daysLeft <= 2 ? "🔔" : "🌙";
@@ -244,7 +244,7 @@ export function buildCompletionEmail(params: {
     <p style="margin:0;color:#3a5050;font-size:14px;line-height:1.7;">
       Mit Respekt für deinen Mut,<br/>
       <strong>Bernd Sinzig</strong><br/>
-      <span style="color:#7a9090;">Life- &amp; Businesscoach | Burnout LIFEBACK&reg; Guide</span>
+      <span style="color:#7a9090;">Burnout- &amp; Stresscoach | Burnout LIFEBACK&reg; Guide</span>
     </p>`;
 
   return {
