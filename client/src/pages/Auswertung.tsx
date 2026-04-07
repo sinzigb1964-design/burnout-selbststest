@@ -516,7 +516,7 @@ export default function Auswertung() {
         <div className="mt-12 pt-12 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 bg-muted/30 rounded-xl border border-border">
             <div>
-              <p className="font-medium text-foreground">Hat Ihnen dieser Beitrag gefallen?</p>
+              <p className="font-medium text-foreground">Empfehle den Selbsttest weiter und teile deine Erfahrungen.</p>
             </div>
             <button
               onClick={() => {
