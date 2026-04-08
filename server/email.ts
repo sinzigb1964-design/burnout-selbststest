@@ -190,7 +190,7 @@ export function buildReminderEmail(params: {
       <a href="${fragebogenUrl}" style="color:#1a6b6b;word-break:break-all;">${fragebogenUrl}</a>
     </p>
     <p style="margin:24px 0 0;color:#3a5050;font-size:14px;line-height:1.7;">
-      Auf deinem Weg,<br/>
+      Auf deinem Weg begleitet dich<br/>
       <strong>Bernd Sinzig</strong><br/>
       <span style="color:#7a9090;">Burnout- &amp; Stresscoach | Burnout LIFEBACK&reg; Guide</span>
     </p>`;
