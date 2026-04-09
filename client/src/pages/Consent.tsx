@@ -57,7 +57,7 @@ export default function Consent() {
                   <p className="text-sm font-medium text-foreground">Was wir speichern</p>
                   <p className="text-sm text-muted-foreground mt-0.5">
                     Deine täglich ausgefüllten Fragebogen-Antworten (Skala 0–3), berechnete
-                    Bereichssummen und Gesamtscores über 14 Tage.
+                    Bereichssummen und Gesamtscores über 7 Tage.
                   </p>
                 </div>
               </div>

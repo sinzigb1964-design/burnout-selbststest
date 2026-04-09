@@ -105,8 +105,8 @@ export default function Auswertung() {
             <h2 className="text-lg font-bold text-foreground mb-2">Keine Auswertung verfügbar</h2>
             <p className="text-muted-foreground text-sm mb-4">
               {data?.entries?.length
-                ? `Es wurden ${data.entries.length} von 14 Tagen erfasst. Fuelle alle 14 Tage aus fuer eine vollstaendige Auswertung.`
-                : "Keine Eintraege gefunden."}
+                ? `Es wurden ${data.entries.length} von 7 Tagen erfasst. Fülle alle 7 Tage aus für eine vollständige Auswertung.`
+                : "Keine Einträge gefunden."}
             </p>
             <Button onClick={() => navigate("/dashboard")}>Zum Dashboard</Button>
           </CardContent>
@@ -180,8 +180,8 @@ export default function Auswertung() {
             })}
           </span>
           <span>•</span>
-          <span>14 von 14 Tagen erfasst</span>
-          {daysCompleted < 14 && (
+          <span>7 von 7 Tagen erfasst</span>
+          {daysCompleted < 7 && (
             <Badge variant="secondary" className="text-xs">
               Vorlaeufige Auswertung
             </Badge>

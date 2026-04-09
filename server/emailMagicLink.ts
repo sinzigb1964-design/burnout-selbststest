@@ -31,7 +31,7 @@ function baseTemplate(content: string): string {
         <tr>
           <td class="email-header" style="background:#1a6b6b;padding:24px 32px;">
             <p style="margin:0;color:#ffffff;font-size:12px;letter-spacing:1px;text-transform:uppercase;opacity:0.8;">Burnout LIFEBACK&reg; Guide</p>
-            <h1 style="margin:6px 0 0;color:#ffffff;font-size:20px;font-weight:700;line-height:1.3;">14-Tage Burnout-Selbsttest</h1>
+            <h1 style="margin:6px 0 0;color:#ffffff;font-size:20px;font-weight:700;line-height:1.3;">7-Tage Burnout-Selbsttest</h1>
           </td>
         </tr>
         <tr>
@@ -64,7 +64,7 @@ export async function sendMagicLinkEmail(params: {
   const { to, firstName, magicUrl, isNewUser } = params;
 
   const greeting = isNewUser
-    ? `Willkommen beim 14-Tage Burnout-Selbsttest, ${firstName}!`
+    ? `Willkommen beim 7-Tage Burnout-Selbsttest, ${firstName}!`
     : `Hallo ${firstName},`;
 
   const intro = isNewUser

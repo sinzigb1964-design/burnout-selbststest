@@ -119,8 +119,8 @@ export default function Datenschutz() {
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2">
               <li>Bereitstellung und Betrieb der Burnout-Selbsttest-App</li>
-              <li>Berechnung und Darstellung der 14-Tage-Auswertung</li>
-              <li>Versand automatischer Erinnerungs-E-Mails während des laufenden 14-Tage-Zyklus</li>
+              <li>Berechnung und Darstellung der 7-Tage-Auswertung</li>
+              <li>Versand automatischer Erinnerungs-E-Mails während des laufenden 7-Tage-Zyklus</li>
               <li>Optionale Freigabe der Ergebnisse an einen Coach (nur mit Ihrer ausdrücklichen Einwilligung)</li>
               <li>Weiterentwicklung und Verbesserung des Angebots</li>
             </ul>
@@ -135,7 +135,7 @@ export default function Datenschutz() {
           <section>
             <h2 className="text-xl font-semibold mb-3">4a. E-Mail-Kommunikation und Erinnerungs-E-Mails</h2>
             <p className="text-muted-foreground mb-3">
-              Mit der Registrierung und dem Start eines 14-Tage-Testzyklus erklären Sie sich damit
+              Mit der Registrierung und dem Start eines 7-Tage-Testzyklus erklären Sie sich damit
               einverstanden, automatische E-Mails zu erhalten, die Sie an das tägliche Ausfüllen
               des Fragebogens erinnern. Diese E-Mails werden ausschließlich während eines aktiven
               Zyklus versendet und dienen allein der Unterstützung Ihrer regelmäßigen Teilnahme.
@@ -146,7 +146,7 @@ export default function Datenschutz() {
             <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2 mb-3">
               <li><strong>Willkommens-E-Mail</strong> beim Start eines neuen Zyklus (einmalig)</li>
               <li><strong>Tägliche Erinnerungs-E-Mail</strong> an Tagen, an denen noch kein Eintrag vorgenommen wurde (täglich um ca. 09:00 Uhr MEZ)</li>
-              <li><strong>Abschluss-E-Mail</strong> nach Abschluss des 14-Tage-Zyklus mit Link zum persönlichen Auswertungsbericht (einmalig)</li>
+              <li><strong>Abschluss-E-Mail</strong> nach Abschluss des 7-Tage-Zyklus mit Link zum persönlichen Auswertungsbericht (einmalig)</li>
             </ul>
 
             <h3 className="font-medium mb-2">Abmelderecht / Opt-out</h3>

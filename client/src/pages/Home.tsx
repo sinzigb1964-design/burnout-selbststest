@@ -37,8 +37,8 @@ export default function Home() {
     },
     {
       icon: <Activity className="w-6 h-6" />,
-      title: "14-Tage-Monitoring",
-      desc: "Täglich 56 Fragen (8 × 7) für ein präzises Bild deines Status über zwei Wochen.",
+      title: "7-Tage-Monitoring",
+      desc: "Täglich 56 Fragen (8 × 7) für ein präzises Bild deines Status über eine Woche.",
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
@@ -105,15 +105,15 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6">
               <CheckCircle2 className="w-4 h-4" />
-              Evidenzbasiertes 14-Tage-Monitoring
+              Evidenzbasiertes 7-Tage-Monitoring
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
               Erkenne Burnout-Risiken,{" "}
               <span className="text-primary">bevor sie dich einholen.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-              Der 14-Tage-Selbsttest erfasst täglich deine Belastung in 8 Lebensbereichen und
-              liefert nach zwei Wochen eine präzise, mehrdimensionale Auswertung mit
+              Der 7-Tage-Selbsttest erfasst täglich deine Belastung in 8 Lebensbereichen und
+              liefert nach einer Woche eine präzise, mehrdimensionale Auswertung mit
               Mustererkennung.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -182,8 +182,8 @@ export default function Home() {
               },
               {
                 step: "02",
-                title: "14 Tage durchhalten",
-                desc: "Nach 14 Tagen hat das System genügend Daten für eine aussagekräftige Analyse.",
+                title: "7 Tage durchhalten",
+                desc: "Nach 7 Tagen hat das System genügend Daten für eine aussagekräftige Analyse.",
               },
               {
                 step: "03",
@@ -231,7 +231,7 @@ export default function Home() {
               Bereit für Klarheit?
             </h2>
             <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
-              Starte jetzt deinen persönlichen 14-Tage-Belastungstest. Kostenlos, anonym und
+              Starte jetzt deinen persönlichen 7-Tage-Belastungstest. Kostenlos, anonym und
               DSGVO-konform.
             </p>
             <Button

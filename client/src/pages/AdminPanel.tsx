@@ -259,7 +259,7 @@ function AdminDashboard({ adminPassword, onLogout }: { adminPassword: string; on
                   <p className="text-xs text-muted-foreground">
                     {testModeData?.testMode
                       ? "Test-Modus: Mehrere Einträge pro Tag erlaubt. Tage werden sequenziell vergeben. Nur für interne Tests verwenden."
-                      : "Normalbetrieb: 1 Eintrag pro Tag, Tagnummer ergibt sich aus dem Startdatum des Zyklus (14-Tage-Lauf)."}
+                      : "Normalbetrieb: 1 Eintrag pro Tag, Tagnummer ergibt sich aus dem Startdatum des Zyklus (7-Tage-Lauf)."}
                   </p>
                 </div>
               </div>

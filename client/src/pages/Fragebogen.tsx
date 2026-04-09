@@ -118,7 +118,7 @@ export default function Fragebogen() {
             </p>
             {submitEntry.data?.isComplete ? (
               <p className="text-primary font-medium text-sm">
-                Du hast alle 14 Tage abgeschlossen! Deine Auswertung wird geladen...
+                Du hast alle 7 Tage abgeschlossen! Deine Auswertung wird geladen...
               </p>
             ) : (
               <p className="text-sm text-muted-foreground">Morgen geht es weiter.</p>
@@ -141,7 +141,7 @@ export default function Fragebogen() {
             <div className="flex items-center gap-2">
               <Heart className="w-5 h-5 text-primary" />
               <span className="font-medium text-foreground text-sm">
-                Tag {todayData?.dayNumber || "?"} von 14
+                Tag {todayData?.dayNumber || "?"} von 7
               </span>
             </div>
             <span className="text-sm text-muted-foreground">

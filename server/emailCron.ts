@@ -20,12 +20,12 @@ import {
 const APP_URL = process.env.APP_URL || "https://selbsttest.burnout-lifeback-guide.click";
 
 /**
- * Berechnet die aktuelle Tagnummer eines Zyklus (1–14).
+ * Berechnet die aktuelle Tagnummer eines Zyklus (1–7).
  */
 function getCurrentDayNumber(startDate: Date): number {
   const now = new Date();
   const diffMs = now.getTime() - startDate.getTime();
-  return Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+  return Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 7);
 }
 
 /**
@@ -48,14 +48,14 @@ export async function runDailyReminderJob(): Promise<void> {
       if (!cycle) { skipped++; continue; }
 
       const dayNumber = getCurrentDayNumber(new Date(cycle.startDate));
-      if (dayNumber > 14) { skipped++; continue; }
+      if (dayNumber > 7) { skipped++; continue; }
 
       // Prüfen ob heute bereits ausgefüllt
       const entries = await getDailyEntriesForCycle(cycle.id);
       const alreadyFilled = entries.some((e) => e.dayNumber === dayNumber);
       if (alreadyFilled) { skipped++; continue; }
 
-      const daysLeft = 14 - dayNumber + 1;
+      const daysLeft = 7 - dayNumber + 1;
       const firstName = user.name?.split(" ")[0] || "du";
 
       // Abmeldelink generieren

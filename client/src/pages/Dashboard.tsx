@@ -40,7 +40,7 @@ export default function Dashboard() {
   const todayEntry = todayData?.entry;
   const dayNumber = todayData?.dayNumber || 1;
 
-  const progressPercent = activeCycle ? Math.round(((dayNumber - 1) / 14) * 100) : 0;
+  const progressPercent = activeCycle ? Math.round(((dayNumber - 1) / 7) * 100) : 0;
   const daysCompleted = activeCycle ? dayNumber - 1 : 0;
   const canFillToday = activeCycle && !todayEntry;
 
@@ -48,12 +48,12 @@ export default function Dashboard() {
     "Jeder Tag zählt. Du machst das großartig!",
     "Schon mehr als die Hälfte geschafft. Weiter so!",
     "Du bist fast am Ziel. Noch ein paar Tage!",
-    "Fantastisch! Du hast alle 14 Tage abgeschlossen.",
+    "Fantastisch! Du hast alle 7 Tage abgeschlossen.",
   ];
 
   const getMotivation = () => {
     if (!activeCycle) return null;
-    if (daysCompleted >= 14) return motivationMessages[3];
+    if (daysCompleted >= 7) return motivationMessages[3];
     if (daysCompleted >= 10) return motivationMessages[2];
     if (daysCompleted >= 7) return motivationMessages[1];
     return motivationMessages[0];
@@ -92,8 +92,8 @@ export default function Dashboard() {
           </h1>
           <p className="text-muted-foreground mt-1">
             {activeCycle
-              ? `Tag ${dayNumber} von 14 – ${canFillToday ? "Heute noch nicht ausgefüllt." : "Heute bereits ausgefüllt."}`
-              : "Starte deinen 14-Tage-Belastungstest."}
+              ? `Tag ${dayNumber} von 7 – ${canFillToday ? "Heute noch nicht ausgefüllt." : "Heute bereits ausgefüllt."}`
+              : "Starte deinen 7-Tage-Belastungstest."}
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export default function Dashboard() {
                         Aktiver Zyklus
                       </CardTitle>
                       <Badge variant="secondary" className="text-xs">
-                        {daysCompleted} / 14 Tage
+                        {daysCompleted} / 7 Tage
                       </Badge>
                     </div>
                   </CardHeader>
@@ -132,8 +132,8 @@ export default function Dashboard() {
                     </div>
 
                     {/* Day dots */}
-                    <div className="grid grid-cols-14 gap-1">
-                      {Array.from({ length: 14 }).map((_, i) => {
+                    <div className="grid grid-cols-7 gap-1">
+                      {Array.from({ length: 7 }).map((_, i) => {
                         const day = i + 1;
                         const isDone = day < dayNumber;
                         const isToday = day === dayNumber;
@@ -194,14 +194,14 @@ export default function Dashboard() {
                       Selbsttest Burnout Check
                     </h3>
                     <p className="text-muted-foreground text-sm mb-6 max-w-sm mx-auto">
-                      Starte jetzt deinen 14-Tage-Belastungstest. Fülle täglich am Abend den Fragebogen aus und erhalte nach zwei Wochen eine sehr detaillierte Auswertung. Jede Teilnehmerin und jeder Teilnehmer erhält jeden Abend über den gesamten Zeitraum von 14 Tagen eine Erinnerungsmail – damit du am Ende wirklich weißt, wo du stehst.
+                      Starte jetzt deinen 7-Tage-Belastungstest. Fülle täglich am Abend den Fragebogen aus und erhalte nach einer Woche eine sehr detaillierte Auswertung. Jede Teilnehmerin und jeder Teilnehmer erhält jeden Abend über den gesamten Zeitraum von 7 Tagen eine Erinnerungsmail – damit du am Ende wirklich weißt, wo du stehst.
                     </p>
                     <Button
                       onClick={() => startCycle.mutate()}
                       disabled={startCycle.isPending}
                       size="lg"
                     >
-                      {startCycle.isPending ? "Wird gestartet …" : "14-Tage-Test starten"}
+                      {startCycle.isPending ? "Wird gestartet …" : "7-Tage-Test starten"}
                     </Button>
                   </CardContent>
                 </Card>

@@ -78,7 +78,7 @@ function baseTemplate(content: string, unsubscribeUrl?: string): string {
         <tr>
           <td class="email-header" style="background:#1a6b6b;padding:24px 32px;">
             <p style="margin:0;color:#ffffff;font-size:12px;letter-spacing:1px;text-transform:uppercase;opacity:0.8;">Burnout LIFEBACK&reg; Guide</p>
-            <h1 style="margin:6px 0 0;color:#ffffff;font-size:20px;font-weight:700;line-height:1.3;">14-Tage Burnout-Selbsttest</h1>
+            <h1 style="margin:6px 0 0;color:#ffffff;font-size:20px;font-weight:700;line-height:1.3;">7-Tage Burnout-Selbsttest</h1>
           </td>
         </tr>
         <!-- Body -->
@@ -124,14 +124,13 @@ export function buildWelcomeEmail(params: {
 
   const content = `
     <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Guten Tag, ${firstName},</h2>
-    <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      dein persönlicher <strong>14-Tage Burnout-Selbsttest</strong> hat heute begonnen (${startDate}).
+    <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">      dein persönlicher <strong>7-Tage Burnout-Selbsttest</strong> hat heute begonnen (${startDate}).
       Herzlichen Glückwunsch – du hast einen wichtigen Schritt für deine Gesundheit gemacht.
     </p>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
       <strong>Was dich erwartet:</strong> Jeden Tag beantwortest du 56 kurze Fragen zu 8 Lebensbereichen:
       Schlaf, Energie, Nervensystem, Konzentration, Körper, Soziales, Sinn & Freude, Innere Distanz.
-      Das dauert ca. 5–10 Minuten. Nach 14 Tagen erhältst du eine detaillierte, persönliche Auswertung
+      Das dauert ca. 5–10 Minuten. Nach 7 Tagen erhältst du eine detaillierte, persönliche Auswertung
       mit Mustererkennung – entwickelt auf der Basis evidenzbasierter wissenschaftlicher Fragetools und meiner Arbeit als Coach und Mentor.
     </p>
     <p style="margin:0 0 8px;color:#3a5050;font-size:15px;line-height:1.7;">
@@ -176,8 +175,7 @@ export function buildReminderEmail(params: {
     <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Guten Abend, ${firstName},</h2>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
       Falls du heute noch nicht ausgefüllt hast – hier ist deine Erinnerung:
-      Heute ist <strong>Tag ${dayNumber}</strong> deines 14-Tage Burnout-Selbsttests.
-    </p>
+      Heute ist <strong>Tag ${dayNumber}</strong> deines 7-Tage Burnout-Selbsttests.    </p>
     ${urgency}
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
       Am Abend hast du meist den besten Überblick über deinen Tag. Genau der richtige Moment,
@@ -216,7 +214,7 @@ export function buildCompletionEmail(params: {
   const content = `
     <h2 style="margin:0 0 16px;color:#1a2e2e;font-size:20px;">Herzlichen Glückwunsch, ${firstName}!</h2>
     <p style="margin:0 0 16px;color:#3a5050;font-size:15px;line-height:1.7;">
-      Du hast deinen <strong>14-Tage Burnout-Selbsttest abgeschlossen</strong>. Das ist keine Kleinigkeit –
+      Du hast deinen <strong>7-Tage Burnout-Selbsttest abgeschlossen</strong>.Das ist keine Kleinigkeit –
       es braucht Konsequenz und den Mut, ehrlich auf sich selbst zu schauen.
     </p>
     <p style="margin:0 0 16px;padding:16px 20px;background:#f0f9f9;border-left:4px solid #1a6b6b;border-radius:4px;color:#1a4040;font-size:14px;line-height:1.7;">

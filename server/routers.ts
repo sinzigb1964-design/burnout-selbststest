@@ -218,13 +218,13 @@ export const appRouter = router({
         const entries = await getDailyEntriesForCycle(cycle.id);
         const usedDays = new Set(entries.map((e) => e.dayNumber));
         dayNumber = 1;
-        while (usedDays.has(dayNumber) && dayNumber <= 14) dayNumber++;
-        dayNumber = Math.min(dayNumber, 14);
+        while (usedDays.has(dayNumber) && dayNumber <= 7) dayNumber++;
+        dayNumber = Math.min(dayNumber, 7);
       } else {
         const startDate = new Date(cycle.startDate);
         const now = new Date();
         const diffMs = now.getTime() - startDate.getTime();
-        dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+        dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 7);
       }
 
       const entry = await getTodayEntry(cycle.id, dayNumber);
@@ -244,13 +244,13 @@ export const appRouter = router({
           const entries = await getDailyEntriesForCycle(cycle.id);
           const usedDays = new Set(entries.map((e) => e.dayNumber));
           dayNumber = 1;
-          while (usedDays.has(dayNumber) && dayNumber <= 14) dayNumber++;
-          dayNumber = Math.min(dayNumber, 14);
+          while (usedDays.has(dayNumber) && dayNumber <= 7) dayNumber++;
+          dayNumber = Math.min(dayNumber, 7);
         } else {
           const startDate = new Date(cycle.startDate);
           const now = new Date();
           const diffMs = now.getTime() - startDate.getTime();
-          dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 14);
+          dayNumber = Math.min(Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1, 7);
 
           const existing = await getTodayEntry(cycle.id, dayNumber);
           if (existing) throw new TRPCError({ code: "BAD_REQUEST", message: "Heute bereits ausgefüllt." });
@@ -266,8 +266,8 @@ export const appRouter = router({
           noteText: input.noteText ?? null,
         });
 
-        // Auto-complete after day 14
-        if (dayNumber >= 14) {
+        // Auto-complete after day 7
+        if (dayNumber >= 7) {
           await completeTestCycle(cycle.id);
 
           // Abschluss-E-Mail senden
@@ -286,7 +286,7 @@ export const appRouter = router({
           }
         }
 
-        return { entry, dayNumber, isComplete: dayNumber >= 14 };
+        return { entry, dayNumber, isComplete: dayNumber >= 7 };
       }),
 
     history: protectedProcedure
