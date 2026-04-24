@@ -19,7 +19,7 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     intro:
       "Es gibt Nächte, in denen du im Bett liegst und dein Körper müde ist, aber dein Kopf einfach weitermacht. Du wachst auf und fühlst dich, als hättest du gar nicht wirklich geschlafen. Tagsüber rettest du dich mit Kaffee oder Snacks über die Runden – und hoffst jeden Abend, dass es diesmal besser wird.",
     questions: [
-      "Bist du heute erschöpft aufgewacht, obwohl du eigentlich genug geschlafen hast?",
+      "Wie erschöpft bist du heute aufgewacht, obwohl du eigentlich genug geschlafen hast?",
       "Hattest du Schwierigkeiten einzuschlafen, weil deine Gedanken kreisen?",
       "Bist du nachts aufgewacht und hast du über die Arbeit oder Probleme gegrübelt?",
       "Hast du tagsüber Koffein gebraucht, um überhaupt funktionieren zu können?",
