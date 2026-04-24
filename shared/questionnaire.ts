@@ -25,7 +25,7 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
       "Hast du tagsüber Koffein gebraucht, um überhaupt funktionieren zu können?",
       "Hast du heute gedacht: Ich würde so gerne mal wieder richtig durchschlafen.",
       "Hast du heute abend lange auf Bildschirme (Handy, Laptop, TV) geschaut, obwohl du weißt, dass es deinen Schlaf stört?",
-      "Verschiebst du bewusst deinen Schlaf (z. B. noch eine Folge, noch schnell etwas fertig machen), obwohl du müde bist?",
+      "Hast du bewusst deinen Schlaf verschoben (z. B. noch eine Folge, noch schnell etwas fertig machen), obwohl du müde warst?",
     ],
   },
   {
