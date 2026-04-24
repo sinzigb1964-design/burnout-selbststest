@@ -45,7 +45,7 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
   },
   {
     id: 3,
-    title: "Nervensystem & Gefühle",
+    title: "Gelassenheit & Gefühle",
     intro:
       "Kleinigkeiten bringen dich aus der Fassung: eine Mail, ein Kommentar, ein kleines Missverständnis. Du merkst, dass du schneller gereizt bist, dünnhäutiger, näher an Tränen oder Explosion als früher. Abends liegst du auf dem Sofa und willst einfach nur Ruhe, aber in dir drin läuft alles weiter.",
     questions: [
@@ -179,10 +179,10 @@ export const AREA_TEXTS: Record<number, { green: string; yellow: string; red: st
   },
   3: {
     green:
-      "Dein Nervensystem zeigt sich derzeit stabil. Du kannst Stress regulieren und abends abschalten. Das ist ein wichtiges Zeichen von Resilienz.",
+      "Deine Gelassenheit zeigt sich derzeit stabil. Du kannst Stress regulieren und abends abschalten. Das ist ein wichtiges Zeichen von Resilienz.",
     yellow:
-      "Dein Nervensystem steht unter Druck. Die Reizbarkeit, das Gefühl, ständig unter Strom zu stehen – das sind Zeichen, dass dein System Unterstützung braucht.",
-    red: "Dein Nervensystem ist dauerhaft überlastet. Die emotionale Erschöpfung und das Gefühl, nicht abschalten zu können, sind ernsthafte Warnsignale. Hier ist professionelle Unterstützung sinnvoll.",
+      "Deine Gelassenheit steht unter Druck. Die Reizbarkeit, das Gefühl, ständig unter Strom zu stehen – das sind Zeichen, dass dein System Unterstützung braucht.",
+    red: "Deine Gelassenheit ist dauerhaft überlastet. Die emotionale Erschöpfung und das Gefühl, nicht abschalten zu können, sind ernsthafte Warnsignale. Hier ist professionelle Unterstützung sinnvoll.",
   },
   4: {
     green:
@@ -232,7 +232,7 @@ export interface PatternInfo {
 export const PATTERN_INFO: Record<string, PatternInfo> = {
   A1: {
     title: "Dein Körper läuft auf dem letzten Reserve",
-    subtitle: "Schlaf, Energie und Nervensystem sind gleichzeitig stark belastet.",
+    subtitle: "Schlaf, Energie und Gelassenheit sind gleichzeitig stark belastet.",
     description:
       "Wenn Schlaf, Energie und emotionale Stabilität gleichzeitig zusammenbrechen, befindet sich dein gesamtes System im Überlebensmodus. Du funktionierst noch – aber dein Körper und Geist zahlen dafür einen hohen Preis. Dieses Muster ist ein ernstes Warnsignal für ein tiefes Erschöpfungssyndrom. Professionelle Unterstützung ist dringend empfohlen.",
     severity: "critical",
@@ -241,7 +241,7 @@ export const PATTERN_INFO: Record<string, PatternInfo> = {
     title: "Dein Körper sendet deutliche Stresssignale",
     subtitle: "Mindestens zwei deiner körperlichen Grundbereiche sind stark belastet.",
     description:
-      "Schlaf, Energie oder Nervensystem – wenn zwei dieser Grundpfeiler gleichzeitig wackeln, kämpft dein Körper gegen die Erschöpfung an. Du merkst es vielleicht daran, dass du dich auch nach Ruhe nicht wirklich erholt fühlst. Ohne gezielte Entlastung droht eine Verschlechterung.",
+      "Schlaf, Energie oder Gelassenheit – wenn zwei dieser Grundpfeiler gleichzeitig wackeln, kämpft dein Körper gegen die Erschöpfung an. Du merkst es vielleicht daran, dass du dich auch nach Ruhe nicht wirklich erholt fühlst. Ohne gezielte Entlastung droht eine Verschlechterung.",
     severity: "warning",
   },
   B1: {
@@ -315,7 +315,7 @@ export function computePatterns(avgs: number[]): string[] {
   const highCount = avgs.filter((v) => v >= 14).length;
   const totalSum = avgs.reduce((s, v) => s + v, 0);
 
-  // Muster A: Körper & Nervensystem
+  // Muster A: Körper & Gelassenheit
   if (a1 >= 14 && a2 >= 14 && a3 >= 14) {
     patterns.push("A1");
   } else if ([a1, a2, a3].filter((v) => v >= 14).length >= 2) {
