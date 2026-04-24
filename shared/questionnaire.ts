@@ -3,7 +3,7 @@
  * Skala: 0 = nie, 1 = selten, 2 = oft, 3 = immer
  */
 
-export const ANSWER_LABELS = ["nein", "ein wenig", "noch ertragbar", "ja"] as const;
+export const ANSWER_LABELS = ["nein", "ein wenig", "noch ertragbar", "sehr"] as const;
 
 export interface QuestionArea {
   id: number;
