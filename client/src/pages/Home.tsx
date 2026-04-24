@@ -112,9 +112,7 @@ export default function Home() {
               <span className="text-primary">bevor sie dich einholen.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-              Der 7-Tage-Selbsttest erfasst täglich deine Belastung in 8 Lebensbereichen und
-              liefert nach einer Woche eine präzise, mehrdimensionale Auswertung mit
-              Mustererkennung.
+              Der 7-Tage-Selbsttest erfasst täglich deinen Status, deine Energie, deine Lebenslust in 8 Lebensbereichen und liefert nach einer Woche eine präzise und ausführliche Auswertung. Damit weisst du mehr über dich und hast Klarheit.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" onClick={handleStart} className="text-base px-8">
