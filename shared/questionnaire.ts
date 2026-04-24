@@ -21,7 +21,7 @@ export const QUESTIONNAIRE_AREAS: QuestionArea[] = [
     questions: [
       "Wie erschöpft bist du heute aufgewacht, obwohl du eigentlich genug geschlafen hast?",
       "Hattest du Schwierigkeiten einzuschlafen, weil deine Gedanken kreisen?",
-      "Bist du nachts aufgewacht und hast du über die Arbeit oder Probleme gegrübelt?",
+      "Wie oft bist du nachts aufgewacht und hast über die Arbeit oder Probleme gegrübelt?",
       "Hast du tagsüber Koffein gebraucht, um überhaupt funktionieren zu können?",
       "Hast du heute gedacht: Ich würde so gerne mal wieder richtig durchschlafen.",
       "Hast du heute abend lange auf Bildschirme (Handy, Laptop, TV) geschaut, obwohl du weißt, dass es deinen Schlaf stört?",
