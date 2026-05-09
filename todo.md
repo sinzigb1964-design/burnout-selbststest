@@ -112,7 +112,10 @@
 - [x] Railway-Projekt (exquisite-gratitude) existiert bereits
 - [x] GitHub-Repo (sinzigb1964-design/burnout-selbststest) mit Railway verbunden
 - [x] Environment-Variablen auf Railway konfiguriert (DATABASE_URL, ADMIN_PANEL_PASSWORD, BREVO_API_KEY, JWT_SECRET, VITE_APP_TITLE)
-- [ ] Redeploy auf Railway durchführen (manuell von Bernd)
+- [x] Commit d82bb9b zu GitHub gepusht (OAuth-Cleanup)
+- [x] import.meta.dirname Fix (Commit 8637bae) – process.cwd() statt import.meta.dirname
+- [ ] Build auf Railway durchführen (automatisch gestartet)
+- [ ] Healthcheck bestätigen
 - [ ] Custom Domain (selbsttest-burnoutrisiken.burnout-lifeback-guide.online) verbinden
 - [ ] DNS bei Hosttech aktualisieren (CNAME/A-Records von Railway)
 - [ ] SSL-Zertifikat verifizieren (automatisch von Railway)
