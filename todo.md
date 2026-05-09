@@ -106,3 +106,14 @@
 - [x] Abschluss-E-Mail: Zeeg-Buchungslink https://zeeg.me/bsinzig/P00U26 ergänzen
 - [x] Startseite: Über-mich-Abschnitt mit Profilfoto (Quelle: burnout-lifeback-guide.online/ueber-mich)
 - [x] Startseite: Abschnitt "Ein letzter Gedanke" mit Bernds Text einbauen
+
+## Phase 7: Railway-Migration
+- [x] OAuth-Abhängigkeiten vollständig entfernt (OAUTH_SERVER_URL, OAuthService)
+- [x] Railway-Projekt (exquisite-gratitude) existiert bereits
+- [x] GitHub-Repo (sinzigb1964-design/burnout-selbststest) mit Railway verbunden
+- [x] Environment-Variablen auf Railway konfiguriert (DATABASE_URL, ADMIN_PANEL_PASSWORD, BREVO_API_KEY, JWT_SECRET, VITE_APP_TITLE)
+- [ ] Redeploy auf Railway durchführen (manuell von Bernd)
+- [ ] Custom Domain (selbsttest-burnoutrisiken.burnout-lifeback-guide.online) verbinden
+- [ ] DNS bei Hosttech aktualisieren (CNAME/A-Records von Railway)
+- [ ] SSL-Zertifikat verifizieren (automatisch von Railway)
+- [ ] Production-Tests durchführen (Magic-Link, Admin-Panel, Fragebogen)
