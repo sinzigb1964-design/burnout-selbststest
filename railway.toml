@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "pnpm start"
+startCommand = "pnpm db:push && pnpm start"
 restartPolicyMaxRetries = 5
 healthcheckPath = "/"
 healthcheckTimeout = 30
