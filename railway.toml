@@ -1,8 +1,9 @@
 [build]
 builder = "nixpacks"
+buildCommand = "pnpm install --no-frozen-lockfile && pnpm build"
 
 [deploy]
-startCommand = "pnpm db:push --accept-data-loss && pnpm start"
+startCommand = "pnpm drizzle-kit push --force && NODE_ENV=production node dist/index.js"
 restartPolicyMaxRetries = 5
 healthcheckPath = "/"
 healthcheckTimeout = 30
