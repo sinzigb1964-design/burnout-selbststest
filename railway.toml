@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "pnpm start"
+startCommand = "pnpm drizzle-kit push && pnpm start"
 restartPolicyMaxRetries = 5
 healthcheckPath = "/"
 healthcheckTimeout = 30

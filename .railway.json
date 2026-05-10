@@ -4,7 +4,7 @@
     "builder": "nixpacks"
   },
   "deploy": {
-    "startCommand": "pnpm start",
+    "startCommand": "pnpm db:push; NODE_ENV=production node dist/index.js"
     "restartPolicyMaxRetries": 5
   }
 }
