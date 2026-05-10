@@ -1,5 +1,5 @@
 import { and, desc, eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/progres-js";
+import { drizzle } from "drizzle-orm/postgres-js";
 import {
   CoachAccess,
   DailyEntry,
