@@ -4,7 +4,7 @@
     "builder": "nixpacks"
   },
   "deploy": {
-    "startCommand": "drizzle-kit push && pnpm start",
+    "startCommand": "pnpm drizzle-kit push && pnpm start",
     "restartPolicyMaxRetries": 5
   }
 }
