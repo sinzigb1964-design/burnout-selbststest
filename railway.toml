@@ -4,7 +4,7 @@ installCommand = "pnpm install --no-frozen-lockfile"
 buildCommand = "pnpm build"
 
 [deploy]
-startCommand = "pnpm drizzle-kit push --force && NODE_ENV=production node dist/index.js"
+startCommand="NODE_ENV=production node dist/index.js"
 restartPolicyMaxRetries = 5
 healthcheckPath = "/"
 healthcheckTimeout = 30
