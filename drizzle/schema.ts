@@ -1,166 +1,131 @@
 import {
   boolean,
-  float,
-  int,
-  json,
-  mysqlEnum,
-  mysqlTable,
+  integer,
+  pgEnum,
+  pgTable,
+  serial,
   text,
   timestamp,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
-/**
- * Core user table backing auth flow.
- */
-export const users = mysqlTable("users", {
-  id: int("id").autoincrement().primaryKey(),
+export const roleEnum = pgEnum("role", ["user", "admin"]);
+export const statusEnum = pgEnum("status", ["active", "completed", "abandoned"]);
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  role: roleEnum("role").default("user").notNull(),
   isCoach: boolean("isCoach").default(false).notNull(),
-  // DSGVO: Einwilligung
   consentGiven: boolean("consentGiven").default(false).notNull(),
   consentGivenAt: timestamp("consentGivenAt"),
-  // DSGVO: E-Mail-Abmeldung (Opt-out für automatische Erinnerungs-E-Mails)
   emailOptOut: boolean("emailOptOut").default(false).notNull(),
   unsubscribeToken: varchar("unsubscribeToken", { length: 128 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-/**
- * A 14-day test cycle for a user.
- */
-export const testCycles = mysqlTable("test_cycles", {
-  id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull(),
+export const testCycles = pgTable("test_cycles", {
+  id: serial("id").primaryKey(),
+  userId: integer("userId").notNull(),
   startDate: timestamp("startDate").defaultNow().notNull(),
   endDate: timestamp("endDate"),
-  status: mysqlEnum("status", ["active", "completed", "abandoned"]).default("active").notNull(),
+  status: statusEnum("status").default("active").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type TestCycle = typeof testCycles.$inferSelect;
 export type InsertTestCycle = typeof testCycles.$inferInsert;
 
-/**
- * A single daily entry within a test cycle.
- * Stores all 56 answers (8 areas × 7 questions) and computed sums.
- */
-export const dailyEntries = mysqlTable("daily_entries", {
-  id: int("id").autoincrement().primaryKey(),
-  cycleId: int("cycleId").notNull(),
-  userId: int("userId").notNull(),
-  dayNumber: int("dayNumber").notNull(), // 1–14
+export const dailyEntries = pgTable("daily_entries", {
+  id: serial("id").primaryKey(),
+  cycleId: integer("cycleId").notNull(),
+  userId: integer("userId").notNull(),
+  dayNumber: integer("dayNumber").notNull(),
   entryDate: timestamp("entryDate").defaultNow().notNull(),
-
-  // Area 1: Schlaf (B1, 7 answers, 0–3 each)
-  b1q1: int("b1q1").notNull().default(0),
-  b1q2: int("b1q2").notNull().default(0),
-  b1q3: int("b1q3").notNull().default(0),
-  b1q4: int("b1q4").notNull().default(0),
-  b1q5: int("b1q5").notNull().default(0),
-  b1q6: int("b1q6").notNull().default(0),
-  b1q7: int("b1q7").notNull().default(0),
-  sumB1: int("sumB1").notNull().default(0),
-
-  // Area 2: Energie & Leistungskraft
-  b2q1: int("b2q1").notNull().default(0),
-  b2q2: int("b2q2").notNull().default(0),
-  b2q3: int("b2q3").notNull().default(0),
-  b2q4: int("b2q4").notNull().default(0),
-  b2q5: int("b2q5").notNull().default(0),
-  b2q6: int("b2q6").notNull().default(0),
-  b2q7: int("b2q7").notNull().default(0),
-  sumB2: int("sumB2").notNull().default(0),
-
-  // Area 3: Nervensystem & Gefühle
-  b3q1: int("b3q1").notNull().default(0),
-  b3q2: int("b3q2").notNull().default(0),
-  b3q3: int("b3q3").notNull().default(0),
-  b3q4: int("b3q4").notNull().default(0),
-  b3q5: int("b3q5").notNull().default(0),
-  b3q6: int("b3q6").notNull().default(0),
-  b3q7: int("b3q7").notNull().default(0),
-  sumB3: int("sumB3").notNull().default(0),
-
-  // Area 4: Konzentration & mentale Leistungskraft
-  b4q1: int("b4q1").notNull().default(0),
-  b4q2: int("b4q2").notNull().default(0),
-  b4q3: int("b4q3").notNull().default(0),
-  b4q4: int("b4q4").notNull().default(0),
-  b4q5: int("b4q5").notNull().default(0),
-  b4q6: int("b4q6").notNull().default(0),
-  b4q7: int("b4q7").notNull().default(0),
-  sumB4: int("sumB4").notNull().default(0),
-
-  // Area 5: Körperliche Stresssignale
-  b5q1: int("b5q1").notNull().default(0),
-  b5q2: int("b5q2").notNull().default(0),
-  b5q3: int("b5q3").notNull().default(0),
-  b5q4: int("b5q4").notNull().default(0),
-  b5q5: int("b5q5").notNull().default(0),
-  b5q6: int("b5q6").notNull().default(0),
-  b5q7: int("b5q7").notNull().default(0),
-  sumB5: int("sumB5").notNull().default(0),
-
-  // Area 6: Soziale Verbindung & Rückzug
-  b6q1: int("b6q1").notNull().default(0),
-  b6q2: int("b6q2").notNull().default(0),
-  b6q3: int("b6q3").notNull().default(0),
-  b6q4: int("b6q4").notNull().default(0),
-  b6q5: int("b6q5").notNull().default(0),
-  b6q6: int("b6q6").notNull().default(0),
-  b6q7: int("b6q7").notNull().default(0),
-  sumB6: int("sumB6").notNull().default(0),
-
-  // Area 7: Sinn & Freude
-  b7q1: int("b7q1").notNull().default(0),
-  b7q2: int("b7q2").notNull().default(0),
-  b7q3: int("b7q3").notNull().default(0),
-  b7q4: int("b7q4").notNull().default(0),
-  b7q5: int("b7q5").notNull().default(0),
-  b7q6: int("b7q6").notNull().default(0),
-  b7q7: int("b7q7").notNull().default(0),
-  sumB7: int("sumB7").notNull().default(0),
-
-  // Area 8: Innere Distanz zu anderen
-  b8q1: int("b8q1").notNull().default(0),
-  b8q2: int("b8q2").notNull().default(0),
-  b8q3: int("b8q3").notNull().default(0),
-  b8q4: int("b8q4").notNull().default(0),
-  b8q5: int("b8q5").notNull().default(0),
-  b8q6: int("b8q6").notNull().default(0),
-  b8q7: int("b8q7").notNull().default(0),
-  sumB8: int("sumB8").notNull().default(0),
-
-  // Total day score (0–168)
-  totalDayScore: int("totalDayScore").notNull().default(0),
-
-  // Optional daily note / comment
+  b1q1: integer("b1q1").notNull().default(0),
+  b1q2: integer("b1q2").notNull().default(0),
+  b1q3: integer("b1q3").notNull().default(0),
+  b1q4: integer("b1q4").notNull().default(0),
+  b1q5: integer("b1q5").notNull().default(0),
+  b1q6: integer("b1q6").notNull().default(0),
+  b1q7: integer("b1q7").notNull().default(0),
+  sumB1: integer("sumB1").notNull().default(0),
+  b2q1: integer("b2q1").notNull().default(0),
+  b2q2: integer("b2q2").notNull().default(0),
+  b2q3: integer("b2q3").notNull().default(0),
+  b2q4: integer("b2q4").notNull().default(0),
+  b2q5: integer("b2q5").notNull().default(0),
+  b2q6: integer("b2q6").notNull().default(0),
+  b2q7: integer("b2q7").notNull().default(0),
+  sumB2: integer("sumB2").notNull().default(0),
+  b3q1: integer("b3q1").notNull().default(0),
+  b3q2: integer("b3q2").notNull().default(0),
+  b3q3: integer("b3q3").notNull().default(0),
+  b3q4: integer("b3q4").notNull().default(0),
+  b3q5: integer("b3q5").notNull().default(0),
+  b3q6: integer("b3q6").notNull().default(0),
+  b3q7: integer("b3q7").notNull().default(0),
+  sumB3: integer("sumB3").notNull().default(0),
+  b4q1: integer("b4q1").notNull().default(0),
+  b4q2: integer("b4q2").notNull().default(0),
+  b4q3: integer("b4q3").notNull().default(0),
+  b4q4: integer("b4q4").notNull().default(0),
+  b4q5: integer("b4q5").notNull().default(0),
+  b4q6: integer("b4q6").notNull().default(0),
+  b4q7: integer("b4q7").notNull().default(0),
+  sumB4: integer("sumB4").notNull().default(0),
+  b5q1: integer("b5q1").notNull().default(0),
+  b5q2: integer("b5q2").notNull().default(0),
+  b5q3: integer("b5q3").notNull().default(0),
+  b5q4: integer("b5q4").notNull().default(0),
+  b5q5: integer("b5q5").notNull().default(0),
+  b5q6: integer("b5q6").notNull().default(0),
+  b5q7: integer("b5q7").notNull().default(0),
+  sumB5: integer("sumB5").notNull().default(0),
+  b6q1: integer("b6q1").notNull().default(0),
+  b6q2: integer("b6q2").notNull().default(0),
+  b6q3: integer("b6q3").notNull().default(0),
+  b6q4: integer("b6q4").notNull().default(0),
+  b6q5: integer("b6q5").notNull().default(0),
+  b6q6: integer("b6q6").notNull().default(0),
+  b6q7: integer("b6q7").notNull().default(0),
+  sumB6: integer("sumB6").notNull().default(0),
+  b7q1: integer("b7q1").notNull().default(0),
+  b7q2: integer("b7q2").notNull().default(0),
+  b7q3: integer("b7q3").notNull().default(0),
+  b7q4: integer("b7q4").notNull().default(0),
+  b7q5: integer("b7q5").notNull().default(0),
+  b7q6: integer("b7q6").notNull().default(0),
+  b7q7: integer("b7q7").notNull().default(0),
+  sumB7: integer("sumB7").notNull().default(0),
+  b8q1: integer("b8q1").notNull().default(0),
+  b8q2: integer("b8q2").notNull().default(0),
+  b8q3: integer("b8q3").notNull().default(0),
+  b8q4: integer("b8q4").notNull().default(0),
+  b8q5: integer("b8q5").notNull().default(0),
+  b8q6: integer("b8q6").notNull().default(0),
+  b8q7: integer("b8q7").notNull().default(0),
+  sumB8: integer("sumB8").notNull().default(0),
+  totalDayScore: integer("totalDayScore").notNull().default(0),
   noteText: text("noteText"),
-
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
 export type DailyEntry = typeof dailyEntries.$inferSelect;
 export type InsertDailyEntry = typeof dailyEntries.$inferInsert;
 
-/**
- * Magic login tokens for passwordless authentication.
- * Each token is valid for 15 minutes and can only be used once.
- */
-export const magicTokens = mysqlTable("magic_tokens", {
-  id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull(),
+export const magicTokens = pgTable("magic_tokens", {
+  id: serial("id").primaryKey(),
+  userId: integer("userId").notNull(),
   token: varchar("token", { length: 128 }).notNull().unique(),
   expiresAt: timestamp("expiresAt").notNull(),
   usedAt: timestamp("usedAt"),
@@ -170,13 +135,10 @@ export const magicTokens = mysqlTable("magic_tokens", {
 export type MagicToken = typeof magicTokens.$inferSelect;
 export type InsertMagicToken = typeof magicTokens.$inferInsert;
 
-/**
- * Coach access grants: a user can grant a coach access to their results.
- */
-export const coachAccess = mysqlTable("coach_access", {
-  id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull(),       // the user granting access
-  coachId: int("coachId").notNull(),     // the coach receiving access
+export const coachAccess = pgTable("coach_access", {
+  id: serial("id").primaryKey(),
+  userId: integer("userId").notNull(),
+  coachId: integer("coachId").notNull(),
   grantedAt: timestamp("grantedAt").defaultNow().notNull(),
   revokedAt: timestamp("revokedAt"),
   isActive: boolean("isActive").default(true).notNull(),
@@ -185,14 +147,10 @@ export const coachAccess = mysqlTable("coach_access", {
 export type CoachAccess = typeof coachAccess.$inferSelect;
 export type InsertCoachAccess = typeof coachAccess.$inferInsert;
 
-/**
- * App-weite Einstellungen (Key-Value-Store).
- * Ermöglicht Laufzeit-Konfiguration ohne Serverneustart.
- */
-export const appSettings = mysqlTable("app_settings", {
+export const appSettings = pgTable("app_settings", {
   key: varchar("key", { length: 128 }).primaryKey(),
   value: text("value").notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type AppSetting = typeof appSettings.$inferSelect;
