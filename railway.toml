@@ -1,6 +1,7 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install --no-frozen-lockfile && pnpm build"
+installCommand = "pnpm install --no-frozen-lockfile"
+buildCommand = "pnpm build"
 
 [deploy]
 startCommand = "pnpm drizzle-kit push --force && NODE_ENV=production node dist/index.js"
@@ -8,5 +9,5 @@ restartPolicyMaxRetries = 5
 healthcheckPath = "/"
 healthcheckTimeout = 30
 
-[env]
-# Alle Environment-Variablen werden in Railway Dashboard konfiguriert
+[environment]
+# Alle Umgebungsvariablen werden im Railway Dashboard konfiguriert
